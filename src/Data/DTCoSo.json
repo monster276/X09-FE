@@ -1,0 +1,38 @@
+[
+
+    {
+      "id": "0",
+      "STT": "1",
+      "MCS": "MCS1",
+      "TCS": "Cơ Sơ 1",
+      "DC": "New York No. 1 Lake Park"
+    },
+    {
+      "id": "1",
+      "STT": "2",
+      "MCS": "MCS2",
+      "TCS": "Cơ Sơ 2",
+      "DC": "New York No. 1 Lake Park"
+    },
+    {
+      "id": "2",
+      "STT": "3",
+      "MCS": "MCS3",
+      "TCS": "Cơ Sơ 3",
+      "DC": "New York No. 1 Lake Park"
+    },
+    {
+      "id": "3",
+      "STT": "4",
+      "MCS": "MCS4",
+      "TCS": "Cơ Sơ 4 ",
+      "DC": "New York No. 1 Lake Park"
+    },
+    {
+      "id": "4",
+      "STT": "5",
+      "MCS": "MCS4",
+      "TCS": "Cơ Sơ 4 ",
+      "DC": "New York No. 1 Lake Park"
+    }
+]
