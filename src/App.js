@@ -2,9 +2,11 @@ import { Layout } from 'antd';
 import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import "./App.css"
+
 import Home from "./components/Home/index";
 import Admin from "./components/Admin/index";
-import Teacher from "./components/Admin/index";
+import Teacher from "./components/Teacher/index";
 
 
 const App = () => {

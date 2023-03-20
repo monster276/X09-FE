@@ -1,0 +1,7 @@
+.container--header{
+    background-color: #BAA3A3;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    
+}
