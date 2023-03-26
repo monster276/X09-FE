@@ -3,36 +3,41 @@
     {
       "id": "0",
       "STT": "1",
-      "MCS": "MCS1",
-      "TCS": "Cơ Sơ 1",
-      "DC": "New York No. 1 Lake Park"
+      "MKhoaHoc": "KH01",
+      "TKhoaHoc": "JAVA",
+      "GThanh": 2000000,
+      "SSlop": 7
     },
     {
       "id": "1",
       "STT": "2",
-      "MCS": "MCS2",
-      "TCS": "Cơ Sơ 2",
-      "DC": "New York No. 1 Lake Park"
+      "MKhoaHoc": "KH02",
+      "TKhoaHoc": "JAVA",
+      "GThanh": 5000000,
+      "SSlop": 4
     },
     {
       "id": "2",
       "STT": "3",
-      "MCS": "MCS3",
-      "TCS": "Cơ Sơ 3",
-      "DC": "New York No. 1 Lake Park"
+      "MKhoaHoc": "KH03",
+      "TKhoaHoc": "JS",
+      "GThanh": 5000000,
+      "SSlop": 4
     },
     {
       "id": "3",
       "STT": "4",
-      "MCS": "MCS4",
-      "TCS": "Cơ Sơ 4 ",
-      "DC": "New York No. 1 Lake Park"
+      "MKhoaHoc": "KH04",
+      "TKhoaHoc": "FONTEND",
+      "GThanh": 5000000,
+      "SSlop": 8
     },
     {
       "id": "4",
       "STT": "5",
-      "MCS": "MCS4",
-      "TCS": "Cơ Sơ 4 ",
-      "DC": "New York No. 1 Lake Park"
+      "MKhoaHoc": "KH05",
+      "TKhoaHoc": "REACT",
+      "GThanh": 5000000,
+      "SSlop": 7
     }
 ]

@@ -1,6 +1,6 @@
 import React from 'react';
 import './SideMenu.css';
-import { HomeOutlined ,ShopOutlined ,TeamOutlined ,ReadOutlined, UserOutlined } from '@ant-design/icons'
+import { HomeOutlined , ShopOutlined ,TeamOutlined ,ReadOutlined, UserOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom';
 import { Menu } from "antd";
 
@@ -18,29 +18,34 @@ function SideMenu() {
         }}
           items = {[
             {
-              label: "Home",
+              label: "Trang Chủ",
               icon: <HomeOutlined  />,
-              key:"/"
+              key:"/admin"
             },
             {
-              label:"DS Cơ Sở ",
+              label:" Cơ Sở ",
               icon: <ShopOutlined />,
-              key:'/DSCoSo'
+              key:'/admin/DSCoSo'
             },
             {
-              label:"DS Giảng Viên",
+              label:" Giảng Viên",
               icon: <UserOutlined />,
-              key:'/DSGV'
+              key:'/admin/DSGV'
             },
             {
-              label:"DS Lớp Học ",
+              label:" Lớp Học ",
               icon: <TeamOutlined />,
-              key:'/DSLH'
+              key:'/admin/DSLH'
             },
             {
-              label:"DS Khóa Học ",
+              label:"Đăng Ký  Khóa Học ",
               icon: <ReadOutlined />,
-              key:'/DSKH'
+              key:'/admin/DSKH'
+            },
+            {
+              label:"Khóa Học ",
+              icon: <ReadOutlined />,
+              key:'/Admin/DSDK'
             }
           ]}
           ></Menu>
