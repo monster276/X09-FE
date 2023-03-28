@@ -48,7 +48,7 @@ function DSKH() {
     const handlSearch = async (e) =>{
       e.preventDefault();
       const { seachdata } = await Axios.get(
-        `https://x09-be.onrender.com/api/courses/${keyword}`
+        `https://x09-be.onrender.com/api/courses?keyword=pr`
       )
       setstate(       
         seachdata.courses.map((row) => ({
@@ -104,13 +104,11 @@ function DSKH() {
         <div className="SpaceandButton">
         <Space direction="vertical">
           <Search
-            onClick={handlSearch}
             className="Search"
             placeholder="Nhập Tìm Kiêm"
             enterButton="Tìm Kiêm"
             size="large"
-            onChange={(e) => setKeyword(e.target.value)}
-            value={keyword}
+            onChange={handlSearch}
           />
         </Space>
         <Space>
