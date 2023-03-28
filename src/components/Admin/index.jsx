@@ -11,7 +11,6 @@ import PageContent from "./PageContent/PageContent";
 export default function Index(props) {
   return (
     <div className="AdminApp">
-      
         <Header />
         <Space className="SideMenuAndPage">
           <SideMenu />
