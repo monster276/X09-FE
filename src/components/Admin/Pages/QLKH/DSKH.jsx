@@ -8,11 +8,10 @@ import { UploadOutlined } from "@ant-design/icons";
 
 function DSKH() {
   const { Search } = Input;
-
+  const [value, setvalue] = useState("");
   const [state, setstate] = useState({});
   const [loading, setloading] = useState(true);
   const [open, setOpen] = useState(false);
-  const [keyword, setKeyword] = useState("");
 
   const onSearch = (value) => console.log(value);
   
@@ -47,11 +46,11 @@ function DSKH() {
 
     const handlSearch = async (e) =>{
       e.preventDefault();
-      const { seachdata } = await Axios.get(
-        `https://x09-be.onrender.com/api/courses?keyword=pr`
+      const { data } = await Axios.get(
+        `https://x09-be.onrender.com/api/courses?keyword=${value}`
       )
       setstate(       
-        seachdata.courses.map((row) => ({
+        data.courses.map((row) => ({
           name: row.name,
           message: row.description,
           price: row.price,
@@ -108,7 +107,8 @@ function DSKH() {
             placeholder="Nhập Tìm Kiêm"
             enterButton="Tìm Kiêm"
             size="large"
-            onChange={handlSearch}
+            onSubmit={handlSearch}
+            onChange={(e) => setvalue(e.target.value)}
           />
         </Space>
         <Space>
