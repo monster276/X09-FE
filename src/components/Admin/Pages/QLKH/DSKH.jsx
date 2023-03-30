@@ -1,20 +1,41 @@
-import React, { useState, useEffect, useRef  } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Axios from "axios";
-import "./DSKH.css";
-import { Table, Space, Button,Input, Drawer, Form, Row, Col, Upload, } from "antd";
+import {
+  Table,
+  Space,
+  Button,
+  Input,
+  Drawer,
+  Form,
+  Row,
+  Col,
+  Upload,
+  AutoComplete,
+} from "antd";
 import { Editor } from "@tinymce/tinymce-react";
 import { UploadOutlined } from "@ant-design/icons";
-
+import "./DSKH.css";
+const mockVal = (str, repeat = 1) => ({
+  value: str.repeat(repeat),
+});
 
 function DSKH() {
-  const { Search } = Input;
-  const [value, setvalue] = useState("");
+  const [searchValue, setSearchValue] = useState('');
+  const [options, setOptions] = useState([]);
   const [state, setstate] = useState({});
   const [loading, setloading] = useState(true);
   const [open, setOpen] = useState(false);
 
-  const onSearch = (value) => console.log(value);
-  
+
+  // seach
+  const getPanelValue = (searchText) =>
+    !searchText
+      ? []
+      : [mockVal(searchText), mockVal(searchText, 2), mockVal(searchText, 3)];
+  const onSelect = (data) => {
+    console.log("onSelect", data);
+  };
+  // show Drawer 
   const showDrawer = () => {
     setOpen(true);
   };
@@ -23,42 +44,40 @@ function DSKH() {
   };
   const editorRef = useRef();
 
-
+  // get data Danh Sach 
   useEffect(() => {
     getData();
   }, []);
-  
- 
-  const getData = async () => {
-    const { data } = await Axios.get(
-      "https://x09-be.onrender.com/api/courses"
-    );
-    setloading(false);
-      setstate(
-        data.courses.map((row) => ({
-          name: row.name,
-          message: row.description,
-          price: row.price,
-          id: row.id,
-        }))
-      );
-    };
+  useEffect(() => {
+    getSearchData();
+  }, [searchValue]);
 
-    const handlSearch = async (e) =>{
-      e.preventDefault();
-      const { data } = await Axios.get(
-        `https://x09-be.onrender.com/api/courses?keyword=${value}`
-      )
-      setstate(       
-        data.courses.map((row) => ({
-          name: row.name,
-          message: row.description,
-          price: row.price,
-          id: row.id,
-        }))
-      );
-    };
-    
+
+  const getData = async () => {
+    const { data } = await Axios.get("https://x09-be.onrender.com/api/courses");
+    setloading(false);
+    setstate(
+      data.courses.map((row) => ({
+        name: row.name,
+        message: row.description,
+        price: row.price,
+        id: row.id,
+      }))
+    );
+  };
+  const getSearchData = async () => {
+    const { data } = await Axios.get(`https://x09-be.onrender.com/api/courses?keyword=${searchValue}`);
+    setloading(false);
+    setstate(
+      data.courses.map((row) => ({
+        name: row.name,
+        message: row.description,
+        price: row.price,
+        id: row.id,
+      }))
+    );
+  };
+
 
   const columns = [
     {
@@ -100,16 +119,20 @@ function DSKH() {
 
   return (
     <div>
-        <div className="SpaceandButton">
+      <div className="SpaceandButton">
         <Space direction="vertical">
-          <Search
-            className="Search"
-            placeholder="Nhập Tìm Kiêm"
-            enterButton="Tìm Kiêm"
-            size="large"
-            onSubmit={handlSearch}
-            onChange={(e) => setvalue(e.target.value)}
-          />
+          <AutoComplete
+            style={{
+              width: 450,
+            }}
+            value={searchValue}
+            options={options}
+            onSelect={onSelect}
+            onSearch={(text) => setOptions(getPanelValue(text))}
+          
+          >
+            <Input.Search size="large" placeholder="input here" enterButton   onChange={(e) => setSearchValue(e.target.value)}   />
+          </AutoComplete>
         </Space>
         <Space>
           <Button type="primary" onClick={showDrawer} className="ButtonTM">
