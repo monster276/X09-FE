@@ -16,6 +16,8 @@ import {
 import { Editor } from "@tinymce/tinymce-react";
 import { UploadOutlined } from "@ant-design/icons";
 import "./DSKH.css";
+import Detail from "./Detail";
+
 const mockVal = (str, repeat = 1) => ({
   value: str.repeat(repeat),
 });
@@ -27,13 +29,17 @@ function DSKH() {
   const [data, setData] = useState({});
   const [loading, setloading] = useState(true);
   const [open, setOpen] = useState(false);
+  const [modalId, setModalId] = useState('Content of the modal');
 
   // show modal
   const showModal = () => {
     setIsModalOpen(true);
   };
   const handleOk = () => {
-    setIsModalOpen(false);
+    setModalId('The modal will be closed after two seconds');
+    setTimeout(() => {
+      setIsModalOpen(false);
+    }, 2000);
   };
   const handleCancel = () => {
     setIsModalOpen(false);
@@ -101,20 +107,23 @@ function DSKH() {
   // Chi Tiết
   const getDetail = async () => {
     const { data } = await Axios.get(
-      `https://x09-be.onrender.com/api/courses/`
+      `https://x09-be.onrender.com/api/courses/${modalId}`
     );
     setloading(false);
     setData(
       data.courses.map((row) => ({
+        id: row.id,
         name: row.name,
         message: row.description,
         price: row.price,
-        id: row.id,
-
+        image: row.image,
+        courseTime: row.courseTime,
+        classTime: row.classTime,
+        maxNumberOfStudents: row.maxNumberOfStudents,
       }))
     );
   };
-  
+
   const columns = [
     {
       title: "Mã Khóa Học",
@@ -152,11 +161,12 @@ function DSKH() {
         <Space size="middle">
           <Button onClick={showModal}> Chi Tiết </Button>
           <Button> Xóa </Button>
+          <Button> Chỉnh Sửa </Button>
         </Space>
       ),
     },
   ];
- 
+
   return (
     <div>
       <div className="SpaceandButton">
@@ -172,7 +182,7 @@ function DSKH() {
           >
             <Input.Search
               size="large"
-              placeholder="input here"
+              placeholder="nhập it nhé"
               enterButton
               onChange={(e) => setSearchValue(e.target.value)}
             />
@@ -338,8 +348,25 @@ function DSKH() {
         onOk={handleOk}
         onCancel={handleCancel}
       >
+        <div className="Title-Modal">
+          <h4> Mã Khóa Học </h4>
+          <span>{modalId}</span>
+          <h4> Tên Khóa Học </h4>
+          <span></span>
+          <h4> Mô Tả Khóa Học </h4>
+          <span></span>
+          <h4> Ảnh Khóa Học </h4>
+          <img  />
+          <h4> Thời Gian Khóa Học </h4>
+          <span></span>
+          <h4> Thời Gian Học </h4>
+          <span></span>
+          <h4> Giá Khóa Học </h4>
+          <span></span>
+          <h4> Số Học Sinh Tối Đa </h4>
+          <span></span>
+        </div>
       </Modal>
-      
     </div>
   );
 }

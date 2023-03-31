@@ -1,6 +1,7 @@
 .SpaceandButton {
     display: flex;
     margin-top: 50px;
+    justify-content: space-between;
 }
 
 .ButtonTM {
@@ -18,6 +19,7 @@
 }
 .BTSpace {
     margin-top: 50px;
+    margin-left: 100px;
 }
 .Title-Modal {
     padding: 10px;
