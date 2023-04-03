@@ -12,6 +12,7 @@ import {
   Upload,
   AutoComplete,
   Modal,
+  Divider
 } from "antd";
 import { Editor } from "@tinymce/tinymce-react";
 import { UploadOutlined } from "@ant-design/icons";
@@ -32,7 +33,14 @@ const mockVal = (str, repeat = 1) => ({
   value: str.repeat(repeat),
 });
 
+const DescriptionItem = ({ title, content }) => (
+  <div className="site-description-item-profile-wrapper">
+    <p className="site-description-item-profile-p-label">{title}:</p>
+    {content}
+  </div> 
+  );
 function DSKH() {
+  const [open, setOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [options, setOptions] = useState([]);
@@ -52,7 +60,12 @@ function DSKH() {
   const showModal = () => {
     setIsModalOpen(!isModalOpen);
   };
-
+  const showDrawer = () => {
+   
+  };
+  const onClose = () => {
+    setOpen(false);
+  };
   // seach
   const getPanelValue = (searchText) =>
     !searchText
@@ -65,7 +78,7 @@ function DSKH() {
   // get data Danh Sach
   useEffect(() => {
     getData();
-  }, []);
+  }, [data]);
   // search
   useEffect(() => {
     getSearchData();
@@ -104,20 +117,25 @@ function DSKH() {
   };
 
   //Chi Tiết
-  // const getDetail = async (id) => {
-  //   const { data } = await Axios.get(
-  //     `https://x09-be.onrender.com/api/courses/${id}`
-  //   );
-  //   setloading(false);
-  //   setData(
-  //     data.courses.map((row) => ({
-  //       name: row.name,
-  //       message: row.description,
-  //       price: row.price,
-  //       id: row.id,
-  //     }))
-  //   );
-  // };
+  const getDetail = async (id) => {
+    setOpen(true);
+    const { data } = await Axios.get(
+      `https://x09-be.onrender.com/api/courses/${id}`
+    );
+    setloading(false);
+    setData(
+      data.courses.map((row) => ({
+        id: row.id,
+        name: row.name,
+        description: row.description,
+        price: row.price,
+        image:row.image,
+        courseTime:row.courseTime,
+        classTime:row.classTime,
+        maxNumberOfStudents:row.maxNumberOfStudents
+      }))
+    );
+  };
 
   const handeChange = (e) => {
     const { name, value } = e.target;
@@ -126,16 +144,20 @@ function DSKH() {
   };
 
   const PostlistData = async () => {
-    delete postData.id;
-    const { data }  = await axios
-      .post("https://x09-be.onrender.com/api/courses", {})
-      .then((res) => {
-        setData(data.concat(res.data));
-        showModal();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const { newData } = await Axios.post(
+      "https://x09-be.onrender.com/api/courses",
+      postData,
+      config,
+      showModal()
+    );
+
+    setData(newData)
   };
 
   const columns = [
@@ -173,7 +195,7 @@ function DSKH() {
       idth: 100,
       render: (fila) => (
         <Space size="middle">
-          <Button> Chi Tiết </Button>
+          <Button onClick= {showDrawer} > Chi Tiết </Button>
           <Button> Xóa </Button>
           <Button> Chỉnh Sửa </Button>
         </Space>
@@ -204,7 +226,7 @@ function DSKH() {
         </Space>
         <Space>
           <Button type="primary" onClick={showModal} className="ButtonTM">
-            Tạo Mới Cở Sở
+            Tạo Mới khóa học
           </Button>
         </Space>
       </div>
@@ -274,6 +296,67 @@ function DSKH() {
           </Item>
         </Form>
       </Modal>
+      <Drawer width={640} placement="right" closable={false} onClose={onClose} open={open}>
+        <p
+          className="site-description-item-profile-p"
+          style={{
+            marginBottom: 24,
+          }}
+        >
+        
+        </p>
+        <p className="site-description-item-profile-p">Personal</p>
+        <Row>
+          <Col span={12}>
+            <DescriptionItem title="Full Name" content="Huy" />
+          </Col>
+          <Col span={12}>
+            <DescriptionItem title="Account" content="AntDesign@example.com" />
+          </Col>
+        </Row>
+        <Row>
+          <Col span={12}>
+            <DescriptionItem title="City" content="HangZhou" />
+          </Col>
+          <Col span={12}>
+            <DescriptionItem title="Country" content="China🇨🇳" />
+          </Col>
+        </Row>
+        <Row>
+          <Col span={12}>
+            <DescriptionItem title="Birthday" content="February 2,1900" />
+          </Col>
+          <Col span={12}>
+            <DescriptionItem title="Website" content="-" />
+          </Col>
+        </Row>
+        <Row>
+          <Col span={24}>
+            <DescriptionItem
+              title="Message"
+              content="Make things as simple as possible but no simpler."
+            />
+          </Col>
+        </Row>
+        <Divider />
+        <p className="site-description-item-profile-p">Company</p>
+        <Row>
+          <Col span={12}>
+            <DescriptionItem title="Position" content="Programmer" />
+          </Col>
+          <Col span={12}>
+            <DescriptionItem title="Responsibilities" content="Coding" />
+          </Col>
+        </Row>
+        <Row>
+          <Col span={12}>
+            <DescriptionItem title="Department" content="XTech" />
+          </Col>
+          <Col span={12}>
+            <DescriptionItem title="Supervisor" content={<a>Lin</a>} />
+          </Col>
+        </Row>
+      </Drawer>
     </div>
   );
 }
