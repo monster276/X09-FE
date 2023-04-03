@@ -16,7 +16,17 @@ import {
 import { Editor } from "@tinymce/tinymce-react";
 import { UploadOutlined } from "@ant-design/icons";
 import "./DSKH.css";
-import Detail from "./Detail";
+import axios from "axios";
+import Item from "antd/es/list/Item";
+
+const Layout = {
+  labelCol: {
+    span: 8,
+  },
+  wrapperCol: {
+    span: 16,
+  },
+};
 
 const mockVal = (str, repeat = 1) => ({
   value: str.repeat(repeat),
@@ -28,21 +38,19 @@ function DSKH() {
   const [options, setOptions] = useState([]);
   const [data, setData] = useState({});
   const [loading, setloading] = useState(true);
-  const [open, setOpen] = useState(false);
-  const [modalId, setModalId] = useState('Content of the modal');
-
+  const [postData, setPostData] = useState({
+    id: "",
+    name: "",
+    description: "",
+    image: "",
+    courseTime: "",
+    price: "",
+    maxNumberOfStudents: "",
+  });
+  const { Item } = Form;
   // show modal
   const showModal = () => {
-    setIsModalOpen(true);
-  };
-  const handleOk = () => {
-    setModalId('The modal will be closed after two seconds');
-    setTimeout(() => {
-      setIsModalOpen(false);
-    }, 2000);
-  };
-  const handleCancel = () => {
-    setIsModalOpen(false);
+    setIsModalOpen(!isModalOpen);
   };
 
   // seach
@@ -53,15 +61,6 @@ function DSKH() {
   const onSelect = (data) => {
     console.log("onSelect", data);
   };
-  // show Drawer
-  const showDrawer = () => {
-    setOpen(true);
-  };
-  const onClose = () => {
-    setOpen(false);
-  };
-  // tiny mce
-  const editorRef = useRef();
 
   // get data Danh Sach
   useEffect(() => {
@@ -72,17 +71,17 @@ function DSKH() {
     getSearchData();
   }, [searchValue]);
   // Chi tiết
-  useEffect(() => {
-    getDetail();
-  }, []);
-  // danh sách
+  // useEffect(() => {
+  //   getDetail();
+  // }, []);
+  //danh sách
   const getData = async () => {
     const { data } = await Axios.get("https://x09-be.onrender.com/api/courses");
     setloading(false);
     setData(
       data.courses.map((row) => ({
         name: row.name,
-        message: row.description,
+        description: row.description,
         price: row.price,
         id: row.id,
       }))
@@ -97,31 +96,46 @@ function DSKH() {
     setData(
       data.courses.map((row) => ({
         name: row.name,
-        message: row.description,
+        description: row.description,
         price: row.price,
         id: row.id,
       }))
     );
   };
 
-  // Chi Tiết
-  const getDetail = async () => {
-    const { data } = await Axios.get(
-      `https://x09-be.onrender.com/api/courses/${modalId}`
-    );
-    setloading(false);
-    setData(
-      data.courses.map((row) => ({
-        id: row.id,
-        name: row.name,
-        message: row.description,
-        price: row.price,
-        image: row.image,
-        courseTime: row.courseTime,
-        classTime: row.classTime,
-        maxNumberOfStudents: row.maxNumberOfStudents,
-      }))
-    );
+  //Chi Tiết
+  // const getDetail = async (id) => {
+  //   const { data } = await Axios.get(
+  //     `https://x09-be.onrender.com/api/courses/${id}`
+  //   );
+  //   setloading(false);
+  //   setData(
+  //     data.courses.map((row) => ({
+  //       name: row.name,
+  //       message: row.description,
+  //       price: row.price,
+  //       id: row.id,
+  //     }))
+  //   );
+  // };
+
+  const handeChange = (e) => {
+    const { name, value } = e.target;
+    setPostData({ ...postData, [name]: value });
+    console.log(postData);
+  };
+
+  const PostlistData = async () => {
+    delete postData.id;
+    const { data }  = await axios
+      .post("https://x09-be.onrender.com/api/courses", {})
+      .then((res) => {
+        setData(data.concat(res.data));
+        showModal();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const columns = [
@@ -139,8 +153,8 @@ function DSKH() {
     },
     {
       title: "Mô Tả Khóa Học",
-      dataIndex: "message",
-      key: "message",
+      dataIndex: "description",
+      key: "description",
       width: 600,
     },
     {
@@ -157,9 +171,9 @@ function DSKH() {
     {
       title: "Chức Năng",
       idth: 100,
-      render: () => (
+      render: (fila) => (
         <Space size="middle">
-          <Button onClick={showModal}> Chi Tiết </Button>
+          <Button> Chi Tiết </Button>
           <Button> Xóa </Button>
           <Button> Chỉnh Sửa </Button>
         </Space>
@@ -182,14 +196,14 @@ function DSKH() {
           >
             <Input.Search
               size="large"
-              placeholder="nhập it nhé"
+              placeholder="nhập tìm kiếm"
               enterButton
               onChange={(e) => setSearchValue(e.target.value)}
             />
           </AutoComplete>
         </Space>
         <Space>
-          <Button type="primary" onClick={showDrawer} className="ButtonTM">
+          <Button type="primary" onClick={showModal} className="ButtonTM">
             Tạo Mới Cở Sở
           </Button>
         </Space>
@@ -206,166 +220,59 @@ function DSKH() {
           />
         )}
       </>
-      <>
-        <Drawer
-          width={750}
-          onClose={onClose}
-          open={open}
-          bodyStyle={{
-            paddingBottom: 80,
-          }}
-        >
-          <Form layout="vertical" hideRequiredMark>
-            <Row gutter={16}>
-              <Col span={12}>
-                <Form.Item
-                  name="MKhoaHoc"
-                  label="Mã Khóa Học "
-                  rules={[
-                    {
-                      required: true,
-                      message: "Nhap Ma Khoa Hoc",
-                    },
-                  ]}
-                >
-                  <Input placeholder="Nhập Mã Khóa Học " />
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item
-                  name="TKhoaHoc"
-                  label="Tên Khóa Học "
-                  rules={[
-                    {
-                      required: true,
-                      message: "Nhap Ten Khoa Hoc",
-                    },
-                  ]}
-                >
-                  <Input placeholder="Nhập Tên Khóa Học" />
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row gutter={16}>
-              <Col span={12}>
-                <Form.Item
-                  name="GThanh"
-                  label="Giá Thành "
-                  rules={[
-                    {
-                      required: true,
-                      message: "nhap gia thanh",
-                    },
-                  ]}
-                >
-                  <Input placeholder="Nhập Giá Thành" />
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item
-                  name="SSlop"
-                  label="Số Học Viên Trên Lớp "
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please enter user name",
-                    },
-                  ]}
-                >
-                  <Input placeholder="Nhập Số Học Viên" />
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item
-                  name="SB"
-                  label="Số Buổi"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Nhap So Buoi",
-                    },
-                  ]}
-                >
-                  <Input placeholder="Nhập Số Buổi" />
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item
-                  name="TLTrenLop"
-                  label="Thời Lượng Trên Lớp "
-                  rules={[
-                    {
-                      required: true,
-                      message: "Nhap Thoi Luong",
-                    },
-                  ]}
-                >
-                  <Input placeholder="Nhập Thời Lương" />
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item
-                  name="Anh"
-                  label="Ảnh"
-                  rules={[
-                    {
-                      required: true,
-                      message: "anh",
-                    },
-                  ]}
-                >
-                  <Space>
-                    <Upload>
-                      <Button>
-                        <UploadOutlined /> Click to Upload
-                      </Button>
-                    </Upload>
-                  </Space>
-                </Form.Item>
-              </Col>
-            </Row>
-            <Editor>
-              onInit={(evt, editor) => (editorRef.current = editor)}
-            </Editor>
-            <Space className="Space">
-              <Button onClick={onClose} className="BTSpace">
-                Thoát{" "}
-              </Button>
-              <Button onClick={onClose} className="BTSpace " type="primary">
-                Lưu lại
-              </Button>
-            </Space>
-          </Form>
-        </Drawer>
-      </>
       <Modal
-        style={{
-          width: 500,
-          height: 200,
-        }}
-        title="Chi Tiết"
-        open={isModalOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
+        Key="id"
+        visible={isModalOpen}
+        title="Tạo Mới Khóa Học"
+        destroyOnClose={true}
+        onCancel={showModal}
+        centered
+        footer={[
+          <Button onClick={showModal}>Thoát</Button>,
+          <Button type="primary" onClick={PostlistData}>
+            Lưu
+          </Button>,
+        ]}
       >
-        <div className="Title-Modal">
-          <h4> Mã Khóa Học </h4>
-          <span>{modalId}</span>
-          <h4> Tên Khóa Học </h4>
-          <span></span>
-          <h4> Mô Tả Khóa Học </h4>
-          <span></span>
-          <h4> Ảnh Khóa Học </h4>
-          <img  />
-          <h4> Thời Gian Khóa Học </h4>
-          <span></span>
-          <h4> Thời Gian Học </h4>
-          <span></span>
-          <h4> Giá Khóa Học </h4>
-          <span></span>
-          <h4> Số Học Sinh Tối Đa </h4>
-          <span></span>
-        </div>
+        <Form  {...Layout}>
+          <Item label="Mã Khóa Học " key='id' >
+            <Input name="id"  onChange={handeChange} />
+          </Item>
+
+          <Item label=" Tên Khóa Học "  key='name' >
+            <Input name="name"  onChange={handeChange} />
+          </Item>
+
+          <Item label="Giá Khóa Học "  key='price'>
+            <Input name="price"  onChange={handeChange} />
+          </Item>
+
+          <Item label="Nội Dung Khóa Học " key='description'  >
+            <Input.TextArea
+              
+              rows={4}
+              name="description"
+              placeholder="nhập nội dung khóa học "
+              onChange={handeChange}
+            />
+          </Item>
+
+          <Item label="Thời Lượng Khóa Học" key='courseTime' >
+            <Input name="courseTime"  onChange={handeChange} />
+          </Item>
+
+          <Item label="Thời Lượng Giờ Học " key='classTime' >
+            <Input name="classTime"  onChange={handeChange} />
+          </Item>
+
+          <Item label="Số học sinh " key='maxNumberOfStudents' >
+            <Input name="maxNumberOfStudents"  onChange={handeChange} />
+          </Item>
+
+           <Item label="ảnh" key='image' >
+            <Input name="image"  onChange={handeChange} />
+          </Item>
+        </Form>
       </Modal>
     </div>
   );
