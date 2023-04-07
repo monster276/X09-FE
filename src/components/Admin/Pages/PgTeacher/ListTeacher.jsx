@@ -12,7 +12,7 @@ import {
   Space,
   Table,
 } from "antd";
-import './DSGV'
+import './ListTeacher'
 import { useState } from "react";
 const { Option } = Select;
 
@@ -142,7 +142,7 @@ const data = [
     Address: "New York No. 1 Lake Park",
   },
 ];
-const DSGV = () => {
+const ListTeacher = () => {
   const [open, setOpen] = useState(false);
   const showDrawer = () => {
     setOpen(true);
@@ -169,7 +169,7 @@ const DSGV = () => {
         </Button>
       </Space>
       </div>
-      <Table className="TableCS" columns={columns} dataSource={data} />;
+      <Table className="TableCS" columns={columns} dataSource={data} pagination={{pageSize:10, }} />;
       <Drawer
         title="Create a new account"
         width={720}
@@ -320,7 +320,7 @@ const DSGV = () => {
           </Row>
         </Form>
       </Drawer>
-    </>
+    </>                                                                 
   );
 };
-export default DSGV;
+export default ListTeacher;

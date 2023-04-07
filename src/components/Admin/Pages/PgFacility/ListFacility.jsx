@@ -12,6 +12,7 @@ import {
   Row,
   Switch,
   Col,
+  Pagination
 } from "antd";
 const { Column } = Table;
 
@@ -19,11 +20,52 @@ const { Search } = Input;
 const onSearch = (value) => console.log(value);
 
 
-const DSCS = () => {
+const ListFacility = () => {
   const onChange = (checked) => {
     console.log(`switch to ${checked}`);
   };
-
+  const columns = [
+    {
+      title: "Mã Khóa Học",
+      dataIndex: "id",
+      key: "id",
+      width: 150,
+    },
+    {
+      title: "Tên Khóa Học",
+      dataIndex: "name",
+      key: "name",
+      width: 200,
+    },
+    {
+      title: "Mô Tả Khóa Học",
+      dataIndex: "description",
+      key: "description",
+      width: 600,
+    },
+    {
+      title: "Giá Thành ",
+      dataIndex: "price",
+      key: "price",
+      width: 150,
+      render: (_, { price }) =>
+        (price = price.toLocaleString("vi", {
+          style: "currency",
+          currency: "VND",
+        })),
+    },
+    {
+      title: "Chức Năng",
+      idth: 100,
+      render: (fila) => (
+        <Space size="middle">
+          <Button onClick= {showDrawer} > Chi Tiết </Button>
+          <Button> Xóa </Button>
+          <Button> Chỉnh Sửa </Button>
+        </Space>
+      ),
+    },
+  ];
   const [open, setOpen] = useState(false);
   const showDrawer = () => {
     setOpen(true);
@@ -50,7 +92,7 @@ const DSCS = () => {
           </Button>
         </Space>
       </div>
-      <Table className="TableCS" >
+      <Table className="TableCS" dataSource={columns} >
         <Column title="STT" dataIndex="STT" key="STT"  />
         <Column title="Mã Cở Sở " dataIndex="MCoSo" key="MCoSo" width={200} />
         <Column title="Tên Cở Sở" dataIndex="TCoSo" key="TCoSo"  width={400} />
@@ -66,7 +108,10 @@ const DSCS = () => {
             </Space>
           )}
         />
+        
       </Table>
+      
+      
       <Drawer
         width={750}
         onClose={onClose}
@@ -147,4 +192,4 @@ const DSCS = () => {
     </>
   );
 };
-export default DSCS;
+export default ListFacility;

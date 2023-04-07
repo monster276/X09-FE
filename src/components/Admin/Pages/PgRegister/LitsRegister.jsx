@@ -1,6 +1,6 @@
 import React from 'react';
 
-function DSDK() {
+function ListRegisterCourse() {
   return (
     <div>
       
@@ -8,4 +8,4 @@ function DSDK() {
   );
 }
 
-export default DSDK;
+export default ListRegisterCourse;

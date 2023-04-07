@@ -1,5 +1,5 @@
 import React from 'react'
-import RoutesPage from '../Routes/RoutesPage'
+import RoutesPage from '../../Routes/RoutesPage'
 
 function PageContent() {
   return (

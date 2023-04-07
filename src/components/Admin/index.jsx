@@ -2,13 +2,13 @@ import React from "react";
 import "./index.css";
 
 import { Space } from "antd";
-import Header from "./header/header";
-import Footer from "./Footer/Footer";
-import SideMenu from "./SideMenu/SideMenu";
-import PageContent from "./PageContent/PageContent";
+import Header from "./components/header/header";
+import Footer from "./components/Footer/Footer";
+import SideMenu from "./components/SideMenu/SideMenu";
+import PageContent from "./components/PageContent/PageContent";
+  
 
-
-export default function Index(props) {
+export default function Index() {
   return (
     <div className="AdminApp">
         <Header />
@@ -17,7 +17,6 @@ export default function Index(props) {
           <PageContent />
         </Space>
         <Footer />
-  
     </div>
   );
 }

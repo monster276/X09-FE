@@ -1,6 +1,6 @@
 import React from 'react';
 
-function DSLH() {
+function ListClass() {
   return (
     <div>
       <h1>huy</h1>
@@ -8,4 +8,4 @@ function DSLH() {
   );
 }
 
-export default DSLH;
+export default ListClass;
