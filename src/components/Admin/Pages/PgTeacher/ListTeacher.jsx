@@ -12,7 +12,7 @@ import {
   Space,
   Table,
 } from "antd";
-import './ListTeacher'
+import "./ListTeacher";
 import { useState } from "react";
 const { Option } = Select;
 
@@ -163,13 +163,24 @@ const ListTeacher = () => {
             onSearch={onSearch}
           />
         </Space>
-      <Space>
-        <Button type="primary" onClick={showDrawer} className="ButtonTM" icon={<PlusOutlined />}>
-          Tạo Mới Khóa Học
-        </Button>
-      </Space>
+        <Space>
+          <Button
+            type="primary"
+            onClick={showDrawer}
+            className="ButtonTM"
+            icon={<PlusOutlined />}
+          >
+            Tạo Mới Khóa Học
+          </Button>
+        </Space>
       </div>
-      <Table className="TableCS" columns={columns} dataSource={data} pagination={{pageSize:10, }} />;
+      <Table
+        className="TableCS"
+        columns={columns}
+        dataSource={data}
+        pagination={{ pageSize: 10 }}
+      />
+      ;
       <Drawer
         title="Create a new account"
         width={720}
@@ -320,7 +331,7 @@ const ListTeacher = () => {
           </Row>
         </Form>
       </Drawer>
-    </>                                                                 
+    </>
   );
 };
 export default ListTeacher;

@@ -1,54 +1,59 @@
-import React from 'react';
-import './SideMenu.css';
-import { HomeOutlined , ShopOutlined ,TeamOutlined ,ReadOutlined, UserOutlined } from '@ant-design/icons'
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import "./SideMenu.css";
+import {
+  HomeOutlined,
+  ShopOutlined,
+  TeamOutlined,
+  ReadOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 import { Menu } from "antd";
-
-
 
 function SideMenu() {
   const navigate = useNavigate();
   return (
-    <div> 
-      <div className='SideMenu'>
-        <Menu className='Menu'
-        onClick={(item)=>{
+    <div>
+      <div className="SideMenu">
+        <Menu
+          className="Menu"
+          onClick={(item) => {
             // item.key
             navigate(item.key);
-        }}
-          items = {[
+          }}
+          items={[
             {
               label: "Trang Chủ",
-              icon: <HomeOutlined  />,
-              key:"/admin"
+              icon: <HomeOutlined />,
+              key: "/admin",
             },
             {
-              label:" Cơ Sở ",
+              label: " Cơ Sở ",
               icon: <ShopOutlined />,
-              key:'/admin/DSCoSo'
+              key: "/admin/DSCoSo",
             },
             {
-              label:" Giảng Viên",
+              label: " Giảng Viên",
               icon: <UserOutlined />,
-              key:'/admin/DSGV'
+              key: "/admin/DSGV",
             },
             {
-              label:" Lớp Học ",
+              label: " Lớp Học ",
               icon: <TeamOutlined />,
-              key:'/admin/DSLH'
+              key: "/admin/DSLH",
             },
             {
-              label:"Đăng Ký  Khóa Học ",
+              label: "Đăng Ký  Khóa Học ",
               icon: <ReadOutlined />,
-              key:'/admin/DSKH'
+              key: "/admin/DSDK",
             },
             {
-              label:"Khóa Học ",
+              label: "Khóa Học ",
               icon: <ReadOutlined />,
-              key:'/Admin/DSDK'
-            }
+              key: "/Admin/DSKH",
+            },
           ]}
-          ></Menu>
+        ></Menu>
       </div>
     </div>
   );
