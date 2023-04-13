@@ -125,70 +125,66 @@ export function ClassroomDetail() {
   ];
   const scheduleColums = schedule
     .map((s) => {
-      return [
-        // {
-        //   title: s.date + "- Bài học",
-        //   dataIndex: s.id,
-        //   key: s.id,
-        //   render: (text, record) => {
-        //     return <span>{s.lectureName}</span>;
-        //   },
-        // },
-        {
-          title: s.date + "- Điểm danh",
-          dataIndex: s.id,
-          key: s.id,
-          render: (text, record) => {
-            let evaluate = record.evaluates.find(
-              (e) => e.lectureId == s.lectureId
-            );
-            return (
-              <Select
-                style={{ width: "100%" }}
-                defaultValue={evaluate?.attendance}
-              >
-                <Option value="MUON">Muộn</Option>
-                <Option value="DUNG_GIO">Đúng giờ</Option>
-                <Option value="VANG">Vắng</Option>
-              </Select>
-            );
+      return {
+        title: s.date,
+        children: [
+          {
+            title: "Điểm danh",
+            dataIndex: s.id,
+            key: s.id,
+            render: (text, record) => {
+              let evaluate = record.evaluates.find(
+                (e) => e.lectureId == s.lectureId
+              );
+              return (
+                <Select
+                  style={{ width: "100%" }}
+                  defaultValue={evaluate?.attendance}
+                >
+                  <Option value="MUON">Muộn</Option>
+                  <Option value="DUNG_GIO">Đúng giờ</Option>
+                  <Option value="VANG">Vắng</Option>
+                  <Option value="VANG_CO_PHEP">Vắng Có Phép</Option>
+                </Select>
+              );
+            },
           },
-        },
-        {
-          title: s.date + "- Chấm điểm",
-          dataIndex: s.id,
-          key: s.id,
-          render: (text, record) => {
-            let evaluate = record.evaluates.find(
-              (e) => e.lectureId == s.lectureId
-            );
-            return (
-              <InputNumber
-                style={{ width: "100%" }}
-                defaultValue={evaluate?.point}
-                min="0"
-                max="10"
-              />
-            );
+          {
+            title: "Chấm điểm",
+            dataIndex: s.id,
+            key: s.id,
+            render: (text, record) => {
+              let evaluate = record.evaluates.find(
+                (e) => e.lectureId == s.lectureId
+              );
+              return (
+                <InputNumber
+                  style={{ width: "50%" }}
+                  defaultValue={evaluate?.point}
+                  min="0"
+                  max="10"
+                />
+              );
+            },
           },
-        },
-        {
-          title: s.date + "- Nhận xét",
-          dataIndex: s.id,
-          key: s.id,
-          render: (text, record) => {
-            let evaluate = record.evaluates.find(
-              (e) => e.lectureId == s.lectureId
-            );
-            return (
-              <Input
-                style={{ width: "100%" }}
-                defaultValue={evaluate?.comment}
-              ></Input>
-            );
+          {
+            title: "Nhận xét",
+            dataIndex: s.id,
+            key: s.id,
+            render: (text, record) => {
+              let evaluate = record.evaluates.find(
+                (e) => e.lectureId == s.lectureId
+              );
+              return (
+                <Input
+                  style={{ width: "100%" }}
+                  defaultValue={evaluate?.comment}
+                ></Input>
+              );
+            },
           },
-        },
-      ];
+        ],
+      };
     })
     .flat(1);
   return (
@@ -197,7 +193,6 @@ export function ClassroomDetail() {
         columns={[...studentColumns, ...scheduleColums]}
         dataSource={student}
         scroll={{ x: 2000 }}
-      
       />
     </>
   );

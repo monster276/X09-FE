@@ -4,27 +4,17 @@
 //     return <h1>This page for teacher</h1>
 // }
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import {Outlet } from "react-router-dom";
 import LayoutComponent from "./Layout/Layout";
-import routes from "./Router/RouterConfig";
+import "./index.css"
+
 function Index(props) {
   return (
-    <div className="TeacherIndex">
-      <LayoutComponent {...props}>
-        <Routes>
-          {routes.length > 0 &&
-            routes.map((item) => {
-              return (
-                <Route
-                  path={item.path}
-                  element={<item.component />}
-                  key={item.path}
-                />
-              );
-            })}
-        </Routes>
-      </LayoutComponent>
-    </div>
+      <div className="TeacherIndex">
+        <LayoutComponent {...props}>
+        <Outlet />
+        </LayoutComponent>
+      </div>
   );
 }
 

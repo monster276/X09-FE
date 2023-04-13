@@ -16,7 +16,7 @@ const LayoutComponent = (props) => {
           <Header style={{backgroundColor:"#BAA3A3" ,color:"#fff"}}>
             <HeaderComponent/>
           </Header>
-          <Content>{props.children}</Content>
+          <Content style={{padding:"26px"}}>{props.children}</Content>
           <Footer>Footer</Footer>
         </Layout>
       </Layout>

@@ -4,23 +4,23 @@ import { useNavigate } from "react-router-dom";
 import * as _unitOfWork from "../api"
 import { path } from "../Router/RouterConfig";
 const {Search} = Input
-export function Lecture() {
+export function Lesson() {
   const navigate = useNavigate()
-  const [lectures, setLectures] = useState([]);
+  const [lessons, setLessons] = useState([]);
   useEffect(() => {
-    fetchLectures()
+    fetchLessons()
   }, []);
 
-  const fetchLectures = async () => {
-    let res = await _unitOfWork.getAllLecture()
+  const fetchLessons = async () => {
+    let res = await _unitOfWork.getAllLesson()
     if(res){
-      setLectures(res.lectures.map((item,index) => ({...item,stt:index+1})))
+      setLessons(res.lessons.map((item,index) => ({...item,stt:index+1})))
     }
   }
   const handleDelete = async (value) => {
-    let res = await _unitOfWork.deleteASingleLecture(value);
+    let res = await _unitOfWork.deleteASingleLesson(value);
     if (res) {
-      fetchLectures()
+      fetchLessons()
     }
   }
   const columns = [
@@ -30,27 +30,32 @@ export function Lecture() {
       key: "stt",
     },
     {
-      title: "Khóa Học",
-      dataIndex: "course",
-      key: "course",
+      title: "Bài học",
+      dataIndex: "lecture",
+      key: "lecture",
       render: (value, record) => (
-        <>{record.course?.name}</>
+        <>{record.lecture?.name}</>
       ),
     },
     {
-      title: "Ten bai giang",
-      dataIndex: "name",
-      key: "name",
+      title: "Tiêu đề",
+      dataIndex: "title",
+      key: "title",
     },
+    {
+        title: "Nội dung",
+        dataIndex: "content",
+        key: "content",
+      },
     {
       title: "Action",
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-            <Button  onClick={() => navigate(path.viewLecture + "/" + record._id)}>
+            <Button  onClick={() => navigate(path.viewLesson + "/" + record._id)}>
             Chi tiết
           </Button>
-          <Button type="primary" onClick={() => navigate(path.updateLecture + "/" + record._id)}>
+          <Button type="primary" onClick={() => navigate(path.updateLesson + "/" + record._id)}>
             Cập nhật
           </Button>
           <Button danger type="primary" onClick={() => handleDelete(record._id)}>
@@ -68,12 +73,12 @@ export function Lecture() {
           <Search placeholder="Tìm kiếm"></Search>
         </Col>
         <Col span={12} style={{ textAlign: "right" }}>
-          <Button type="primary" onClick={() => navigate(path.createLecture)}>
+          <Button type="primary" onClick={() => navigate(path.createLesson)}>
             Thêm mới
           </Button>
         </Col>
       </Row>
-      <Table columns={columns} dataSource={lectures} />
+      <Table columns={columns} dataSource={lessons} />
     </>
   );
 }

@@ -3,6 +3,7 @@ import { Menu, Button } from "antd";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { path } from "../Router/RouterConfig";
 import { Link } from "react-router-dom";
+import "./Menu.css";
 
 function MenuComponent() {
   const [collapsed, setCollapsed] = useState(false);
@@ -38,8 +39,23 @@ function MenuComponent() {
           </Link>
         </Menu.Item>
         <Menu.Item key="3">
-          <Link to={path.lecture}>
+          <Link to={path.register}>
             <span>DS Đăng kí Học</span>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="4">
+          <Link to={path.classroomManagement}>
+            <span>Quản lý lớp học</span>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="5">
+          <Link to={path.facilityManagement}>
+            <span>Quản lý cơ sở</span>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="6">
+          <Link to={path.lesson}>
+            <span>Bài học</span>
           </Link>
         </Menu.Item>
       </Menu>
