@@ -96,7 +96,7 @@ const SearchLocation = () => {
           </AutoComplete>
         </Space>
         <Space>
-          <Button type="primary" onClick={handleCreateCancel} className="ButtonTM">
+          <Button type="primary" onClick={handleCreateCancel} className="ButtonTM" Key="id" >
             Tạo Mới Cở Sở
           </Button>
         </Space>

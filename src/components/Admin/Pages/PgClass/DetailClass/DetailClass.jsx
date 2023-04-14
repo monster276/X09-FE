@@ -1,13 +1,11 @@
-import React, { useContext,  } from "react";
-import { Button, Modal,  Form } from "antd";
+import React, { useContext } from "react";
+import { Button, Modal, Form } from "antd";
 import { ListContext } from "../ListClass/ListClass";
 const { Item } = Form;
 
 const DetailClass = () => {
-   const { postData, showDetaillModal, Layout, DetailsModalOpen } = useContext(ListContext);
+  const { postData, showDetaillModal, Layout, DetailsModalOpen } =useContext(ListContext);
 
-
-  
   return (
     <div>
       <Modal
@@ -19,52 +17,41 @@ const DetailClass = () => {
         footer={[<Button onClick={showDetaillModal}>Thoát</Button>]}
       >
         <Form {...Layout}>
-          <Item label="Mã Lớp Học " key="id">
+          <Item label="Mã Lớp Học ">
             <span name="id"> {postData && postData.id} </span>
           </Item>
 
-          <Item label=" Tên Lớp Học " key="name">
-            <span name="name">{postData && postData.name}</span>
+          <Item label=" Tên Lớp Học ">
+            <span name="name">{postData && postData.nameclass}</span>
           </Item>
 
-          <Item label="Giá Khóa Học " key="price">
-            <span name="price">{postData && postData.price} </span>
+          <Item label="Tên Giảng Viên  ">
+            <span name="price">{postData && postData.fullname} </span>
           </Item>
 
-          <Item label="Nội Dung Khóa Học " key="description">
-            <span
-              rows={4}
-              name="description"
-              placeholder="nhập nội dung khóa học "
-            
-            >
-              {" "}
-              {postData && postData.description}
-            </span>
+          <Item label="Địa Chỉ Lớp Học ">
+            <span name="location">{postData && postData.location}</span>
           </Item>
 
-          <Item label="Thời Lượng Khóa Học" key="courseTime">
-            <span name="courseTime">
-              {postData && postData.courseTime}
-            </span>
+          <Item label="Khóa Học">
+            <span name="course">{postData && postData.course}</span>
           </Item>
 
-          <Item label="Thời Lượng Giờ Học " key="classTime">
-            <span name="classTime">
-              {postData && postData.classTime}
-            </span>
+          <Item label="Thời Lượng Giờ Học ">
+            <span name="startTime">{postData && postData.startTime}</span>
           </Item>
 
-          <Item label="Số học sinh " key="maxNumberOfStudents">
-            <span name="maxNumberOfStudents">
-              {postData && postData.maxNumberOfStudents}
-            </span>
+          <Item label="Ngày kết thúc Học ">
+            <span name="endTime">{postData && postData.endTime}</span>
           </Item>
-
-          <Item label="ảnh" key="image">
-            <span name="image">
-              {postData && postData.image}
-            </span>
+          <Item label="Số học sinh">
+            <span name="numberOfLessons">{postData && postData.numberOfLessons}</span>
+          </Item>
+          <Item label="Giờ Lớp Học">
+            <span name="classTime">{postData && postData.classTime}</span>
+          </Item>
+          <Item label="Lịch Học">
+            <span name="schedule">{postData && postData.schedule}</span>
           </Item>
         </Form>
       </Modal>

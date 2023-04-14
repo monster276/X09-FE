@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { Button, Modal } from "antd";
-import { ListContext } from "../ListClass/ListClass";
+import { ListContext } from "../ListTeacher/ListTeacher";
 import Axios from "axios";
-const DeleteClass = () => {
-  const { postData,  showDeletelModal, deletesModalOpen, baseUrlClass, data, setData } = useContext(ListContext);
+const DeleteLocation = () => {
+  const { postData,  showDeletelModal, deletesModalOpen, baseUrlLocations, data, setData } = useContext(ListContext);
 
   const HandlDelete = async () => {
-    await Axios.delete(baseUrlClass + "/" + postData._id)
+    await Axios.delete(baseUrlLocations + "/" + postData._id)
       .then((res) => {
         setData(data.filter((elemento) => elemento._id !== postData._id));
         showDeletelModal();
@@ -20,7 +20,7 @@ const DeleteClass = () => {
       <Modal
         Key="id"
         visible={deletesModalOpen}
-        title="Xóa Lớp Học"
+        title="Tạo Mới Khóa Học"
         destroyOnClose={true}
         onCancel={showDeletelModal}
         centered
@@ -37,4 +37,4 @@ const DeleteClass = () => {
   );
 };
 
-export default DeleteClass;
+export default DeleteLocation;

@@ -20,7 +20,7 @@ const DeleteLocation = () => {
       <Modal
         Key="id"
         visible={deletesModalOpen}
-        title="Tạo Mới Khóa Học"
+        title="Xóa Cở Sở "
         destroyOnClose={true}
         onCancel={showDeletelModal}
         centered

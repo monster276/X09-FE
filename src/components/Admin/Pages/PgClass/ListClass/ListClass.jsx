@@ -26,15 +26,17 @@ const ListClass = () => {
   const [EditsModalOpen, setEditModalOpen] = useState(false);
   const [DetailsModalOpen, setDetailModalOpen] = useState(false);
   const [postData, setPostData] = useState({
-    _id: "",
+    _id:"",
     id: "",
-    name: "",
-    description: "",
-    image: "",
-    courseTime: "",
-    classTime: "",
-    price: "",
-    maxNumberOfStudents: "",
+    nameclass: "",
+    fullname: "",
+    location: "",
+    course: "",
+    startTime: "",
+    endTime: "",
+    numberOfLessons:"",
+    classTime:"",
+    schedule:"",
   });
   useEffect(() => {
     getData();
@@ -57,13 +59,15 @@ const ListClass = () => {
       data.classrooms.map((row) => ({
         _id: row._id,
         id: row.id,
-        name: row.name,
-        fullName: row.fullName,
-        price: row.price,
-        courseTime: row.courseTime,
+        nameclass: row.name,
+        fullname: row.user.fullName,
+        location:row.location.name,
+        course: row.course.name,
         classTime: row.classTime,
-        image: row.image,
-        maxNumberOfStudents: row.maxNumberOfStudents,
+        schedule: row.schedule,
+        numberOfLessons: row.numberOfLessons,
+        startTime:row.startTime,
+        endTime: row.endTime,
       }))
     );
   };
@@ -72,20 +76,22 @@ const ListClass = () => {
     caso === "Editar" ? showEditlModal() : showDeletelModal();
   };
 
-  const HandlDetail = async () => {
-    await Axios.get(baseUrlClass + "/" + postData._id, postData)
+  const HandlDetail = async (_id) => {
+    await Axios.get(baseUrlClass+ '/' + postData._id, postData)
       .then((res) => {
         var dataPut = data;
         dataPut.map((row) => ({
           _id: row._id,
           id: row.id,
-          name: row.name,
-          description: row.description,
-          price: row.price,
-          courseTime: row.courseTime,
+          nameclass: row.name,
+          fullname: row.user.fullName,
+          location:row.location.name,
+          course: row.course.name,
           classTime: row.classTime,
-          image: row.image,
-          maxNumberOfStudents: row.maxNumberOfStudents,
+          schedule: row.schedule,
+          numberOfLessons: row.numberOfLessons,
+          startTime:row.startTime,
+          endTime: row.endTime,
         }));
         setData(dataPut);
         showDetaillModal();
@@ -100,28 +106,34 @@ const ListClass = () => {
 
   const columns = [
     {
-      title: "Mã Khóa Học",
+      title: "Mã Lớp Học",
       dataIndex: "id",
       key: "id",
       width: 150,
     },
     {
-      title: "Tên Khóa Học",
-      dataIndex: "name",
-      key: "name",
+      title: "Tên Lớp Học",
+      dataIndex: "nameclass",
+      key: "nameclass",
+      width: 150,
+    },
+    {
+      title: "Tên Giảng Viên",
+      dataIndex: "fullname",
+      key: "fullname",
       width: 200,
     },
     {
-      title: "Mô Tả Khóa Học",
-      dataIndex: "description",
-      key: "description",
-      width: 600,
+      title: "Địa Chỉ Cơ Sở",
+      dataIndex: "location",
+      key: "location",
+      width: 300,
     },
     {
-      title: "Giá Thành ",
-      dataIndex: "price",
-      key: "price",
-      width: 150,
+      title: "Khóa Học ",
+      dataIndex: "course",
+      key: "course",
+      width: 170,
     },
     {
       title: "Chức Năng",

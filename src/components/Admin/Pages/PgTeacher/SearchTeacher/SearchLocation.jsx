@@ -1,12 +1,12 @@
 import { React, useContext, useEffect,useState } from "react";
 import Axios from "axios";
-import "./Search.css";
-import { ListContext } from "../ListClass/ListClass";
+import "./SearchLocation.css";
+import { ListContext } from "../ListTeacher/ListTeacher";
 import { Space, Button, Input, AutoComplete, Modal, Form } from "antd";
 const { Item } = Form;
 
 
-const SearchClass = () => {
+const SearchLocation = () => {
   const [ createModalOpen, setcreateModalOpen] = useState(false);
   const {
     setloading,
@@ -18,7 +18,7 @@ const SearchClass = () => {
     searchValue,
     setOptions,
     setSearchValue,
-    baseUrlClass,
+    baseUrlLocations,
     Layout,
   } = useContext(ListContext);
 
@@ -37,20 +37,15 @@ const SearchClass = () => {
 
   const getSearchData = async () => {
     const { data } = await Axios.get(
-      `https://x09-be.onrender.com/api/classrooms?keyword=${searchValue}`
+      `https://x09-be.onrender.com/api/locations?keyword=${searchValue}`
     );
     setloading(false);
     setData(
-      data.classrooms.map((row) => ({
-          _id: row._id,
-          id: row.id,
-          nameclass: row.name,
-          fullname: row.user._id,
-          fullname: row.user.fullName,
-          location:row.location._id,
-          location:row.location.name,
-          course: row.course._id,
-          course: row.course.name,
+      data.locations.map((row) => ({
+        name: row.name,
+        id: row.id,
+        status: row.status,
+        address: row.address,
       }))
     );
   };
@@ -71,7 +66,7 @@ const SearchClass = () => {
     };
 
     const { newData } = await Axios.post(
-      baseUrlClass,
+      baseUrlLocations,
       postData,
       config,
       handleCreateCancel()
@@ -101,13 +96,13 @@ const SearchClass = () => {
           </AutoComplete>
         </Space>
         <Space>
-          <Button type="primary" onClick={handleCreateCancel} className="ButtonTM">
-            Tạo Mới Lớp Học
+          <Button type="primary" onClick={handleCreateCancel} className="ButtonTM" Key="id" >
+            Tạo Mới Giảng Viên
           </Button>
         </Space>
         <Modal
             visible={createModalOpen}
-            title="Tạo Mới Lớp Học "
+            title="Tạo Giảng Viên"
             destroyOnClose={true}
             onCancel={handleCreateCancel}
             centered
@@ -119,49 +114,26 @@ const SearchClass = () => {
             ]}
           >
             <Form {...Layout}>
-              <Item label="Mã Lớp Học ">
-                <Input name="id" onChange={handeChange} placeholder="nhập Mã Lớp Học " />
+              <Item label="Mã Cơ Sở ">
+                <Input name="id" onChange={handeChange}  placeholder="Nhập Mã Cở Sở " />
               </Item>
 
-              <Item label=" Tên Lớp Học ">
-                <Input name="name" onChange={handeChange}   placeholder="nhập Tên Lớp Học " />
+              <Item label=" Tên Cở Sở ">
+                <Input name="name" onChange={handeChange}  placeholder=" Nhập Tên Cở Sở " />
               </Item>
 
-              <Item label="Tên Giảng Viên">
-                <Input name="user" onChange={handeChange}  placeholder="nhập Tên Giảng Viên "  />
+              <Item label="Trạng Thái Cở cở">
+                <Input name="status" onChange={handeChange}  placeholder="Trạng Thái Cơ Sở"  />
               </Item>
 
-              <Item label="Địa Chỉ Cơ Sở">
+              <Item label=" Địa Chỉ Cở Sở">
                 <Input.TextArea
                   rows={4}
-                  name="location"
-                  placeholder="nhập địa Chỉ Cơ Sở "
+                  name="address"
+                  placeholder="nhập Địa Chỉ Cở Sở "
                   onChange={handeChange}
                 />
               </Item>
-               <Item label=" Khóa Học">
-                <Input name="course" onChange={handeChange}  placeholder="nhập Khóa Học " />
-              </Item>
-
-              <Item label=" Khóa Học">
-                <Input name="startTime" onChange={handeChange}  placeholder="nhập Khóa Học " />
-              </Item>
-
-              <Item label=" Khóa Học">
-                <Input name="endTime" onChange={handeChange}  placeholder="nhập Khóa Học " />
-              </Item>
-
-              <Item label=" Khóa Học">
-                <Input name="numberOfLessons" onChange={handeChange}  placeholder="nhập Khóa Học " />
-              </Item>
-
-               <Item label=" Khóa Học">
-                <Input name="classTime" onChange={handeChange}  placeholder="nhập Khóa Học " />
-              </Item>
-              <Item label=" Khóa Học">
-                <Input name="schedule" onChange={handeChange}  placeholder="nhập Khóa Học " />
-              </Item>
-
             </Form>
           </Modal>
       </div>
@@ -169,4 +141,4 @@ const SearchClass = () => {
   );
 };
 
-export default SearchClass;
+export default SearchLocation;

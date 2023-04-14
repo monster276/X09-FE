@@ -5,7 +5,7 @@ import Axios from "axios";
 const { Item } = Form;
 
 const EditClass = () => {
-  const { postData, showEditlModal, Layout, EditsModalOpen,  setPostData, baseUrl, data, setData} = useContext(ListContext);
+  const { postData, showEditlModal, Layout, EditsModalOpen,  setPostData, baseUrlClass, data, setData} = useContext(ListContext);
 
   const handeChange = (e) => {
     const { name, value } = e.target;
@@ -15,26 +15,27 @@ const EditClass = () => {
   
   const HandlPut = async () => {
     try {
-      let result = await Axios.put(baseUrl + "/" + postData._id, postData).then(
+      let result = await Axios.put(baseUrlClass + "/" + postData._id, postData).then(
         (res) => {
           var dataPut = data;
           dataPut.map((elemento) => {
             if (elemento._id === postData._id) {
               elemento.id = postData.id;
               elemento.name = postData.name;
-              elemento.description = postData.description;
-              elemento.courseTime = postData.courseTime;
+              elemento.fullname = postData.fullname;
+              elemento.location = postData.location;
+              elemento.course = postData.course;
+              elemento.startTime = postData.startTime;
+              elemento.endTime = postData.endTime;
+              elemento.numberOfLessons = postData.numberOfLessons;
               elemento.classTime = postData.classTime;
-              elemento.price = postData.price;
-              elemento.image = postData.image;
-              elemento.maxNumberOfStudents = postData.maxNumberOfStudents;
+              elemento.schedule = postData.schedule;
             }
           });
           setData(dataPut);
           showEditlModal();
           console.log(result);
-        }
-      );
+        });
     } catch (error) {
       console.error(error.data);
     }
@@ -45,7 +46,7 @@ const EditClass = () => {
        <Modal
           Key="id"
           visible={EditsModalOpen}
-          title="Chỉnh sửa khóa học "
+          title="Chỉnh sửa Lớp Học "
           onCancel={showEditlModal}
           centered
           footer={[
@@ -55,8 +56,8 @@ const EditClass = () => {
             </Button>,
           ]}
         >
-          <Form {...Layout} value={postData && postData._id}>
-            <Item label="Mã Khóa Học " key="id">
+          <Form {...Layout}>
+            <Item label="Mã Lớp Học ">
               <Input
                 name="id"
                 onChange={handeChange}
@@ -64,61 +65,74 @@ const EditClass = () => {
               />
             </Item>
 
-            <Item label=" Tên Khóa Học " key="name">
+            <Item label=" Tên Lớp Học " >
               <Input
-                name="name"
+                name="nameclass"
                 onChange={handeChange}
-                value={postData && postData.name}
+                value={postData && postData.nameclass}
               />
             </Item>
 
-            <Item label="Giá Khóa Học " key="price">
+            <Item label="Tên Giảng Viên " >
               <Input
-                name="price"
+                name="fullname"
                 onChange={handeChange}
-                value={postData && postData.price}
+                value={postData && postData.fullname}
               />
             </Item>
 
-            <Item label="Nội Dung Khóa Học " key="description">
-              <Input.TextArea
-                rows={4}
-                name="description"
+            <Item label="Địa Chỉ Lớp Học " >
+              <Input
+                name="location"
                 placeholder="nhập nội dung khóa học "
                 onChange={handeChange}
-                value={postData && postData.description}
+                value={postData && postData.location}
               />
             </Item>
 
-            <Item label="Thời Lượng Khóa Học" key="courseTime">
+            <Item label=" Khóa Học" key="courseTime">
               <Input
-                name="courseTime"
+                name="course"
                 onChange={handeChange}
-                value={postData && postData.courseTime}
+                value={postData && postData.course}
               />
             </Item>
 
-            <Item label="Thời Lượng Giờ Học " key="classTime">
+            <Item label="Ngày Bắt Đầu Học " >
+              <Input
+                name="startTime"
+                onChange={handeChange}
+                value={postData && postData.startTime}
+              />
+            </Item>
+
+            <Item label="Ngày kết thúc Học">
+              <Input
+                name="endTime"
+                onChange={handeChange}
+                value={postData && postData.endTime}
+              />
+            </Item>
+
+            <Item label="Số học sinh" >
+              <Input
+                name="numberOfLessons"
+                onChange={handeChange}
+                value={postData && postData.numberOfLessons}
+              />
+            </Item>
+            <Item label="Giờ Lớp Học " >
               <Input
                 name="classTime"
                 onChange={handeChange}
                 value={postData && postData.classTime}
               />
             </Item>
-
-            <Item label="Số học sinh " key="maxNumberOfStudents">
+            <Item label="Lịch Học " >
               <Input
-                name="maxNumberOfStudents"
+                name="schedule"
                 onChange={handeChange}
-                value={postData && postData.maxNumberOfStudents}
-              />
-            </Item>
-
-            <Item label="ảnh" key="image">
-              <Input
-                name="image"
-                onChange={handeChange}
-                value={postData && postData.image}
+                value={postData && postData.schedule}
               />
             </Item>
           </Form>
@@ -126,5 +140,4 @@ const EditClass = () => {
     </div>
   );
 };
-
 export default EditClass;

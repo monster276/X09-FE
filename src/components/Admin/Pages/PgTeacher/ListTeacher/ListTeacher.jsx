@@ -2,11 +2,11 @@ import { React, createContext, useEffect, useState } from "react";
 import "./Location.css";
 import { Table, Space, Button, Status, Tag } from "antd";
 import Axios from "axios";
-import EditLocation from "../EditLocation/EditLocation";
-import DetailLocation from "../DetailLocation/DetailLocation";
-import DeleteLocation from "../DeleteLocation/DeleteLocation";
-import SearchLocation from "../SearchLocation/SearchLocation";
-const baseUrlLocations = "https://x09-be.onrender.com/api/locations";
+import EditLocation from "../EditTeacher/EditTeacher";
+import DetailLocation from "../DetailTeacher/DetailTeacher";
+import DeleteLocation from "../DeleteTeacher/DeleteTeacher";
+import SearchLocation from "../SearchTeacher/SearchLocation";
+const baseUrlTeacher = "https://x09-be.onrender.com/api/user";
 const Layout = {
   labelCol: {
     span: 8,
@@ -19,7 +19,6 @@ const Layout = {
 export const ListContext = createContext();
 
 const ListLocation = () => {
-  const [detail, setdetail] = useState(null)
   const [loading, setloading] = useState(true);
   const [data, setData] = useState([]);
   const [searchValue, setSearchValue] = useState("");
@@ -54,30 +53,32 @@ const ListLocation = () => {
   
 
   const getData = async () => {
-    const { data } = await Axios.get(baseUrlLocations);
+    const { data } = await Axios.get(baseUrlTeacher);
     setloading(false);
     setData(
       data.locations.map((row) => ({
         _id: row._id,
-        id: row.id,
-        name: row.name,
-        status: row.status,
-        address: row.address,
+        fullName: row.fullName,
+        email: row.email,
+        username: row.username,
+        password: row.password,
+        phoneNumber: row.phoneNumber,
       }))
     );
   };
 
   
   const getDetail = async () => {
-     await Axios.get(baseUrlLocations + '/' + postData._id, postData)
+     await Axios.get(baseUrlTeacher + '/' + postData._id, postData)
     .then((res) => {
       var dataPut = data;
       dataPut.find((row) => ({
         _id: row._id,
-        id: row.id,
-        name: row.name,
-        status: row.status,
-        address: row.address,
+        fullName: row.fullName,
+        email: row.email,
+        username: row.username,
+        password: row.password,
+        phoneNumber: row.phoneNumber,
       }));
       setData(dataPut);
       showDetaillModal();
@@ -90,34 +91,33 @@ const ListLocation = () => {
 
   const columnLocations = [
     {
-      title: "Mã Cở Sở",
-      dataIndex: "id",
-      key: "id",
+      title: "Họ và Tên",
+      dataIndex: "fullName",
+      key: "fullName",
       width: 150,
     },
     {
-      title: "Tên Cơ Sở ",
-      dataIndex: "name",
-      key: "name",
+      title: "email",
+      dataIndex: "email",
+      key: "email",
       width: 200,
     },
     {
-      title: "Trạng Thái Hoạt Động ",
-      dataIndex: "status",
-      key: "status",
+      title: "Tên Đăng Nhập",
+      dataIndex: "username",
+      key: "username",
       width: 90,
-      render: (fila) => {
-        if(fila === true ){
-          return <span>Hoạt Động</span>
-        }else {
-          return <span>Ngừng Hoạt Động</span>
-        }
-      }
     },
     {
-      title: "Địa Chỉ ",
-      dataIndex: "address",
-      key: "address",
+      title: "Mật Khẩu",
+      dataIndex: "password",
+      key: "password",
+      width: 250,
+    },
+    {
+      title: "Số Điện Thoại",
+      dataIndex: "phoneNumber",
+      key: "phoneNumber",
       width: 250,
     },
     {
@@ -145,7 +145,7 @@ const ListLocation = () => {
         data,
         loading,
         postData,
-        baseUrlLocations,
+        baseUrlTeacher,
         deletesModalOpen,
         DetailsModalOpen,
         Layout,
@@ -160,7 +160,6 @@ const ListLocation = () => {
         showDetaillModal,
         showEditlModal,
         getDetail,
-        detail
       }}
     >
       <div>

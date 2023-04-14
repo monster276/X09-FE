@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "../Pages/PgHome/PgHome";
 import ListLocation from "../Pages/PgLocations/ListLocation/ListLocation";
-import ListTeacher from "../Pages/PgTeacher/ListTeacher";
+import ListTeacher from "../Pages/PgTeacher/ListTeacher/ListTeacher";
 import ListClass from  "../Pages/PgClass/ListClass/ListClass";
 import ListCourse from "../Pages/PgCourse/ListCourse/ListCourse";
 

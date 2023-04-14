@@ -33,9 +33,9 @@ function SideMenu() {
               key: "/admin/DSCoSo",
             },
             {
-              label: " Giảng Viên",
-              icon: <UserOutlined />,
-              key: "/admin/DSGV",
+              label: "Khóa Học ",
+              icon: <ReadOutlined />,
+              key: "/Admin/DSKH",
             },
             {
               label: " Lớp Học ",
@@ -43,15 +43,16 @@ function SideMenu() {
               key: "/admin/DSLH",
             },
             {
+              label: " Giảng Viên",
+              icon: <UserOutlined />,
+              key: "/admin/DSGV",
+            },
+            {
               label: "Đăng Ký  Khóa Học ",
               icon: <ReadOutlined />,
               key: "/admin/DSDK",
             },
-            {
-              label: "Khóa Học ",
-              icon: <ReadOutlined />,
-              key: "/Admin/DSKH",
-            },
+            
           ]}
         ></Menu>
       </div>

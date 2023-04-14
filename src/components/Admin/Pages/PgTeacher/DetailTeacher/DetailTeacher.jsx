@@ -1,6 +1,6 @@
 import React, { useContext,  } from "react";
 import { Button, Modal,  Form } from "antd";
-import { ListContext } from "../ListLocation/ListLocation";
+import { ListContext } from "../ListTeacher/ListTeacher";
 const { Item } = Form;
 
 
