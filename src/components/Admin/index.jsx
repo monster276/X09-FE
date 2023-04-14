@@ -1,6 +1,5 @@
 import React from "react";
 import "./index.css";
-import 'bootstrap/dist/css/bootstrap.css';
 import { Space } from "antd";
 import Header from "./components/header/header";
 import Footer from "./components/Footer/Footer";
