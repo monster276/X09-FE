@@ -1,0 +1,8 @@
+.SpaceandButton {
+    justify-content: space-between;
+}
+.ButtonTM {
+    height: 40px;
+    font-size: 17px;
+    font-weight: 500;
+}
