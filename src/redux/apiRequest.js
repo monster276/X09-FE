@@ -63,7 +63,7 @@ export const getAllUsers = async (token, dispatch, axiosJWT) => {
       headers: { token: `Bearer ${token}` },
     })
     dispatch(getUsersSuccess(res.data))
-    console.log(res.data)
+    console.log(res.data.users)
   } catch (err) {
     dispatch(getUsersFailed())
   }
