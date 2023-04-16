@@ -1,0 +1,10 @@
+.SpaceandButton {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+.ButtonTM {
+    height: 40px;
+    font-size: 17px;
+    font-weight: 500;
+}

@@ -4,14 +4,18 @@ const headerDefault = {
 };
 
 const parseParams = (url, params) => {
-  if (params) {
+  if (params && typeof(params) == "object") {
     const qs = Object.keys(params)
       .map(
         (key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
       )
       .join("&");
     return url + "?" + qs;
-  } else return url;
+  }
+  else if(params){
+    return url + "/" + params;
+  } 
+  else return url ;
 };
 
 function get(route, params) {

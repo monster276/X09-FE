@@ -1,7 +1,7 @@
 import { Button, Space, Table, Row, Col } from "antd";
 import Search from "antd/es/input/Search";
 import { useNavigate } from "react-router-dom";
-import { path } from "../Router/RouterConfig";
+import { link, path } from "../Router/RouterConfig";
 import momnent from "moment";
 import React, { useEffect, useState } from "react";
 import * as _unitOfWork from "../api";
@@ -105,10 +105,10 @@ export function ClassroomManagement() {
       key: "action",
       render: (text, record) => (
         <Space size="middle">
-             <Button  onClick={() => navigate(path.viewClassroom + "/" + record._id)}>
+             <Button  onClick={() => navigate(link.viewClassroom + "/" + record._id)}>
             Chi tiết
           </Button>
-          <Button type="primary" onClick={() => navigate(path.updateClassroom + "/" + record._id)}>
+          <Button type="primary" onClick={() => navigate(link.updateClassroom + "/" + record._id)}>
             Cập nhật
           </Button>
           <Button danger type="primary" onClick={() => handleDelete(record._id)}>
@@ -125,7 +125,7 @@ export function ClassroomManagement() {
           <Search placeholder="Tìm kiếm"></Search>
         </Col>
         <Col span={12} style={{ textAlign: "right" }}>
-          <Button type="primary" onClick={() => navigate(path.createClassroom)}>
+          <Button type="primary" onClick={() => navigate(link.createClassroom)}>
             Thêm mới
           </Button>
         </Col>

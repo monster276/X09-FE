@@ -1,6 +1,6 @@
 import { Button, Space, Table, Tag } from 'antd';
 import { useNavigate } from "react-router-dom";
-import { path } from '../Router/RouterConfig';
+import { link, path } from '../Router/RouterConfig';
 
 
 const data = [
@@ -67,7 +67,7 @@ export function Classroom() {
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <Button type='primary'onClick = {() => navigate(path.classroomDetail)} >Chi tiết</Button>
+          <Button type='primary'onClick = {() => navigate(link.classroomDetail)} >Chi tiết</Button>
         </Space>
       ),
     },

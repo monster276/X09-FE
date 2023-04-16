@@ -4,17 +4,17 @@
 //     return <h1>This page for teacher</h1>
 // }
 import React from "react";
-import {Outlet } from "react-router-dom";
 import LayoutComponent from "./Layout/Layout";
-import "./index.css"
+import "./index.css";
+import RouterPage from "./Router/RouterPage";
 
 function Index(props) {
   return (
-      <div className="TeacherIndex">
-        <LayoutComponent {...props}>
-        <Outlet />
-        </LayoutComponent>
-      </div>
+    <div className="TeacherIndex">
+      <LayoutComponent {...props}>
+       <RouterPage/>
+      </LayoutComponent>
+    </div>
   );
 }
 

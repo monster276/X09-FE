@@ -2,7 +2,7 @@ import { Button, Space, Table, Row, Col, Input } from "antd";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import * as _unitOfWork from "../api"
-import { path } from "../Router/RouterConfig";
+import { link, path } from "../Router/RouterConfig";
 const {Search} = Input
 export function Lecture() {
   const navigate = useNavigate()
@@ -47,10 +47,10 @@ export function Lecture() {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-            <Button  onClick={() => navigate(path.viewLecture + "/" + record._id)}>
+            <Button  onClick={() => navigate(link.viewLecture + "/" + record._id)}>
             Chi tiết
           </Button>
-          <Button type="primary" onClick={() => navigate(path.updateLecture + "/" + record._id)}>
+          <Button type="primary" onClick={() => navigate(link.updateLecture + "/" + record._id)}>
             Cập nhật
           </Button>
           <Button danger type="primary" onClick={() => handleDelete(record._id)}>
@@ -68,7 +68,7 @@ export function Lecture() {
           <Search placeholder="Tìm kiếm"></Search>
         </Col>
         <Col span={12} style={{ textAlign: "right" }}>
-          <Button type="primary" onClick={() => navigate(path.createLecture)}>
+          <Button type="primary" onClick={() => navigate(link.createLecture)}>
             Thêm mới
           </Button>
         </Col>

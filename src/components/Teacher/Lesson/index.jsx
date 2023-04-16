@@ -2,7 +2,7 @@ import { Button, Space, Table, Row, Col, Input } from "antd";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import * as _unitOfWork from "../api"
-import { path } from "../Router/RouterConfig";
+import { link, path } from "../Router/RouterConfig";
 const {Search} = Input
 export function Lesson() {
   const navigate = useNavigate()
@@ -52,10 +52,10 @@ export function Lesson() {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-            <Button  onClick={() => navigate(path.viewLesson + "/" + record._id)}>
+            <Button  onClick={() => navigate(link.viewLesson + "/" + record._id)}>
             Chi tiết
           </Button>
-          <Button type="primary" onClick={() => navigate(path.updateLesson + "/" + record._id)}>
+          <Button type="primary" onClick={() => navigate(link.updateLesson + "/" + record._id)}>
             Cập nhật
           </Button>
           <Button danger type="primary" onClick={() => handleDelete(record._id)}>
@@ -73,7 +73,7 @@ export function Lesson() {
           <Search placeholder="Tìm kiếm"></Search>
         </Col>
         <Col span={12} style={{ textAlign: "right" }}>
-          <Button type="primary" onClick={() => navigate(path.createLesson)}>
+          <Button type="primary" onClick={() => navigate(link.createLesson)}>
             Thêm mới
           </Button>
         </Col>

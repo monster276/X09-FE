@@ -5,7 +5,7 @@ import "./Layout.css"
 
 const { Header, Footer, Sider, Content } = Layout;
 const LayoutComponent = (props) => {
-  
+  console.log(props.children)
   return (
     <Space direction="vertical" style={{ width: "100%"}} size={[0, 48]}>
       <Layout>
@@ -16,7 +16,9 @@ const LayoutComponent = (props) => {
           <Header style={{backgroundColor:"#BAA3A3" ,color:"#fff"}}>
             <HeaderComponent/>
           </Header>
-          <Content style={{padding:"26px"}}>{props.children}</Content>
+          <Content style={{padding:"26px"}}>
+            {props.children}
+            </Content>
           <Footer>Footer</Footer>
         </Layout>
       </Layout>

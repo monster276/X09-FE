@@ -1,0 +1,43 @@
+[
+
+    {
+      "id": "0",
+      "STT": "1",
+      "MKhoaHoc": "KH01",
+      "TKhoaHoc": "JAVA",
+      "GThanh": 2000000,
+      "SSlop": 7
+    },
+    {
+      "id": "1",
+      "STT": "2",
+      "MKhoaHoc": "KH02",
+      "TKhoaHoc": "JAVA",
+      "GThanh": 5000000,
+      "SSlop": 4
+    },
+    {
+      "id": "2",
+      "STT": "3",
+      "MKhoaHoc": "KH03",
+      "TKhoaHoc": "JS",
+      "GThanh": 5000000,
+      "SSlop": 4
+    },
+    {
+      "id": "3",
+      "STT": "4",
+      "MKhoaHoc": "KH04",
+      "TKhoaHoc": "FONTEND",
+      "GThanh": 5000000,
+      "SSlop": 8
+    },
+    {
+      "id": "4",
+      "STT": "5",
+      "MKhoaHoc": "KH05",
+      "TKhoaHoc": "REACT",
+      "GThanh": 5000000,
+      "SSlop": 7
+    }
+]

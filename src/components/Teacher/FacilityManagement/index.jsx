@@ -2,7 +2,7 @@ import React,{ useEffect, useState } from "react";
 import { Button, Space, Table, Row, Col } from "antd";
 import Search from "antd/es/input/Search";
 import { useNavigate } from "react-router-dom";
-import { path } from "../Router/RouterConfig";
+import { link, path } from "../Router/RouterConfig";
 import * as _unitOfWork from "../api";
 
 export function FacilityManagement() {
@@ -58,10 +58,10 @@ export function FacilityManagement() {
       key: "action",
       render: (text, record) => (
         <Space size="middle">
-            <Button  onClick={() => navigate(path.viewFacility + "/" + record._id)}>
+            <Button  onClick={() => navigate(link.viewFacility + "/" + record._id)}>
             Chi tiết
           </Button>
-          <Button type="primary" onClick={() => navigate(path.updateFacility + "/" + record._id)}>
+          <Button type="primary" onClick={() => navigate(link.updateFacility + "/" + record._id)}>
             Cập nhật
           </Button>
           <Button danger type="primary" onClick={() => handleDelete(record._id)}>
@@ -78,7 +78,7 @@ export function FacilityManagement() {
           <Search placeholder="Tìm kiếm"></Search>
         </Col>
         <Col span={12} style={{ textAlign: "right" }}>
-          <Button type="primary" onClick={() => navigate(path.createFacility)}>
+          <Button type="primary" onClick={() => navigate(link.createFacility)}>
             Thêm mới
           </Button>
         </Col>
