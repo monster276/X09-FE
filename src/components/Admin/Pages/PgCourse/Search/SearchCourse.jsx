@@ -1,13 +1,18 @@
-import { React, useContext, useEffect,useState } from "react";
+import { React, useContext, useEffect, useState } from "react";
 import Axios from "axios";
 import "./Search.css";
+import { AudioOutlined } from "@ant-design/icons";
 import { ListContext } from "../ListCourse/ListCourse";
 import { Space, Button, Input, AutoComplete, Modal, Form } from "antd";
-const { Item } = Form;
-
-
+const { Search } = Input;
+const onFinishFailed = (errorInfo) => {
+  console.log('Failed:', errorInfo);
+};
+const onFinish = (values) => {
+  console.log('Success:', values);
+};
 const SearchCourse = () => {
-  const [ createModalOpen, setcreateModalOpen] = useState(false);
+  const [createModalOpen, setcreateModalOpen] = useState(false);
   const {
     setloading,
     setData,
@@ -80,78 +85,111 @@ const SearchCourse = () => {
         <Space direction="vertical">
           <AutoComplete
             style={{
-              width: 450,
+              height: 10,
+              width: 460,
             }}
-            value={searchValue}
+            onSearch={(text) => setOptions(getPanelValue(text))}
             options={options}
             onSelect={onSelect}
-            onSearch={(text) => setOptions(getPanelValue(text))}
           >
-            <Input.Search
+            <Search
+              className="Search"
               size="large"
               placeholder="nhập tìm kiếm"
-              enterButton
+              enterButton="Tìm Kiếm"
               onChange={(e) => setSearchValue(e.target.value)}
+              value={searchValue}
             />
           </AutoComplete>
         </Space>
         <Space>
-          <Button type="primary" onClick={handleCreateCancel} className="ButtonTM">
+          <Button
+            type="primary"
+            onClick={handleCreateCancel}
+            className="ButtonTM"
+          >
             Tạo Mới khóa học
           </Button>
         </Space>
         <Modal
-            visible={createModalOpen}
-            title="Tạo Mới Khóa Học"
-            destroyOnClose={true}
-            onCancel={handleCreateCancel}
-            centered
-            footer={[
-              <Button onClick={handleCreateCancel}>Thoát</Button>,
-              <Button type="primary" onClick={PostlistData}>
-                Lưu
-              </Button>,
-            ]}
+          visible={createModalOpen}
+          title="Tạo Mới Khóa Học"
+          destroyOnClose={true}
+          onCancel={handleCreateCancel}
+          centered
+          footer={[
+            <Button onClick={handleCreateCancel}>Thoát</Button>,
+            <Button type="primary" onClick={PostlistData} htmlType="Lưu" >
+              Lưu
+            </Button>,
+          ]}
+        >
+          <Form
+            {...Layout}
+            name="basic"
+            labelCol={{
+              span: 8,
+            }}
+            wrapperCol={{
+              span: 16,
+            }}
+            style={{
+              maxWidth: 600,
+            }}
+            initialValues={{
+              remember: true,
+            }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            autoComplete="off"
           >
-            <Form {...Layout}>
-              <Item label="Mã Khóa Học ">
-                <Input name="id" onChange={handeChange} />
-              </Item>
+            <Form.Item
+              name="id"
+              label="Mã Khóa Học"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your username!',
+                },
+              ]}
+            >
+              <Input onChange={handeChange} name="id" />
+            </Form.Item>
 
-              <Item label=" Tên Khóa Học ">
-                <Input name="name" onChange={handeChange} />
-              </Item>
+            <Form.Item label=" Tên Khóa Học ">
+              <Input name="name" onChange={handeChange} />
+            </Form.Item>
 
-              <Item label="Giá Khóa Học ">
-                <Input name="price" onChange={handeChange} />
-              </Item>
+            <Form.Item label="Giá Khóa Học ">
+              <Input name="price" onChange={handeChange} />
+            </Form.Item>
 
-              <Item label="Nội Dung Khóa Học ">
-                <Input.TextArea
-                  rows={4}
-                  name="description"
-                  placeholder="nhập nội dung khóa học "
-                  onChange={handeChange}
-                />
-              </Item>
+            <Form.Item label="Nội Dung Khóa Học ">
+              <Input.TextArea
+                rows={4}
+                name="description"
+                placeholder="nhập nội dung khóa học "
+                onChange={handeChange}
+              />
+            </Form.Item>
 
-              <Item label="Thời Lượng Khóa Học">
-                <Input name="courseTime" onChange={handeChange} />
-              </Item>
+            <Form.Item label="Thời Lượng Khóa Học">
+              <Input name="courseTime" onChange={handeChange} />
+            </Form.Item>
 
-              <Item label="Thời Lượng Giờ Học ">
-                <Input name="classTime" onChange={handeChange} />
-              </Item>
+            <Form.Item label="Thời Lượng Giờ Học ">
+              <Input name="classTime" onChange={handeChange} />
+            </Form.Item>
 
-              <Item label="Số học sinh ">
-                <Input name="maxNumberOfStudents" onChange={handeChange} />
-              </Item>
+            <Form.Item label="Số học sinh ">
+              <Input name="maxNumberOfStudents" onChange={handeChange} />
+            </Form.Item>
 
-              <Item label="ảnh">
-                <Input name="image" onChange={handeChange} />
-              </Item>
-            </Form>
-          </Modal>
+            <Form.Item label="ảnh">
+              <Input name="image" onChange={handeChange} />
+            </Form.Item>
+          </Form>
+        </Modal>
       </div>
     </div>
   );

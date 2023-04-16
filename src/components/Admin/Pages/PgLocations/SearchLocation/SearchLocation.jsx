@@ -4,6 +4,7 @@ import "./SearchLocation.css";
 import { ListContext } from "../ListLocation/ListLocation";
 import { Space, Button, Input, AutoComplete, Modal, Form } from "antd";
 const { Item } = Form;
+const { Search } = Input;
 
 
 const SearchLocation = () => {
@@ -78,20 +79,24 @@ const SearchLocation = () => {
     <div>
       <div className="SpaceandButton">
         <Space direction="vertical">
-          <AutoComplete
+        <AutoComplete
             style={{
-              width: 450,
+              height:10,
+              width: 460,
             }}
-            value={searchValue}
+            onSearch={(text) => setOptions(getPanelValue(text))}
             options={options}
             onSelect={onSelect}
-            onSearch={(text) => setOptions(getPanelValue(text))}
+
           >
-            <Input.Search
+            <Search
+              className="Search"
               size="large"
               placeholder="nhập tìm kiếm"
-              enterButton
+              enterButton="Tìm Kiếm"
               onChange={(e) => setSearchValue(e.target.value)}
+
+              value={searchValue}
             />
           </AutoComplete>
         </Space>

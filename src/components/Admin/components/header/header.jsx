@@ -14,7 +14,7 @@ function Header() {
       </Space>
       <Typography.Title>Admin</Typography.Title>
       <Space>
-        <Button type="primary" href='https://ant.design/index-cn' className='Button'> 
+        <Button type="primary" href='' className='Button'> 
           Đăng Xuất 
         </Button>
       </Space>

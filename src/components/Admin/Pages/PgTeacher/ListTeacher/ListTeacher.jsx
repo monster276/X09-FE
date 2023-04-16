@@ -6,7 +6,7 @@ import EditLocation from "../EditTeacher/EditTeacher";
 import DetailLocation from "../DetailTeacher/DetailTeacher";
 import DeleteLocation from "../DeleteTeacher/DeleteTeacher";
 import SearchLocation from "../SearchTeacher/SearchLocation";
-const baseUrlTeacher = "https://x09-be.onrender.com/api/user";
+const baseUrlUsers = "https://x09-be.onrender.com/api/user";
 const Layout = {
   labelCol: {
     span: 8,
@@ -53,10 +53,11 @@ const ListLocation = () => {
   
 
   const getData = async () => {
-    const { data } = await Axios.get(baseUrlTeacher);
+   
+    const { data } = await Axios.get(baseUrlUsers);
     setloading(false);
     setData(
-      data.locations.map((row) => ({
+      data.users.map((row) => ({
         _id: row._id,
         fullName: row.fullName,
         email: row.email,
@@ -69,10 +70,10 @@ const ListLocation = () => {
 
   
   const getDetail = async () => {
-     await Axios.get(baseUrlTeacher + '/' + postData._id, postData)
+     await Axios.get(baseUrlUsers + '/' + postData._id, postData)
     .then((res) => {
       var dataPut = data;
-      dataPut.find((row) => ({
+      dataPut.map((row) => ({
         _id: row._id,
         fullName: row.fullName,
         email: row.email,
@@ -100,19 +101,13 @@ const ListLocation = () => {
       title: "email",
       dataIndex: "email",
       key: "email",
-      width: 200,
+      width: 150,
     },
     {
       title: "Tên Đăng Nhập",
       dataIndex: "username",
       key: "username",
       width: 90,
-    },
-    {
-      title: "Mật Khẩu",
-      dataIndex: "password",
-      key: "password",
-      width: 250,
     },
     {
       title: "Số Điện Thoại",
@@ -145,7 +140,7 @@ const ListLocation = () => {
         data,
         loading,
         postData,
-        baseUrlTeacher,
+        baseUrlUsers,
         deletesModalOpen,
         DetailsModalOpen,
         Layout,

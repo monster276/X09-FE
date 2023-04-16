@@ -97,12 +97,12 @@ const SearchLocation = () => {
         </Space>
         <Space>
           <Button type="primary" onClick={handleCreateCancel} className="ButtonTM" Key="id" >
-            Tạo Mới Giảng Viên
+            Tạo Mới Người Dùng
           </Button>
         </Space>
         <Modal
             visible={createModalOpen}
-            title="Tạo Giảng Viên"
+            title="Tạo Người Dùng"
             destroyOnClose={true}
             onCancel={handleCreateCancel}
             centered
