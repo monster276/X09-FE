@@ -35,7 +35,7 @@ function SideMenu() {
             {
               label: "Khóa Học ",
               icon: <ReadOutlined />,
-              key: "/Admin/DSKH",
+              key: "/admin/DSKH",
             },
             {
               label: " Lớp Học ",
@@ -43,7 +43,7 @@ function SideMenu() {
               key: "/admin/DSLH",
             },
             {
-              label: " Giảng Viên",
+              label: "Người Dùng",
               icon: <UserOutlined />,
               key: "/admin/DSGV",
             },

@@ -5,6 +5,7 @@ import Header from "./components/header/header";
 import Footer from "./components/Footer/Footer";
 import SideMenu from "./components/SideMenu/SideMenu";
 import PageContent from "./components/PageContent/PageContent";
+import { Route, Routes } from "react-router-dom";
 
 
 export default function Index() {
