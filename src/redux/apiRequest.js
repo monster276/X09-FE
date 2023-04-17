@@ -47,7 +47,7 @@ export const loginUser = async (user, dispatch, navigate) => {
 export const createUser = async (user, dispatch, navigate) => {
   dispatch(CreateStart())
   try {
-    await axios.post('https://x09-be.onrender.com/api/auth/register', user)
+    await axios.post('https://x09-be.onrender.com/api/auth/create', user)
     dispatch(CreateSuccess())
     navigate('/login')
   } catch (err) {
