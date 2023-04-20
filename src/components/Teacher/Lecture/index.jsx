@@ -38,12 +38,12 @@ export function Lecture() {
       ),
     },
     {
-      title: "Ten bai giang",
+      title: "Tên Bài Giảng",
       dataIndex: "name",
       key: "name",
     },
     {
-      title: "Action",
+      title: "Ghi Chú",
       key: "action",
       render: (_, record) => (
         <Space size="middle">

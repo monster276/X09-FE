@@ -48,7 +48,7 @@ export function Lesson() {
         key: "content",
       },
     {
-      title: "Action",
+      title: "Ghi Chú",
       key: "action",
       render: (_, record) => (
         <Space size="middle">

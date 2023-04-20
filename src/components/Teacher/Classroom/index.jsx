@@ -63,7 +63,7 @@ export function Classroom() {
       key: 'schedule',
     },
     {
-      title: 'Action',
+      title: 'Ghi Chú',
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
