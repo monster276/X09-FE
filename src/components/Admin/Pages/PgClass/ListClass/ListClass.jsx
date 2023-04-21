@@ -51,7 +51,14 @@ const ListClass = () => {
   const showDetaillModal = () => {
     setDetailModalOpen(!DetailsModalOpen);
   };
-
+  const SeleArtista = (artista, caso) => {
+    setPostData(artista);
+    caso === "Editar" ? showEditlModal() : showDeletelModal();
+  };
+  const SeleDetail = (artistaDetail, casoDetail) => {
+    setPostData(artistaDetail);
+    casoDetail === "Detail" && showDetaillModal();
+  }
   const getData = async () => {
     const { data } = await Axios.get(baseUrlClass);
     setloading(false);
@@ -60,7 +67,6 @@ const ListClass = () => {
         _id: row._id,
         id: row.id,
         nameclass: row.name,
-        fullname: row.user.fullName,
         location:row.location.name,
         course: row.course.name,
         classTime: row.classTime,
@@ -68,42 +74,16 @@ const ListClass = () => {
         numberOfLessons: row.numberOfLessons,
         startTime:row.startTime,
         endTime: row.endTime,
+        students:row.students.fullName,
+        students:row.students.email,
+        students:row.students.phoneNumber,
+        students:row.students.course,
+        students:row.students.status,
+        students:row.students.createdAt,
+        students:row.students.updatedAt,
       }))
     );
   };
-  const SeleArtista = (artista, caso) => {
-    setPostData(artista);
-    caso === "Editar" ? showEditlModal() : showDeletelModal();
-  };
-
-  const HandlDetail = async (_id) => {
-    await Axios.get(baseUrlClass+ '/' + postData._id, postData)
-      .then((res) => {
-        var dataPut = data;
-        dataPut.map((row) => ({
-          _id: row._id,
-          id: row.id,
-          nameclass: row.name,
-          fullname: row.user.fullName,
-          location:row.location.name,
-          course: row.course.name,
-          classTime: row.classTime,
-          schedule: row.schedule,
-          numberOfLessons: row.numberOfLessons,
-          startTime:row.startTime,
-          endTime: row.endTime,
-        }));
-        setData(dataPut);
-        showDetaillModal();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  // Chi Tiết
- 
-
   const columns = [
     {
       title: "Mã Lớp Học",
@@ -140,9 +120,9 @@ const ListClass = () => {
       width: 100,
       render: (fila) => (
         <Space size="middle"> {" "}
-          <Button onClick={() => SeleArtista(fila, "Editar")}> Chỉnh Sửa </Button>
-          <Button onClick={() => SeleArtista(fila, "Delete")}> xóa </Button>
-          <Button onClick={HandlDetail}> Chi Tiết </Button>
+          <Button style={{background: "blue", color: "white"}} onClick={() => SeleArtista(fila, "Editar")}> Chỉnh Sửa </Button>
+          <Button style={{background: "red", color: "white"}} onClick={() => SeleArtista(fila, "Delete")}> xóa </Button>
+          <Button style={{background: "green", color: "white"}} onClick={() => SeleDetail(fila, "Detail")}> Chi Tiết </Button>
         </Space>
       ),
     },
@@ -173,7 +153,7 @@ const ListClass = () => {
       }}
     >
       <div>
-        <SearchClass />
+        <SearchClass/>
         <div>
         {loading ? (
           "Loading"

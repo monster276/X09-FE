@@ -14,7 +14,6 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import * as _unitOfWork from "../api";
 import moment from "moment";
-import { responsiveArray } from "antd/es/_util/responsiveObserver";
 const { Option } = Select;
 
 export function ViewClassroom() {

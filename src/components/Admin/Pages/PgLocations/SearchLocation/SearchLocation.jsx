@@ -1,14 +1,17 @@
-import { React, useContext, useEffect,useState } from "react";
+import { React, useContext, useEffect, useState } from "react";
 import Axios from "axios";
 import "./SearchLocation.css";
 import { ListContext } from "../ListLocation/ListLocation";
-import { Space, Button, Input, AutoComplete, Modal, Form } from "antd";
-const { Item } = Form;
+import { Space, Button, Input, AutoComplete, Modal, Form, Select, message } from "antd";
 const { Search } = Input;
-
-
+const onFinishFailed = (errorInfo) => {
+  console.log("Failed:", errorInfo);
+};
+const onFinish = (values) => {
+  console.log("Success:", values);
+};
 const SearchLocation = () => {
-  const [ createModalOpen, setcreateModalOpen] = useState(false);
+  const [createModalOpen, setcreateModalOpen] = useState(false);
   const {
     setloading,
     setData,
@@ -22,10 +25,14 @@ const SearchLocation = () => {
     baseUrlLocations,
     Layout,
   } = useContext(ListContext);
-
+  // get data
   useEffect(() => {
     getSearchData();
   }, [searchValue]);
+    
+  // hiện message 
+  
+  // tìm kiếm
 
   const mockVal = (str, repeat = 1) => ({
     value: str.repeat(repeat),
@@ -65,7 +72,6 @@ const SearchLocation = () => {
         "Content-Type": "application/json",
       },
     };
-
     const { newData } = await Axios.post(
       baseUrlLocations,
       postData,
@@ -79,15 +85,14 @@ const SearchLocation = () => {
     <div>
       <div className="SpaceandButton">
         <Space direction="vertical">
-        <AutoComplete
+          <AutoComplete
             style={{
-              height:10,
+              height: 10,
               width: 460,
             }}
             onSearch={(text) => setOptions(getPanelValue(text))}
             options={options}
             onSelect={onSelect}
-
           >
             <Search
               className="Search"
@@ -95,52 +100,137 @@ const SearchLocation = () => {
               placeholder="nhập tìm kiếm"
               enterButton="Tìm Kiếm"
               onChange={(e) => setSearchValue(e.target.value)}
-
               value={searchValue}
             />
           </AutoComplete>
         </Space>
         <Space>
-          <Button type="primary" onClick={handleCreateCancel} className="ButtonTM" Key="id" >
-            Tạo Mới Cở Sở
+          <Button
+            type="primary"
+            onClick={handleCreateCancel}
+            className="ButtonTM"
+            Key={handleCreateCancel}
+          >
+            TẠO MỚI CỞ SỞ
           </Button>
         </Space>
+            
+    
         <Modal
-            visible={createModalOpen}
-            title="Tạo Mới Cở Sở"
-            destroyOnClose={true}
-            onCancel={handleCreateCancel}
-            centered
-            footer={[
-              <Button onClick={handleCreateCancel}>Thoát</Button>,
-              <Button type="primary" onClick={PostlistData}>
-                Lưu
-              </Button>,
-            ]}
+          visible={createModalOpen}
+          title="TẠO MỚI CỞ SỞ"
+          destroyOnClose={true}
+          onCancel={handleCreateCancel}
+          centered
+          footer={[
+            <Button
+              style={{ background: "red", color: "white" }}
+              onClick={handleCreateCancel}
+            >
+              Thoát
+            </Button>,
+            <Button
+              style={{ background: "blue", color: "white" }}
+              type="primary"
+              onClick={PostlistData}
+              htmlType="Luu"
+            >
+              Lưu
+            </Button>,
+          ]}
+        >
+          <Form {...Layout}
+          name="basic"
+          labelCol={{
+            span: 8,
+          }}
+          wrapperCol={{
+            span: 16,
+          }}
+          style={{
+            maxWidth: 600,
+          }}
+          initialValues={{
+            remember: true,
+          }}
+          
+          autoComplete="off"
           >
-            <Form {...Layout}>
-              <Item label="Mã Cơ Sở ">
-                <Input name="id" onChange={handeChange}  placeholder="Nhập Mã Cở Sở " />
-              </Item>
+            <Form.Item
+              label="Mã Cơ Sở "
+              name="username"
+              rules={[
+                {
+                  required: true,
+                  message: "Vui Lòng nhập Mã Cơ Sở",
+                },
+              ]}
+            >
+              <Input
+                name="id"
+                onChange={handeChange}
+                placeholder="Nhập Mã Cở Sở"
+              />
+            </Form.Item>
 
-              <Item label=" Tên Cở Sở ">
-                <Input name="name" onChange={handeChange}  placeholder=" Nhập Tên Cở Sở " />
-              </Item>
+            <Form.Item
+              label=" Tên Cở Sở "
+              name="tencoso"
+              rules={[
+                {
+                  required: true,
+                  message: "Vui Lòng Nhập Tên Cơ Sở",
+                },
+              ]}
+            >
+              <Input
+                name="name"
+                onChange={handeChange}
+                placeholder=" Nhập Tên Cở Sở "
+              />
+            </Form.Item>
 
-              <Item label="Trạng Thái Cở cở">
-                <Input name="status" onChange={handeChange}  placeholder="Trạng Thái Cơ Sở"  />
-              </Item>
-
-              <Item label=" Địa Chỉ Cở Sở">
-                <Input.TextArea
-                  rows={4}
-                  name="address"
-                  placeholder="nhập Địa Chỉ Cở Sở "
-                  onChange={handeChange}
-                />
-              </Item>
-            </Form>
-          </Modal>
+            <Form.Item
+              label="Trạng Thái Cở cở"
+              name="TrạngTháiCởcở"
+              rules={[
+                {
+                  required: true,
+                  message: "Trạng Thái Cở Sở",
+                },
+              ]}
+            >
+              <Select
+                style={{
+                  width: 160,
+                }}
+                onChange={(postData) =>
+                  handeChange({ target: { value: postData, name: "status" } })
+                }
+              >
+                <Select.Option value={true}>Hoạt Động</Select.Option>
+                <Select.Option value={false}>Ngừng Hoạt Động</Select.Option>
+              </Select>
+            </Form.Item>
+            <Form.Item
+              label=" ĐịaChỉCởSở"
+              name="ĐịaChỉCởSở"
+              rules={[
+                {
+                  required: true,
+                  message: "Vui Lòng Nhập Địa Chỉ Cở Sở",
+                },
+              ]}
+            >
+              <Input.TextArea
+                rows={4}
+                name="address"
+                placeholder="nhập Địa Chỉ Cở Sở "
+                onChange={handeChange}
+              />
+            </Form.Item>
+          </Form>
+        </Modal>
       </div>
     </div>
   );

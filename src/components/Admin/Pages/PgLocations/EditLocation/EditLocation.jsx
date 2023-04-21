@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import { Button, Modal, Form, Input } from "antd";
+import { Button, Modal, Form, Input,Select } from "antd";
 import { ListContext } from "../ListLocation/ListLocation";
 import Axios from "axios";
 const { Item } = Form;
 
-const EditCourse = () => {
+const EditLocation = () => {
   const { postData, showEditlModal, Layout, EditsModalOpen,  setPostData, baseUrlLocations, data, setData} = useContext(ListContext);
 
   const handeChange = (e) => {
@@ -12,15 +12,10 @@ const EditCourse = () => {
     setPostData({ ...postData, [name]: value });
     console.log(postData);
   };
-  const check = (e) => {
-    const { name } = e.status;
-    console.log(name);
-  }
-
 
   const GetPut = async () => {
     try {
-      let result = await Axios.put(baseUrlLocations + "/" + postData._id, postData).then(
+      await Axios.put(baseUrlLocations + "/" + postData._id, postData).then(
         (res) => {
           var dataPut = data;
           dataPut.map((elemento) => {
@@ -33,7 +28,6 @@ const EditCourse = () => {
           });
           setData(dataPut);
           showEditlModal();
-          console.log(result);
         }
       );
     } catch (error) {
@@ -46,19 +40,20 @@ const EditCourse = () => {
        <Modal
           Key="id"
           visible={EditsModalOpen}
-          title="Chỉnh sửa Cở Sở "
+          title="CHỈNH SỬA CỞ SỞ "
           onCancel={showEditlModal}
           centered
           footer={[
-            <Button onClick={showEditlModal}>Thoát</Button>,
-            <Button type="primary" onClick={GetPut}>
+            <Button style={{background: "red", color: "white"}} onClick={showEditlModal}>Thoát</Button>,
+            <Button style={{background: "blue", color: "white"}} type="primary" onClick={GetPut}>
               Lưu
             </Button>,
           ]}
         >
-          <Form {...Layout} value={postData && postData._id}>
+          <Form {...Layout}>
             <Item label="Mã Cở Sở " key="id">
               <Input
+                disabled
                 name="id"
                 onChange={handeChange}
                 placeholder="nhập Mã Cơ Sở"
@@ -68,6 +63,7 @@ const EditCourse = () => {
 
             <Item label=" Tên Cở Sở" key="name">
               <Input
+                disabled
                 name="name"
                 onChange={handeChange}
                 placeholder="nhập Tên Cở Sở"
@@ -76,13 +72,16 @@ const EditCourse = () => {
             </Item>
 
             <Item label=" Trạng Thái Hoạt Động " key="status">
-              <Input
-                check= {check}
-                name="status"
-                placeholder="nhập Trạng Thái Hoạt Động"
-                onChange={handeChange}
-                value={postData && postData.status}
-              />
+              <Select
+                value={postData && postData.status ? "Hoạt Động" : "Ngừng Hoạt Động"}
+                style={{
+                  width: 160,
+                }}
+                onChange={postData => handeChange({ target: { value: postData , name: 'status' } })}
+              > 
+                 <Select.Option value={true}>Hoạt Động</Select.Option>
+                 <Select.Option value={false}>Ngừng Hoạt Động</Select.Option>
+              </Select>
             </Item>
 
             <Item label="Địa Chỉ Cở Sở " key="address">
@@ -100,4 +99,4 @@ const EditCourse = () => {
   );
 };
 
-export default EditCourse;
+export default EditLocation;

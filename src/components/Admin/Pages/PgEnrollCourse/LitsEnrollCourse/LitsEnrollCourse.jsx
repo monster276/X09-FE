@@ -1,12 +1,12 @@
 import { React, createContext, useEffect, useState } from "react";
-import "./Location.css";
-import { Table, Space, Button, Status, Tag } from "antd";
+import "./DSDK.css";
+import { Table, Space, Button } from "antd";
 import Axios from "axios";
-import EditLocation from "../EditLocation/EditLocation";
-import DetailLocation from "../DetailLocation/DetailLocation";
-import DeleteLocation from "../DeleteLocation/DeleteLocation";
-import SearchLocation from "../SearchLocation/SearchLocation";
-const baseUrlLocations = "https://x09-be.onrender.com/api/locations";
+import EditEnrollCourse from "../EditEnrollCourse/EditEnrollCourse";
+import DetailEnrollCourse from "../DetailEnrollCourse/DetailEnrollCourse";
+import DeleteEnrollCourse from "../DeleteEnrollCourse/DeleteEnrollCourse";
+import SearchEnrollCourse from "../SearchEnrollCourse/SearchEnrollCourse";
+const baseUrlenrollCourse = "https://x09-be.onrender.com/api/enrollCourse";
 const Layout = {
   labelCol: {
     span: 8,
@@ -17,9 +17,7 @@ const Layout = {
 };
 
 export const ListContext = createContext();
-
-const ListLocation = () => {
-  const [detail, setdetail] = useState(null)
+const ListEnrollCourse = () => {
   const [loading, setloading] = useState(true);
   const [data, setData] = useState([]);
   const [searchValue, setSearchValue] = useState("");
@@ -31,8 +29,12 @@ const ListLocation = () => {
     _id: "",
     id: "",
     name: "",
-    status: "",
-    address: "",
+    description: "",
+    image: "",
+    courseTime: "",
+    classTime: "",
+    price: "",
+    maxNumberOfStudents: "",
   });
   useEffect(() => {
     getData();
@@ -53,69 +55,63 @@ const ListLocation = () => {
   };
   const SeleDetail = (artistaDetail, casoDetail) => {
     setPostData(artistaDetail);
-    casoDetail === "Detail"&&showDetaillModal();
+    casoDetail === "Detail" && showDetaillModal();
   }
-  
-
   const getData = async () => {
-    const { data } = await Axios.get(baseUrlLocations);
+    const { data } = await Axios.get(baseUrlenrollCourse);
     setloading(false);
     setData(
-      data.locations.map((row) => ({
+      data.enrollCourses.map((row) => ({
         _id: row._id,
-        id: row.id,
-        name: row.name,
+        email: row.email,
+        fullName: row.fullName,
+        location: row.location.name,
+        phoneNumber: row.phoneNumber,
+        course: row.course.name,
         status: row.status,
-        address: row.address,
+        createAt: row.createAt,
       }))
     );
   };
-
-  
-
-  const columnLocations = [
+ 
+  const columns = [
     {
-      title: "Mã Cở Sở",
-      dataIndex: "id",
-      key: "id",
+      title: "Tên Khóa Học",
+      dataIndex: "course",
+      key: "course",
       width: 150,
     },
     {
-      title: "Tên Cơ Sở ",
-      dataIndex: "name",
-      key: "name",
+      title: "Tên Người Đăng Ký ",
+      dataIndex: "fullName",
+      key: "fullName",
       width: 200,
     },
     {
-      title: "Trạng Thái Hoạt Động ",
-      dataIndex: "status",
-      key: "status",
-      width: 90,
-      render: (fila) => {
-        if(fila === true ){
-          return <span>Hoạt Động</span>
-        }else {
-          return <span>Ngừng Hoạt Động</span>
-        }
-      }
+      title: "Số Điện Thoại",
+      dataIndex: "phoneNumber",
+      key: "phoneNumber",
+      width: 600,
     },
     {
-      title: "Địa Chỉ ",
-      dataIndex: "address",
-      key: "address",
-      width: 250,
+      title: "Cở Sở",
+      dataIndex: "location",
+      key: "location",
+      width: 150,
     },
     {
-      title: "Chức Năng", 
-      width: 90, 
-      render: (fila ) => (
-        <Space size="middle">
-          {" "}
-          <Button key={showEditlModal} style={{background: "blue", color: "white"}} onClick={() => SeleArtista(fila, "Editar")}>
-            {" "}
-            Chỉnh Sửa{" "}
-          </Button>
-          <Button style={{background: "red", color: "white"}} onClick={() => SeleArtista(fila, "Delete")}> xóa </Button>
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
+      width: 150,
+    },
+    {
+      title: "Chức Năng",
+      width: 100,
+      render: (fila) => (
+        <Space size="middle"> {" "}
+          <Button style={{background: "blue", color: "white"}} onClick={() => SeleArtista(fila, "Editar")}> Chỉnh Sửa </Button>
+          <Button style={{background: "red", color: "white"}}  onClick={() => SeleArtista(fila, "Delete")}> xóa </Button>
           <Button style={{background: "green", color: "white"}} onClick={() => SeleDetail(fila, "Detail")}> Chi Tiết </Button>
         </Space>
       ),
@@ -130,7 +126,7 @@ const ListLocation = () => {
         data,
         loading,
         postData,
-        baseUrlLocations,
+        baseUrlenrollCourse,
         deletesModalOpen,
         DetailsModalOpen,
         Layout,
@@ -147,26 +143,26 @@ const ListLocation = () => {
       }}
     >
       <div>
-        <SearchLocation />
+        <SearchEnrollCourse />
         <div>
-          {loading ? (
-            "Loading"
-          ) : (
-            <Table
-              className="TableCS"
-              columns={columnLocations}
-              dataSource={data}
-              rowKey="id"
-            ></Table>
-          )}
+        {loading ? (
+          "Loading"
+        ) : (
+          <Table
+            className="TableCS"
+            columns={columns}
+            dataSource={data}
+            rowKey="id"
+          ></Table>
+        )}
           <div>
-            <EditLocation />
+            <EditEnrollCourse />
           </div>
           <div>
-            <DeleteLocation />
+            <DeleteEnrollCourse />
           </div>
           <div>
-            <DetailLocation />
+            <DetailEnrollCourse />
           </div>
         </div>
       </div>
@@ -174,4 +170,4 @@ const ListLocation = () => {
   );
 };
 
-export default ListLocation;
+export default ListEnrollCourse;

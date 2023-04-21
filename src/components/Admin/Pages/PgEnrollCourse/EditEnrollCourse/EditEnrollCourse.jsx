@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import { Button, Modal, Form, Input } from "antd";
-import { ListContext } from "../ListCourse/ListCourse";
+import { ListContext } from "../LitsEnrollCourse/LitsEnrollCourse";
 import Axios from "axios";
 const { Item } = Form;
 
-const EditCourse = () => {
+const EditEnrollCourse = () => {
   const { postData, showEditlModal, Layout, EditsModalOpen,  setPostData, baseUrl, data, setData} = useContext(ListContext);
 
   const handeChange = (e) => {
@@ -129,4 +129,4 @@ const EditCourse = () => {
   );
 };
 
-export default EditCourse;
+export default EditEnrollCourse;

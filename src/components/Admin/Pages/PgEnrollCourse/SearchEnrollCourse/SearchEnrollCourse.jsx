@@ -1,7 +1,7 @@
 import { React, useContext, useEffect, useState } from "react";
 import Axios from "axios";
 import "./Search.css";
-import { ListContext } from "../ListCourse/ListCourse";
+import { ListContext } from "../LitsEnrollCourse/LitsEnrollCourse";
 import { Space, Button, Input, AutoComplete, Modal, Form,message  } from "antd";
 const { Search } = Input;
 const onFinishFailed = (errorInfo) => {
@@ -10,7 +10,7 @@ const onFinishFailed = (errorInfo) => {
 const onFinish = (values) => {
   console.log("Success:", values);
 };
-const SearchCourse = () => {
+const SearchEnrollCourse = () => {
   const [createModalOpen, setcreateModalOpen] = useState(false);
   const {
     setloading,
@@ -275,4 +275,4 @@ const SearchCourse = () => {
   );
 };
 
-export default SearchCourse;
+export default SearchEnrollCourse;

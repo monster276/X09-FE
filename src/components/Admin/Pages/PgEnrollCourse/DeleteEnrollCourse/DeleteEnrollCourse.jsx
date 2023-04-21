@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { Button, Modal } from "antd";
-import { ListContext } from "../ListCourse/ListCourse";
+import { ListContext } from "../LitsEnrollCourse/LitsEnrollCourse";
 import Axios from "axios";
-const DeleteCourse = () => {
+const DeleteEnrollCourse = () => {
   const { postData,  showDeletelModal, deletesModalOpen, baseUrl, data, setData } = useContext(ListContext);
 
   const HandlDelete = async () => {
@@ -37,4 +37,4 @@ const DeleteCourse = () => {
   );
 };
 
-export default DeleteCourse;
+export default DeleteEnrollCourse;
