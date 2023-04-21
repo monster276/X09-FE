@@ -7,6 +7,8 @@ import DetailCourse from "../DetailCourse/DetailCourse";
 import DeleteCourse from "../DeleteCourse/DeleteCourse";
 import SearchCourse from "../Search/SearchCourse";
 const baseUrl = "https://x09-be.onrender.com/api/courses";
+import swal from 'sweetalert';
+
 const Layout = {
   labelCol: {
     span: 8,
@@ -159,7 +161,7 @@ const ListCourse = () => {
             <EditCourse />
           </div>
           <div>
-            <DeleteCourse />
+            {/* <DeleteCourse /> */}
           </div>
           <div>
             <DetailCourse />

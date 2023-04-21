@@ -91,7 +91,7 @@ const ListEnrollCourse = () => {
       title: "Số Điện Thoại",
       dataIndex: "phoneNumber",
       key: "phoneNumber",
-      width: 600,
+      width: 150,
     },
     {
       title: "Cở Sở",

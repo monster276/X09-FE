@@ -115,7 +115,7 @@ const SearchEnrollCourse = () => {
             onClick={handleCreateCancel}
             className="ButtonTM"
           >
-            TẠO MỚI KHÓA HỌC
+            TẠO MỚI ĐĂNG KÝ KHÓA HỌC
           </Button>
         </Space>
         <Modal
