@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { Button, Modal, Form } from "antd";
-import { ListContext } from "../ListCourse/ListCourse";
+import { ListContext } from "../LitsEnrollCourse/LitsEnrollCourse";
 import Axios from "axios";
 const { Item } = Form;
 
-const DetailCourse = () => {
+const DetailEnrollCourse = () => {
   const {
     postData,
     showDetaillModal,
@@ -132,4 +132,4 @@ const DetailCourse = () => {
   );
 };
 
-export default DetailCourse;
+export default DetailEnrollCourse;

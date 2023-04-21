@@ -42,7 +42,7 @@ export function ViewFacility() {
             <Form.Item label="Trạng Thái Hoạt Động" name="status">
               <Select>
                 <Option key={true} value ={true}>Mở cửa</Option>
-                <Option key={false}value ={false}>Đóng cửa</Option>
+                <Option key={false} value ={false}>Đóng cửa</Option>
               </Select>
             </Form.Item>
           </Col>

@@ -1,20 +1,50 @@
 import React, { useContext } from "react";
+import Axios from "axios";
 import { Button, Modal, Form } from "antd";
 import { ListContext } from "../ListClass/ListClass";
 const { Item } = Form;
 
 const DetailClass = () => {
-  const { postData, showDetaillModal, Layout, DetailsModalOpen } =useContext(ListContext);
-
+  const { setData,postData, showDetaillModal, data, Layout, DetailsModalOpen, baseUrlClass } =useContext(ListContext);
+  const GetDetail = async () => {
+    try {
+      let result = await Axios.get(
+        baseUrlClass + "/" + postData._id,
+        postData
+      ).then((res) => {
+        var dataPut = data;
+        dataPut.map((elemento) => {
+          if (elemento._id === postData._id) {
+            elemento.id = postData.id;
+            elemento.nameclass = postData.nameclass;
+            elemento.fullname = postData.fullname;
+            elemento.location = postData.location;
+            elemento.course = postData.course;
+            elemento.startTime = postData.startTime;
+            elemento.endTime = postData.endTime;
+            elemento.numberOfLessons = postData.numberOfLessons;
+            elemento.classTime = postData.classTime;
+            elemento.schedule = postData.schedule;
+          }
+        });
+        setData(dataPut);
+        showDetaillModal();
+        console.log(result);
+      });
+    } catch (error) {
+      console.error(error.data);
+    }
+    GetDetail();
+  };
   return (
     <div>
       <Modal
         Key="id"
         visible={DetailsModalOpen}
-        title="Chi Tiết Lớp Học "
+        title="CHI TIẾT LỚP HỌC"
         onCancel={showDetaillModal}
         centered
-        footer={[<Button onClick={showDetaillModal}>Thoát</Button>]}
+        footer={[<Button style={{background: "red", color: "white"}} onClick={showDetaillModal}>Thoát</Button>]}
       >
         <Form {...Layout}>
           <Item label="Mã Lớp Học ">

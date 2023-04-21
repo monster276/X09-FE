@@ -1,12 +1,18 @@
 import React, { useContext } from "react";
 import { Button, Modal } from "antd";
-import { ListContext } from "../ListTeacher/ListTeacher";
+import { ListContext } from "../ListUsres/ListUsres";
 import Axios from "axios";
 const DeleteLocation = () => {
-  const { postData,  showDeletelModal, deletesModalOpen, baseUrlLocations, data, setData } = useContext(ListContext);
+  const { postData,  showDeletelModal, deletesModalOpen, baseUrlUsers, data, setData } = useContext(ListContext);
 
   const HandlDelete = async () => {
-    await Axios.delete(baseUrlLocations + "/" + postData._id)
+    await Axios.delete(baseUrlUsers + "/" + postData._id,
+    {
+      headers: { 
+        token: `Bearer ${JSON.parse(localStorage.getItem("accesstoken"))}`
+      }
+    }
+    )
       .then((res) => {
         setData(data.filter((elemento) => elemento._id !== postData._id));
         showDeletelModal();
@@ -20,13 +26,13 @@ const DeleteLocation = () => {
       <Modal
         Key="id"
         visible={deletesModalOpen}
-        title="Tạo Mới Khóa Học"
+        title="XÓA NGƯỜI DÙNG"
         destroyOnClose={true}
         onCancel={showDeletelModal}
         centered
         footer={[
-          <Button onClick={showDeletelModal}>Thoát</Button>,
-          <Button type="primary" onClick={HandlDelete}>
+          <Button style={{background: "red", color: "white"}} onClick={showDeletelModal}>Thoát</Button>,
+          <Button style={{background: "blue", color: "white"}} type="primary" onClick={HandlDelete}>
             Lưu
           </Button>,
         ]}

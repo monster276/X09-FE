@@ -48,7 +48,7 @@ function SideMenu() {
               key: "/admin/DSGV",
             },
             {
-              label: "Đăng Ký  Khóa Học ",
+              label: "Đăng Ký Khóa Học ",
               icon: <ReadOutlined />,
               key: "/admin/DSDK",
             },

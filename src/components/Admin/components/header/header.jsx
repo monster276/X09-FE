@@ -2,7 +2,7 @@ import React from 'react';
 import "./header.css"
 import { UserOutlined } from '@ant-design/icons';
 import { Avatar, Space, Typography, Button } from 'antd';
-
+import { Link } from "react-router-dom";
 function Header() {
   return (
     <div >
@@ -14,9 +14,11 @@ function Header() {
       </Space>
       <Typography.Title>Admin</Typography.Title>
       <Space>
-        <Button type="primary" href='' className='Button'> 
-          Đăng Xuất 
-        </Button>
+        <Link to="/login">
+          <Button type="primary"   className='Buttonheader'> 
+            Đăng Xuất 
+          </Button>
+        </Link>
       </Space>
       </div>
     </div>

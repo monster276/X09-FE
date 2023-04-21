@@ -46,12 +46,12 @@ const EditClass = () => {
        <Modal
           Key="id"
           visible={EditsModalOpen}
-          title="Chỉnh sửa Lớp Học "
+          title="CHỈNH SỬA LỚP HỌC"
           onCancel={showEditlModal}
           centered
           footer={[
-            <Button onClick={showEditlModal}>Thoát</Button>,
-            <Button type="primary" onClick={HandlPut}>
+            <Button style={{background: "red", color: "white"}} onClick={showEditlModal}>Thoát</Button>,
+            <Button style={{background: "blue", color: "white"}} type="primary" onClick={HandlPut}>
               Lưu
             </Button>,
           ]}
