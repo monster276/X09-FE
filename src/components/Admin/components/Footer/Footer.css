@@ -1,0 +1,12 @@
+.Footer{
+    height: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+}
+.Title {
+    color: black;
+    font-size: 25px;
+    margin-top: 20px;
+}

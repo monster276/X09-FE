@@ -1,0 +1,16 @@
+.Header{
+    background: azure;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 12px 2px 10px;
+    border-bottom: 1px solid black;
+}
+.Avatar {
+    margin: 20px;
+}
+.Buttonheader{
+    background: blue !important;
+    margin-right: 40px;
+}
