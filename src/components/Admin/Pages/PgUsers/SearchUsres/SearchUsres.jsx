@@ -1,7 +1,7 @@
 import { React, useContext, useEffect, useState } from "react";
 import Axios from "axios";
-import "./Search.css";
-import { ListContext } from "../ListClass/ListClass";
+import "./SearchUsres.css";
+import { ListContext } from "../ListUsres/ListUsres";
 import { Space, Button, Input, AutoComplete, Modal, Form } from "antd";
 const { Item } = Form;
 const { Search } = Input;
@@ -11,7 +11,7 @@ const onFinishFailed = (errorInfo) => {
 const onFinish = (values) => {
   console.log("Success:", values);
 };
-const SearchClass = () => {
+const SearchUsers = () => {
   const [createModalOpen, setcreateModalOpen] = useState(false);
   const {
     setloading,
@@ -23,7 +23,6 @@ const SearchClass = () => {
     searchValue,
     setOptions,
     setSearchValue,
-    baseUrlClass,
     Layout,
   } = useContext(ListContext);
 
@@ -41,21 +40,23 @@ const SearchClass = () => {
   };
 
   const getSearchData = async () => {
-    const { data } = await Axios.get(
-      `https://x09-be.onrender.com/api/classrooms?keyword=${searchValue}`
-    );
+    const { data } = await Axios.get(`https://x09-be.onrender.com/api/user?`, {
+      params: {
+        keyword: `${searchValue}`,
+      },
+      headers: {
+        token: `Bearer ${JSON.parse(localStorage.getItem("accesstoken"))}`,
+      },
+    });
     setloading(false);
     setData(
-      data.classrooms.map((row) => ({
+      data.users.map((row) => ({
         _id: row._id,
-        id: row.id,
-        nameclass: row.name,
-        fullname: row.user._id,
-        fullname: row.user.fullName,
-        location: row.location._id,
-        location: row.location.name,
-        course: row.course._id,
-        course: row.course.name,
+        fullName: row.fullName,
+        email: row.email,
+        username: row.username,
+        password: row.password,
+        phoneNumber: row.phoneNumber,
       }))
     );
   };
@@ -71,12 +72,13 @@ const SearchClass = () => {
   const PostlistData = async () => {
     const config = {
       headers: {
+        token: `Bearer ${JSON.parse(localStorage.getItem("accesstoken"))}`,
         "Content-Type": "application/json",
       },
     };
 
     const { newData } = await Axios.post(
-      baseUrlClass,
+      `https://x09-be.onrender.com/api/auth/create`,
       postData,
       config,
       handleCreateCancel()
@@ -113,19 +115,20 @@ const SearchClass = () => {
             type="primary"
             onClick={handleCreateCancel}
             className="ButtonTM"
+            Key="id"
           >
-            TẠO MỚI LỚP HỌC
+            TẠO MỚI NGƯỜI DÙNG
           </Button>
         </Space>
         <Modal
           visible={createModalOpen}
-          title="TẠO MỚI LỚP HỌC"
+          title="TẠO MỚI NGƯỜI DÙNG"
           destroyOnClose={true}
           onCancel={handleCreateCancel}
           centered
           footer={[
             <Button style={{background: "red", color: "white"}} onClick={handleCreateCancel}>Thoát</Button>,
-            <Button style={{background: "blue", color: "white"}} type="primary" onClick={PostlistData} htmlType="Lưu" >
+            <Button style={{background: "blue", color: "white"}} type="primary" onClick={PostlistData}>
               Lưu
             </Button>,
           ]}
@@ -150,11 +153,11 @@ const SearchClass = () => {
             autoComplete="off"
           >
             <Item
-              label="Mã Lớp Học "
+              label="Họ và Tên"
               rules={[
                 {
                   required: true,
-                  message: "Vui Lòng Nhập Mã Lớp Học ",
+                  message: "Vui Lòng Nhập Họ và Tên ",
                 },
                 {
                   whitespace: true,
@@ -165,17 +168,18 @@ const SearchClass = () => {
                   message: "Ít nhất là 3 ký tự",
                 },
               ]}
-              name="id"
+              name="fullName" 
             >
-              <Input onChange={handeChange} placeholder="nhập Mã Lớp Học " />
+              <Input   name="fullName" onChange={handeChange} placeholder="Nhập Họ và Tên" />
             </Item>
 
             <Item
-              label=" Tên Lớp Học "
+              label=" email "
+              name="email"
               rules={[
                 {
                   required: true,
-                  message: "Vui Lòng Nhập Têm Lớp Học ",
+                  message: "Vui Lòng Nhập Email ",
                 },
                 {
                   whitespace: true,
@@ -186,18 +190,17 @@ const SearchClass = () => {
                   message: "Ít nhất là 3 ký tự",
                 },
               ]}
-              name="name"
             >
-              <Input onChange={handeChange} placeholder="nhập Tên Lớp Học " />
+              <Input name="email" onChange={handeChange} placeholder=" Nhập email" />
             </Item>
 
             <Item
-              label="Tên Giảng Viên"
-              name="user"
+              label="Tên Đăng Nhập"
+              name="username"
               rules={[
                 {
                   required: true,
-                  message: "Vui Lòng Nhập Tên Giảng viên ",
+                  message: "Vui Lòng Nhập Tên Đăng Nhập ",
                 },
                 {
                   whitespace: true,
@@ -209,19 +212,15 @@ const SearchClass = () => {
                 },
               ]}
             >
-              <Input
-                onChange={handeChange}
-                placeholder="nhập Tên Giảng Viên "
-              />
+              <Input name="username" onChange={handeChange} placeholder="nhập Tên Đăng Nhập" />
             </Item>
 
             <Item
-              label="Địa Chỉ Cơ Sở"
-              name="location"
+              label="Mật Khẩu"
               rules={[
                 {
                   required: true,
-                  message: "Vui Lòng Nhập Địa Chỉ Cơ Sở ",
+                  message: "Vui Lòng Nhập password",
                 },
                 {
                   whitespace: true,
@@ -232,41 +231,18 @@ const SearchClass = () => {
                   message: "Ít nhất là 3 ký tự",
                 },
               ]}
+              name="password"
             >
-              <Input.TextArea
-                rows={4}
-                placeholder="nhập địa Chỉ Cơ Sở "
-                onChange={handeChange}
-              />
-            </Item>
-            <Item
-              label=" Khóa Học"
-              name="course"
-              rules={[
-                {
-                  required: true,
-                  message: "Vui Lòng Nhập Khóa Học ",
-                },
-                {
-                  whitespace: true,
-                  message: "Không có khoảng cách",
-                },
-                {
-                  min: 3,
-                  message: "Ít nhất là 3 ký tự",
-                },
-              ]}
-            >
-              <Input onChange={handeChange} placeholder="nhập Khóa Học " />
+              <Input.Password name="password" onChange={handeChange} placeholder="nhập password" />
             </Item>
 
             <Item
-              label=" Khóa Học bắt đầu"
-              name="startTime"
+              label="Số Điện Thoại"
+              name="phoneNumber"
               rules={[
                 {
                   required: true,
-                  message: "Vui Lòng Nhập Khóa Học bắt đầu",
+                  message: "Vui Lòng Nhập Số Điện Thoại",
                 },
                 {
                   whitespace: true,
@@ -278,90 +254,7 @@ const SearchClass = () => {
                 },
               ]}
             >
-              <Input onChange={handeChange} placeholder="nhập Khóa Học bắt đầu " />
-            </Item>
-
-            <Item
-              label="Khóa Học Kêt thúc"
-              name="endTime"
-              rules={[
-                {
-                  required: true,
-                  message: "Vui Lòng Nhập  Khóa Học Kêt thúc",
-                },
-                {
-                  whitespace: true,
-                  message: "Không có khoảng cách",
-                },
-                {
-                  min: 3,
-                  message: "Ít nhất là 3 ký tự",
-                },
-              ]}
-            >
-              <Input onChange={handeChange} placeholder="nhập Khóa Học Kêt thúc" />
-            </Item>
-
-            <Item
-              label="Số Học Sinh"
-              name="numberOfLessons"
-              rules={[
-                {
-                  required: true,
-                  message: "Vui Lòng Nhập Số Học Sinh",
-                },
-                {
-                  whitespace: true,
-                  message: "Không có khoảng cách",
-                },
-                {
-                  min: 3,
-                  message: "Ít nhất là 3 ký tự",
-                },
-              ]}
-            >
-              <Input onChange={handeChange} placeholder="nhập  Số Học Sinh" />
-            </Item>
-
-            <Item
-              label="Giờ Học"
-              name="classTime"
-              rules={[
-                {
-                  required: true,
-                  message: "Vui Lòng Nhập Giờ Học ",
-                },
-                {
-                  whitespace: true,
-                  message: "Không có khoảng cách",
-                },
-                {
-                  min: 3,
-                  message: "Ít nhất là 3 ký tự",
-                },
-              ]}
-            >
-              <Input onChange={handeChange} placeholder="nhập Giờ Học " />
-            </Item>
-            <Item
-              label="Lịch Học"
-              name="schedule"
-              rules={[
-                {
-                  required: true,
-                  message: "Vui Lòng Nhập Lịch Học ",
-                },
-                {
-                  whitespace: true,
-                  message: "Không có khoảng cách",
-                },
-                {
-                  min: 3,
-                  message: "Ít nhất là 3 ký tự",
-                },
-              ]}
-            >
-              <Input onChange={handeChange} placeholder="nhập Lịch Học " />
+              <Input name="phoneNumber" placeholder="Số Điện Thoại" onChange={handeChange} />
             </Item>
           </Form>
         </Modal>
@@ -370,4 +263,4 @@ const SearchClass = () => {
   );
 };
 
-export default SearchClass;
+export default SearchUsers;

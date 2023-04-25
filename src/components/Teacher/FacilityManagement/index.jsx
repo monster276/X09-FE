@@ -2,7 +2,7 @@ import React,{ useEffect, useState } from "react";
 import { Button, Space, Table, Row, Col } from "antd";
 import Search from "antd/es/input/Search";
 import { useNavigate } from "react-router-dom";
-import { link, path } from "../Router/RouterConfig";
+import { link } from "../Router/RouterConfig";
 import * as _unitOfWork from "../api";
 
 export function FacilityManagement() {

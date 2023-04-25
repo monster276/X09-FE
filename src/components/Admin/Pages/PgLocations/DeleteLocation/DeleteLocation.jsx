@@ -20,13 +20,13 @@ const DeleteLocation = () => {
       <Modal
         Key="id"
         visible={deletesModalOpen}
-        title="Xóa Cở Sở "
+        title="XÓA CỞ SỞ"
         destroyOnClose={true}
         onCancel={showDeletelModal}
         centered
         footer={[
-          <Button onClick={showDeletelModal}>Thoát</Button>,
-          <Button type="primary" onClick={HandlDelete}>
+          <Button style={{background: "red", color: "white"}} onClick={showDeletelModal}>Thoát</Button>,
+          <Button style={{background: "blue", color: "white"}} type="primary" onClick={HandlDelete}>
             Lưu
           </Button>,
         ]}

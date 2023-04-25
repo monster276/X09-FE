@@ -5,9 +5,10 @@
     height: 40px;
     font-size: 17px;
     font-weight: 500;
-}
-.searchClass{
     background: blue !important;
-    border-radius: 4px;
+}
+.Search {
+    background: blue !important;
+    border-radius: 6px;
     border:0.5px solid blue;
 }

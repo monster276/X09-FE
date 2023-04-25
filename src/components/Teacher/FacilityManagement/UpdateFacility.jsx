@@ -4,14 +4,10 @@ import {
   Col,
   Form,
   Input,
-  DatePicker,
-  Table,
-  Checkbox,
   Button,
   Select,
 } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
-import { path } from "../Router/RouterConfig";
 import * as _unitOfWork from "../api/index";
 const { Option } = Select;
 export function UpdateFacility() {
