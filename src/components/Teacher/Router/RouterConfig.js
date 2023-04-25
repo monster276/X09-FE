@@ -20,7 +20,7 @@ import { UpdateLesson } from "../Lesson/UpdateLesson";
 import { ViewLesson } from "../Lesson/ViewLesson";
 export const path = {
   classroom: "classroom",
-  classroomDetail: "classroom/detail",
+  classroomDetail: "classroom/detail" + "/:id",
   lecture: "lecture",
   createLecture: "lecture/create",
   updateLecture: "lecture/update" + "/:id",
@@ -53,7 +53,7 @@ export const link = objectMap(path, function(value) {
 const routes = [
   {
     path: path.classroom,
-    component: <Classroom />,
+    component: Classroom,
   },
   {
     path: path.classroomDetail,
@@ -61,18 +61,18 @@ const routes = [
   },
   {
     path: path.lecture,
-    component: lazy(() => import("../Lecture")),
+    component: Lecture,
   },
   {
     path: path.createLecture,
     component: CreateLecture,
   },
   {
-    path: path.updateLecture + "/:id",
+    path: path.updateLecture ,
     component: UpdateLecture,
   },
   {
-    path: path.viewLecture + "/:id",
+    path: path.viewLecture,
     component: ViewLecture,
   },
   {
@@ -84,11 +84,11 @@ const routes = [
     component: CreateLesson,
   },
   {
-    path: path.updateLesson + "/:id",
+    path: path.updateLesson ,
     component: UpdateLesson,
   },
   {
-    path: path.viewLesson + "/:id",
+    path: path.viewLesson,
     component: ViewLesson,
   },
   {
@@ -104,11 +104,11 @@ const routes = [
     component: CreateClassroom,
   },
   {
-    path: path.updateClassroom + "/:id",
+    path: path.updateClassroom ,
     component: UpdateClassroom,
   },
   {
-    path: path.viewClassroom + "/:id",
+    path: path.viewClassroom ,
     component: ViewClassroom,
   },
   {
@@ -120,11 +120,11 @@ const routes = [
     component: CreateFacility,
   },
   {
-    path: path.viewFacility + "/:id",
+    path: path.viewFacility ,
     component: ViewFacility,
   },
   {
-    path: path.updateFacility + "/:id",
+    path: path.updateFacility ,
     component: UpdateFacility,
   },
 ];

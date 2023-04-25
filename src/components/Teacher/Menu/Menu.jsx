@@ -38,7 +38,7 @@ function MenuComponent() {
             <span>Bài giảng</span>
           </Link>
         </Menu.Item>
-        <Menu.Item key="3">
+        {/* <Menu.Item key="3">
           <Link to={path.register}>
             <span>DS Đăng kí Học</span>
           </Link>
@@ -57,7 +57,7 @@ function MenuComponent() {
           <Link to={path.lesson}>
             <span>Bài học</span>
           </Link>
-        </Menu.Item>
+        </Menu.Item> */}
       </Menu>
     </>
   );

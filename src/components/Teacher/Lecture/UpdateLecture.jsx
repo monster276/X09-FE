@@ -13,6 +13,7 @@ import {
 } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import * as _unitOfWork from "../api";
+import { Lesson } from "../Lesson";
 const { Option } = Select;
 
 export function UpdateLecture() {
@@ -79,7 +80,7 @@ export function UpdateLecture() {
               <Input placeholder="Tên bài học"></Input>
             </Form.Item>
           </Col>
-
+          <Lesson></Lesson>
           <Col span={24} style={{ textAlign: "right" }}>
             <Button onClick={() => navigate(-1)}>Quay lại</Button>
             <Button type="primary" htmlType="submit">

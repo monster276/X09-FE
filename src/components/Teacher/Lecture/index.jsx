@@ -1,4 +1,4 @@
-import { Button, Space, Table, Row, Col, Input } from "antd";
+import { Button, Space, Table, Row, Col, Input, Form } from "antd";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import * as _unitOfWork from "../api"
@@ -6,6 +6,7 @@ import { link, path } from "../Router/RouterConfig";
 const {Search} = Input
 export function Lecture() {
   const navigate = useNavigate()
+  const [formSearch] = Form.useForm();
   const [lectures, setLectures] = useState([]);
   useEffect(() => {
     fetchLectures()
@@ -50,12 +51,12 @@ export function Lecture() {
             <Button  onClick={() => navigate(link.viewLecture + "/" + record._id)}>
             Chi tiết
           </Button>
-          <Button type="primary" onClick={() => navigate(link.updateLecture + "/" + record._id)}>
+          {/* <Button type="primary" onClick={() => navigate(link.updateLecture + "/" + record._id)}>
             Cập nhật
           </Button>
           <Button danger type="primary" onClick={() => handleDelete(record._id)}>
             Xóa
-          </Button>
+          </Button> */}
         </Space>
       ),
     },
@@ -63,16 +64,34 @@ export function Lecture() {
 
   return (
     <>
-    <Row style={{ marginBottom: "10px" }}>
+      <Form form={formSearch} layout="vertical">
+        <Row gutter={32}>
+          <Col span={6}>
+            <Form.Item label="Khóa Học" >
+              <Input placeholder="Khóa Học"></Input>
+            </Form.Item>
+          </Col>
+          <Col span={6}>
+            <Form.Item label="Tên Bài Giảng" >
+              <Input placeholder="Tên Bài Giảng"></Input>
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row style={{ marginBottom: "10px" }}>
+          <Col span={12}>
+            <Button type="primary" htmlType="submit">
+              Tìm kiếm
+            </Button>
+          </Col>
+        </Row>
+      {/* <Row style={{ marginBottom: "10px" }}>
         <Col span={12}>
-          <Search placeholder="Tìm kiếm"></Search>
-        </Col>
-        <Col span={12} style={{ textAlign: "right" }}>
           <Button type="primary" onClick={() => navigate(link.createLecture)}>
             Thêm mới
           </Button>
-        </Col>
-      </Row>
+          </Col>
+      </Row> */}
+      </Form>
       <Table columns={columns} dataSource={lectures} />
     </>
   );

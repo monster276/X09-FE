@@ -10,14 +10,15 @@ import {
   Button,
   Select,
   InputNumber,
+  Modal,
 } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import * as _unitOfWork from "../api";
 const { Option } = Select;
 const { TextArea } = Input;
 
-export function UpdateLesson() {
-  const param = useParams();
+export function UpdateLesson({isModalOpen,lesson,onCancel,onCallback}) {
+  const param = lesson;
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [lectures, setLectures] = useState([]);
@@ -49,12 +50,23 @@ export function UpdateLesson() {
   
       let res = await _unitOfWork.updateASingleLesson(payload, param.id);
       if (res) {
-        navigate(-1);
+        onCallback();
       }
   };
 
   return (
     <>
+     <Modal
+        Key="id"
+        visible={isModalOpen}
+        title="Chi Tiết Lớp Học "
+        onCancel={onCancel}
+        centered
+        footer={[
+          <Button onClick={() => form.submit()}>Đồng ý</Button>,
+          <Button onClick={onCancel}>Thoát</Button>,
+        ]}
+      >
       <Form form={form} layout="vertical" onFinish={onFinish}>
         <Row gutter={32}>
           <Col span={8}>
@@ -102,14 +114,15 @@ export function UpdateLesson() {
               <TextArea placeholder="nôi dung" rows={4}></TextArea>
             </Form.Item>
           </Col>
-          <Col span={24} style={{ textAlign: "right" }}>
+          {/* <Col span={24} style={{ textAlign: "right" }}>
             <Button onClick={() => navigate(-1)}>Quay lại</Button>
             <Button type="primary" htmlType="submit">
               Lưu lại
             </Button>
-          </Col>
+          </Col> */}
         </Row>
       </Form>
+      </Modal>
     </>
   );
 }

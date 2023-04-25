@@ -13,6 +13,7 @@ import {
 } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import * as _unitOfWork from "../api";
+import { Lesson } from "../Lesson";
 const { Option } = Select;
 
 export function ViewLecture() {
@@ -36,8 +37,6 @@ export function ViewLecture() {
         form.setFieldsValue({ ...res, course: res.course?._id });
     }
   };
-
- 
 
   return (
     <>
@@ -67,10 +66,10 @@ export function ViewLecture() {
               <Input placeholder="Tên bài học"></Input>
             </Form.Item>
           </Col>
-
+          <Lesson></Lesson>
           <Col span={24} style={{ textAlign: "right" }}>
             <Button onClick={() => navigate(-1)}>Quay lại</Button>
-           
+          
           </Col>
         </Row>
       </Form>
