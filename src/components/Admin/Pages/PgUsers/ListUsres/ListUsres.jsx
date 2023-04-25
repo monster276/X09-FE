@@ -1,11 +1,11 @@
 import { React, createContext, useEffect, useState } from "react";
-import "./Location.css";
+import "./Usres.css";
 import { Table, Space, Button, Status, Tag } from "antd";
 import Axios from "axios";
-import EditLocation from "../EditTeacher/EditTeacher";
-import DetailLocation from "../DetailTeacher/DetailTeacher";
-import DeleteLocation from "../DeleteTeacher/DeleteTeacher";
-import SearchLocation from "../SearchTeacher/SearchLocation";
+import EditUsers from "../EditUsres/EditUsres";
+import DetailUsers from "../DetailUsers/DetailUsers";
+import DeleteUsers from "../DeleteUsres/DeleteUsres";
+import SearchUsers from "../SearchUsres/SearchUsres";
 const baseUrlUsers = "https://x09-be.onrender.com/api/user";
 const Layout = {
   labelCol: {
@@ -18,7 +18,8 @@ const Layout = {
 
 export const ListContext = createContext();
 
-const ListLocation = () => {
+const ListUsres = () => {
+
   const [loading, setloading] = useState(true);
   const [data, setData] = useState([]);
   const [searchValue, setSearchValue] = useState("");
@@ -27,11 +28,12 @@ const ListLocation = () => {
   const [EditsModalOpen, setEditModalOpen] = useState(false);
   const [DetailsModalOpen, setDetailModalOpen] = useState(false);
   const [postData, setPostData] = useState({
-    _id: "",
-    id: "",
-    name: "",
-    status: "",
-    address: "",
+    _id:"",
+    fullName: "",
+    email: "",
+    username: "",
+    password: "",
+    phoneNumber: "",
   });
   useEffect(() => {
     getData();
@@ -50,16 +52,17 @@ const ListLocation = () => {
     setPostData(artista);
     caso === "Editar" ? showEditlModal() : showDeletelModal();
   };
-
-
-  const getData = async (token) => {
+  const SeleDetail = (artistaDetail, casoDetail) => {
+    setPostData(artistaDetail);
+    casoDetail === "Detail"&&showDetaillModal();
+  }
+  const getData = async () => {
     const config = {
-      headers: { token: `Bearer ${token}`} ,
+      headers: {
+        token: `Bearer ${JSON.parse(localStorage.getItem("accesstoken"))}`,
+      },
     };
-    const { data } = await Axios.get(
-      baseUrlUsers,
-      config,
-    )
+    const { data } = await Axios.get(baseUrlUsers, config);
     setData(
       data.users.map((row) => ({
         _id: row._id,
@@ -68,31 +71,34 @@ const ListLocation = () => {
         username: row.username,
         password: row.password,
         phoneNumber: row.phoneNumber,
-      }))
-    )
+      })) 
+    );
   };
 
-  
-//   const getDetail = async () => {
-//      await Axios.get(baseUrlUsers + '/' + postData._id, postData)
-//     .then((res) => {
-//       var dataPut = data;
-//       dataPut.map((row) => ({
-//         _id: row._id,
-//         fullName: row.fullName,
-//         email: row.email,
-//         username: row.username,
-//         password: row.password,
-//         phoneNumber: row.phoneNumber,
-//       }));
-//       setData(dataPut);
-//       showDetaillModal();
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//     });
-// };
-    
+  const getDetail = async () => {
+    await Axios.get(baseUrlUsers + "/" + postData._id,
+    {
+      headers: {
+        token: `Bearer ${JSON.parse(localStorage.getItem("accesstoken"))}`,
+      },
+    })
+      .then((res) => {
+        var dataPut = data;
+        dataPut.map((row) => ({
+          _id: row._id,
+          fullName: row.fullName,
+          email: row.email,
+          username: row.username,
+          password: row.password,
+          phoneNumber: row.phoneNumber,
+        }));
+        setData(dataPut);
+        showDetaillModal();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const columnLocations = [
     {
@@ -120,17 +126,17 @@ const ListLocation = () => {
       width: 250,
     },
     {
-      title: "Chức Năng", 
-      width: 90, 
-      render: (fila ) => (
+      title: "Chức Năng",
+      width: 90,
+      render: (fila) => (
         <Space size="middle">
           {" "}
-          <Button onClick={() => SeleArtista(fila, "Editar")}>
+          <Button key="sua" style={{background: "blue", color: "white"}} onClick={() => SeleArtista(fila, "Editar")}>
             {" "}
             Chỉnh Sửa{" "}
           </Button>
-          <Button onClick={() => SeleArtista(fila, "Delete")}> xóa </Button>
-          <Button> Chi Tiết </Button>
+          <Button  style={{background: "red", color: "white"}}   onClick={() => SeleArtista(fila, "Delete")}> xóa </Button>
+          <Button  style={{background: "green", color: "white"}}  onClick={() => SeleDetail(fila, "Detail")}> Chi Tiết </Button>
         </Space>
       ),
     },
@@ -158,11 +164,11 @@ const ListLocation = () => {
         showDeletelModal,
         showDetaillModal,
         showEditlModal,
-        
+        getDetail,
       }}
     >
       <div>
-        <SearchLocation />
+        <SearchUsers />
         <div>
           {loading ? (
             "Loading"
@@ -175,13 +181,13 @@ const ListLocation = () => {
             ></Table>
           )}
           <div>
-            <EditLocation />
+            <EditUsers />
           </div>
           <div>
-            <DeleteLocation />
+            <DeleteUsers />
           </div>
           <div>
-            <DetailLocation />
+            <DetailUsers />
           </div>
         </div>
       </div>
@@ -189,4 +195,4 @@ const ListLocation = () => {
   );
 };
 
-export default ListLocation;
+export default ListUsres;

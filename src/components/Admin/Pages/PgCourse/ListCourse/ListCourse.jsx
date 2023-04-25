@@ -7,6 +7,8 @@ import DetailCourse from "../DetailCourse/DetailCourse";
 import DeleteCourse from "../DeleteCourse/DeleteCourse";
 import SearchCourse from "../Search/SearchCourse";
 const baseUrl = "https://x09-be.onrender.com/api/courses";
+import swal from 'sweetalert';
+
 const Layout = {
   labelCol: {
     span: 8,
@@ -49,7 +51,14 @@ const ListCourse = () => {
   const showDetaillModal = () => {
     setDetailModalOpen(!DetailsModalOpen);
   };
-
+  const SeleArtista = (artista, caso) => {
+    setPostData(artista);
+    caso === "Editar" ? showEditlModal() : showDeletelModal();
+  };
+  const SeleDetail = (artistaDetail, casoDetail) => {
+    setPostData(artistaDetail);
+    casoDetail === "Detail"&&showDetaillModal();
+  }
   const getData = async () => {
     const { data } = await Axios.get(baseUrl);
     setloading(false);
@@ -67,37 +76,7 @@ const ListCourse = () => {
       }))
     );
   };
-  const SeleArtista = (artista, caso) => {
-    setPostData(artista);
-    caso === "Editar" ? showEditlModal() : showDeletelModal();
-  };
-
-  const HandlDetail = async () => {
-    await Axios.get(baseUrl + "/" + postData._id, postData)
-      .then((res) => {
-        var dataPut = data;
-        dataPut.map((row) => ({
-          _id: row._id,
-          id: row.id,
-          name: row.name,
-          description: row.description,
-          price: row.price,
-          courseTime: row.courseTime,
-          classTime: row.classTime,
-          image: row.image,
-          maxNumberOfStudents: row.maxNumberOfStudents,
-        }));
-        setData(dataPut);
-        showDetaillModal();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  // Chi Tiết
  
-
   const columns = [
     {
       title: "Mã Khóa Học",
@@ -133,9 +112,9 @@ const ListCourse = () => {
       width: 100,
       render: (fila) => (
         <Space size="middle"> {" "}
-          <Button onClick={() => SeleArtista(fila, "Editar")}> Chỉnh Sửa </Button>
-          <Button onClick={() => SeleArtista(fila, "Delete")}> xóa </Button>
-          <Button onClick={HandlDetail}> Chi Tiết </Button>
+          <Button style={{background: "blue", color: "white"}} onClick={() => SeleArtista(fila, "Editar")}> Chỉnh Sửa </Button>
+          <Button style={{background: "red", color: "white"}}  onClick={() => SeleArtista(fila, "Delete")}> xóa </Button>
+          <Button style={{background: "green", color: "white"}} onClick={() => SeleDetail(fila, "Detail")}> Chi Tiết </Button>
         </Space>
       ),
     },
@@ -182,7 +161,7 @@ const ListCourse = () => {
             <EditCourse />
           </div>
           <div>
-            <DeleteCourse />
+            {/* <DeleteCourse /> */}
           </div>
           <div>
             <DetailCourse />
