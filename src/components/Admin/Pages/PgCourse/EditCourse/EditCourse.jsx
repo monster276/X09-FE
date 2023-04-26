@@ -1,7 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { Button, Modal, Form, Input } from "antd";
 import { ListContext } from "../ListCourse/ListCourse";
 import Axios from "axios";
+import swal from 'sweetalert';
 const { Item } = Form;
 
 const EditCourse = () => {
@@ -13,6 +14,17 @@ const EditCourse = () => {
     console.log(postData);
   };
   
+  const sweetalert = () => {
+    swal({
+      title: "Tuyệt Vời",
+      text: "Bạn Đã sửa Thành Công",
+      icon: "success",
+      button: "Thoát",
+    })
+  }
+
+ 
+
   const HandlPut = async () => {
     try {
       let result = await Axios.put(baseUrl + "/" + postData._id, postData).then(
@@ -31,10 +43,14 @@ const EditCourse = () => {
             }
           });
           setData(dataPut);
-          showEditlModal();
-          console.log(result);
+          showEditlModal(
+            setTimeout(() => {
+              sweetalert()
+            }, 1500)
+          )
         }
-      );
+      )
+      
     } catch (error) {
       console.error(error.data);
     }
@@ -55,7 +71,7 @@ const EditCourse = () => {
             </Button>,
           ]}
         >
-          <Form {...Layout} value={postData && postData._id}>
+          <Form {...Layout}>
             <Item label="Mã Khóa Học" key="id" >
               <Input
                 disabled

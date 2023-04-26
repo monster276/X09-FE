@@ -11,29 +11,28 @@ import Footer from "./components/Footer/Footer";
 import SideMenu from "./components/SideMenu/SideMenu";
 import PageContent from "./components/PageContent/PageContent";
 import { Route, Routes } from "react-router-dom";
+export default function Index() {
+  const user = useSelector((state) => state.auth.login?.currentUser);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  let axiosJWT = createAxios(user, dispatch, loginSuccess);
 
-    export default function Index() {
-    const user = useSelector((state) => state.auth.login?.currentUser);
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    let axiosJWT = createAxios(user, dispatch, loginSuccess);
-
- useEffect(() => {
+  useEffect(() => {
     if (!user) {
       navigate("/login");
     }
     if (user?.accessToken) {
-      getAllUsers(user?.accessToken, dispatch,axiosJWT);
+      getAllUsers(user?.accessToken, dispatch, axiosJWT);
     }
   }, []);
   return (
     <div className="AdminApp">
-        <Header />
-        <Space className="SideMenuAndPage">
-          <SideMenu />
-          <PageContent />
-        </Space>
-        <Footer />
+      <Header />
+      <Space className="SideMenuAndPage">
+        <SideMenu />
+        <PageContent></PageContent>
+      </Space>
+      <Footer />
     </div>
   );
 }
