@@ -1,11 +1,12 @@
 import { React, createContext, useEffect, useState } from "react";
 import "./Location.css";
-import { Table, Space, Button, Status, Tag } from "antd";
 import Axios from "axios";
 import EditLocation from "../EditLocation/EditLocation";
 import DetailLocation from "../DetailLocation/DetailLocation";
 import DeleteLocation from "../DeleteLocation/DeleteLocation";
 import SearchLocation from "../SearchLocation/SearchLocation";
+import Pagination from "@mui/material/Pagination";
+import { Table, Space, Button } from "antd";
 const baseUrlLocations = "https://x09-be.onrender.com/api/locations";
 const Layout = {
   labelCol: {
@@ -19,7 +20,7 @@ const Layout = {
 export const ListContext = createContext();
 
 const ListLocation = () => {
-  const [detail, setdetail] = useState(null)
+  const [page, setPage] = useState(1);
   const [loading, setloading] = useState(true);
   const [data, setData] = useState([]);
   const [searchValue, setSearchValue] = useState("");
@@ -36,8 +37,10 @@ const ListLocation = () => {
   });
   useEffect(() => {
     getData();
-  }, []);
-
+  }, [page]);
+  const handleChangePagination = (event, value) => {
+    setPage(value);
+  };
   const showDeletelModal = () => {
     setdeletesModalOpen(!deletesModalOpen);
   };
@@ -58,7 +61,7 @@ const ListLocation = () => {
   
 
   const getData = async () => {
-    const { data } = await Axios.get(baseUrlLocations);
+    const { data } = await Axios.get(baseUrlLocations + "?pageNumber=" + `${page}`);
     setloading(false);
     setData(
       data.locations.map((row) => ({
@@ -157,8 +160,19 @@ const ListLocation = () => {
               columns={columnLocations}
               dataSource={data}
               rowKey="id"
+              pagination={false}
             ></Table>
           )}
+            <Pagination
+            style={{ marginLeft: 920, marginTop: 20, marginBottom: 20 }}
+            variant="outlined"
+            shape="rounded"
+            color="secondary"
+            count={10}
+            page={page}
+            onChange={handleChangePagination}
+          />
+          <div></div>
           <div>
             <EditLocation />
           </div>

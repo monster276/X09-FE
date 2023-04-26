@@ -2,7 +2,9 @@ import { React, useContext, useEffect, useState } from "react";
 import Axios from "axios";
 import "./SearchUsres.css";
 import { ListContext } from "../ListUsres/ListUsres";
+import { SreachDeBounce } from "../../hooks";
 import { Space, Button, Input, AutoComplete, Modal, Form } from "antd";
+import swal from "sweetalert";
 const { Item } = Form;
 const { Search } = Input;
 const onFinishFailed = (errorInfo) => {
@@ -12,6 +14,7 @@ const onFinish = (values) => {
   console.log("Success:", values);
 };
 const SearchUsers = () => {
+  const [form] = Form.useForm();
   const [createModalOpen, setcreateModalOpen] = useState(false);
   const {
     setloading,
@@ -26,9 +29,11 @@ const SearchUsers = () => {
     Layout,
   } = useContext(ListContext);
 
+  const debounced = SreachDeBounce(searchValue, 700);
+
   useEffect(() => {
     getSearchData();
-  }, [searchValue]);
+  }, [debounced]);
 
   const mockVal = (str, repeat = 1) => ({
     value: str.repeat(repeat),
@@ -42,7 +47,7 @@ const SearchUsers = () => {
   const getSearchData = async () => {
     const { data } = await Axios.get(`https://x09-be.onrender.com/api/user?`, {
       params: {
-        keyword: `${searchValue}`,
+        keyword: `${debounced}`,
       },
       headers: {
         token: `Bearer ${JSON.parse(localStorage.getItem("accesstoken"))}`,
@@ -72,8 +77,8 @@ const SearchUsers = () => {
   const PostlistData = async () => {
     const config = {
       headers: {
-        token: `Bearer ${JSON.parse(localStorage.getItem("accesstoken"))}`,
         "Content-Type": "application/json",
+        token: `Bearer ${JSON.parse(localStorage.getItem("accesstoken"))}`,
       },
     };
 
