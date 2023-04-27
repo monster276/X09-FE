@@ -6,6 +6,7 @@ import EditUsers from "../EditUsres/EditUsres";
 import DetailUsers from "../DetailUsers/DetailUsers";
 import DeleteUsers from "../DeleteUsres/DeleteUsres";
 import SearchUsers from "../SearchUsres/SearchUsres";
+import Pagination from "@mui/material/Pagination";
 const baseUrlUsers = "https://x09-be.onrender.com/api/user";
 const Layout = {
   labelCol: {
@@ -19,7 +20,7 @@ const Layout = {
 export const ListContext = createContext();
 
 const ListUsres = () => {
-
+  const [page, setPage] = useState(1);
   const [loading, setloading] = useState(true);
   const [data, setData] = useState([]);
   const [searchValue, setSearchValue] = useState("");
@@ -37,8 +38,10 @@ const ListUsres = () => {
   });
   useEffect(() => {
     getData();
-  }, []);
-
+  }, [page]);
+  const handleChangePagination = (event, value) => {
+    setPage(value);
+  };
   const showDeletelModal = () => {
     setdeletesModalOpen(!deletesModalOpen);
   };
@@ -180,6 +183,15 @@ const ListUsres = () => {
               rowKey="id"
             ></Table>
           )}
+          <Pagination
+            style={{ marginLeft: 920, marginTop: 20, marginBottom: 20 }}
+            variant="outlined"
+            shape="rounded"
+            color="secondary"
+            count={10}
+            page={page}
+            onChange={handleChangePagination}
+          />
           <div>
             <EditUsers />
           </div>

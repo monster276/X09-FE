@@ -59,7 +59,7 @@ const DetailLocation = () => {
             <span name="name"  style={{ color: "green" }} >{postData.name}</span>
           </Item>
 
-          <Item label="TRẠNG THÁI HOẠT ĐỘNG" key="status">
+          <Item label="TRẠNG THÁI HĐ" key="status">
             <span key={true} value={true}  style={{ color: "green" }} >
               {postData.status?'Hoạt Động ':'Ngừng Hoạt Động'}
             </span>

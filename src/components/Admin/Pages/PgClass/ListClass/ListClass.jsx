@@ -6,7 +6,9 @@ import EditClass from "../EditClass/EditClass";
 import DetailClass from "../DetailClass/DetailClass";
 import DeleteClass from "../DeleteClass/DeleteClass";
 import SearchClass from "../Search/SearchClass";
-const baseUrlClass = "https://x09-be.onrender.com/api/classrooms";
+import * as _unitOfWork from "../api";
+import momnent from "moment";
+
 const Layout = {
   labelCol: {
     span: 8,
@@ -15,7 +17,6 @@ const Layout = {
     span: 16,
   },
 };
-
 export const ListContext = createContext();
 const ListClass = () => {
   const [loading, setloading] = useState(true);
@@ -28,10 +29,9 @@ const ListClass = () => {
   const [postData, setPostData] = useState({
     _id:"",
     id: "",
+    course:"",
+    location:"",
     nameclass: "",
-    fullname: "",
-    location: "",
-    course: "",
     startTime: "",
     endTime: "",
     numberOfLessons:"",
@@ -59,62 +59,87 @@ const ListClass = () => {
     setPostData(artistaDetail);
     casoDetail === "Detail" && showDetaillModal();
   }
+
+
   const getData = async () => {
-    const { data } = await Axios.get(baseUrlClass);
-    setloading(false);
-    setData(
-      data.classrooms.map((row) => ({
-        _id: row._id,
-        id: row.id,
-        nameclass: row.name,
-        location:row.location.name,
-        course: row.course.name,
-        classTime: row.classTime,
-        schedule: row.schedule,
-        numberOfLessons: row.numberOfLessons,
-        startTime:row.startTime,
-        endTime: row.endTime,
-        students:row.students.fullName,
-        students:row.students.email,
-        students:row.students.phoneNumber,
-        students:row.students.course,
-        students:row.students.status,
-        students:row.students.createdAt,
-        students:row.students.updatedAt,
-      }))
-    );
-  };
+    let res = await _unitOfWork.getAllClassroom();
+    if (res)
+      setData(res.classrooms.map((c, i) => ({ ...c, stt: i + 1 })));
+  }
   const columns = [
     {
-      title: "Mã Lớp Học",
+      title: "STT",
+      dataIndex: "stt",
+      key: "stt",
+    },
+    {
+      title: "Mã Lớp",
       dataIndex: "id",
       key: "id",
-      width: 150,
     },
     {
-      title: "Tên Lớp Học",
-      dataIndex: "nameclass",
-      key: "nameclass",
-      width: 150,
+      title: "Tên Lớp",
+      dataIndex: "name",
+      key: "name",
     },
     {
-      title: "Tên Giảng Viên",
-      dataIndex: "fullname",
-      key: "fullname",
-      width: 200,
+      title: "Giảng viên",
+      dataIndex: "user",
+      key: "user",
+      render: ( _,record) => (
+        <>{record.user?.fullName}</>
+      ),
     },
     {
-      title: "Địa Chỉ Cơ Sở",
-      dataIndex: "location",
-      key: "location",
-      width: 300,
-    },
-    {
-      title: "Khóa Học ",
+      title: "Khóa Học",
       dataIndex: "course",
       key: "course",
-      width: 170,
+      render: (value, record) => (
+        <>{record.course?.name}</>
+      ),
     },
+    {
+      title: "Cơ sở",
+      dataIndex: "location",
+      key: "location",
+      render: (value, record) => (
+        <>{record.location?.name}</>
+      ),
+    },
+
+    {
+      title: "Ngày bắt đầu",
+      dataIndex: "startTime",
+      key: "startTime",
+      render: (value, record) => (
+        <>{momnent(value).add("hours", 7).format("DD-MM-YYYY")}</>
+      ),
+    },
+    {
+      title: "Ngày kết thúc",
+      dataIndex: "endTime",
+      key: "endTime",
+      render: (value, record) => (
+        <>{momnent(value).add("hours", 7).format("DD-MM-YYYY")}</>
+      ),
+    },
+    {
+      title: "Số bài giảng",
+      dataIndex: "numberOfLessons",
+      key: "numberOfLessons",
+    },
+    {
+      title: "Giờ học",
+      dataIndex: "classTime",
+      key: "classTime",
+    },
+    {
+      title: "Lịch Học",
+      dataIndex: "schedule",
+      key: "schedule",
+      render: (value, record) => <>{value.join(",")}</>,
+    },
+
     {
       title: "Chức Năng",
       width: 100,
@@ -136,7 +161,6 @@ const ListClass = () => {
         data,
         loading,
         postData,
-        baseUrlClass,
         deletesModalOpen,
         DetailsModalOpen,
         Layout,

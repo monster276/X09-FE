@@ -1,18 +1,19 @@
+
 import { React, useContext, useEffect, useState } from "react";
 import Axios from "axios";
 import "./Search.css";
 import { ListContext } from "../ListCourse/ListCourse";
-import { Space, Button, Input, AutoComplete, Modal, Form,message  } from "antd";
+import { SreachDeBounce } from "../../hooks"
+import { Space, Button, Input, AutoComplete, Modal, Form, Spin  } from "antd";
+import swal from 'sweetalert';
 const { Search } = Input;
-const onFinishFailed = (errorInfo) => {
-  console.log("Failed:", errorInfo);
-};
-const onFinish = (values) => {
-  console.log("Success:", values);
-};
+
 const SearchCourse = () => {
+  const [form] = Form.useForm();
   const [createModalOpen, setcreateModalOpen] = useState(false);
+ 
   const {
+    loading,
     setloading,
     setData,
     postData,
@@ -26,11 +27,21 @@ const SearchCourse = () => {
     Layout,
   } = useContext(ListContext);
 
+  const debounced = SreachDeBounce(searchValue , 700)
 
+ 
+  // const onFinish = (values) => {
+  //   console.log('Success:', values);
+  // };
+  // const onFinishFailed = (errorInfo) => {
+  //   console.log('Failed:', errorInfo);
+  // };
+  
   useEffect(() => {
     getSearchData();
-  }, [searchValue]);
+  }, [debounced]);
 
+ 
   
   const mockVal = (str, repeat = 1) => ({
     value: str.repeat(repeat),
@@ -40,9 +51,10 @@ const SearchCourse = () => {
   const onSelect = (data) => {
     console.log("onSelect", data);
   };
+
   const getSearchData = async () => {
     const { data } = await Axios.get(
-      `https://x09-be.onrender.com/api/courses?keyword=${searchValue}`
+      `https://x09-be.onrender.com/api/courses?keyword=${debounced}`
     );
     setloading(false);
     setData(
@@ -62,30 +74,34 @@ const SearchCourse = () => {
     setPostData({ ...postData, [name]: value });
     console.log(postData);
   };
-  const check = (e) =>{
-    console.log(e);
-    setTimeout(() => {
-      message.success('thêm TC')
-    },);
-
-  }
-
-  const PostlistData = async () => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
+  const onFinish = async (value) => {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+  
+      const { newData } = await Axios.post(
+        baseUrl,
+        postData,
+        config,
+        handleCreateCancel()
+      );
+      setTimeout(()=>{
+        swal({
+          title: "Tuyệt Vời",
+          text: "Bạn Đã Thêm khóa Học Thành Công",
+          icon: "success",
+          button: "Thoát",
+        })
+      }, 2000)
+      getData(newData);
+      setTimeout(() => {
+        form.resetFields()
+      }, 500)
+      form.validateFields();
     };
-
-    const { newData } = await Axios.post(
-      baseUrl,
-      postData,
-      config,
-      handleCreateCancel()
-    );
-    getData(newData);
-  };
-
+  
   return (
     <div>
       <div className="SpaceandButton">
@@ -105,7 +121,7 @@ const SearchCourse = () => {
               placeholder="nhập tìm kiếm"
               enterButton="Tìm Kiếm"
               onChange={(e) => setSearchValue(e.target.value)}
-              value={searchValue}
+              value={debounced}
             />
           </AutoComplete>
         </Space>
@@ -123,16 +139,14 @@ const SearchCourse = () => {
           title="TẠO MỚI KHÓA HỌC"
           destroyOnClose={true}
           onCancel={handleCreateCancel}
-          centered
-          footer={[
-            <Button style={{background: "red", color: "white"}} onClick={handleCreateCancel}>Thoát</Button>,
-            <Button  style={{background: "blue", color: "white"}} type="primary" onClick={PostlistData} htmlType="Lưu" >
-              Lưu
-            </Button>,
-          ]}
+          cancelButtonProps={{ style: { display: 'none' } }}
+          okButtonProps={{ style: { display: 'none' } }}
+          
         >
+          <Spin spinning={loading}>
           <Form
-            check={check} 
+            form={form}
+            onFinish={onFinish}
             {...Layout}
             name="basic"
             labelCol={{
@@ -147,11 +161,11 @@ const SearchCourse = () => {
             initialValues={{
               remember: true,
             }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
+            // onFinishFailed={onFinishFailed}
             autoComplete="off"
           >
             <Form.Item
+              
               name="id"
               label="Mã Khóa Học"
               rules={[
@@ -268,7 +282,14 @@ const SearchCourse = () => {
             >
               <Input  name="image" onChange={handeChange} />
             </Form.Item>
+            <div style={{marginLeft: 310, marginTop: 50 }} >
+              <Button style={{background: "red", color: "white" }} onClick={handleCreateCancel}>Thoát</Button>,
+              <Button  style={{background: "blue", color: "white", marginLeft: 15}} type="submit" value="Submit" htmlType="submit" >
+                Lưu lại
+              </Button>,
+            </div>
           </Form>
+          </Spin>
         </Modal>
       </div>
     </div>

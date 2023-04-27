@@ -46,7 +46,7 @@ export function ClassroomManagement() {
       title: "Giảng viên",
       dataIndex: "user",
       key: "user",
-      render: (value, record) => (
+      render: ( _,record) => (
         <>{record.user?.fullName}</>
       ),
     },

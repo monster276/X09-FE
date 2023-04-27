@@ -33,8 +33,8 @@ const DetailCourse = () => {
               elemento.price = postData.price;
               elemento.courseTime = postData.courseTime;
               elemento.classTime = postData.classTime;
-              elemento.image = postData.image;
               elemento.maxNumberOfStudents = postData.maxNumberOfStudents;
+              elemento.image = postData.image;
             }
           });
           setData(dataPut);
@@ -47,7 +47,6 @@ const DetailCourse = () => {
     }
     GetDetail();
   };
-  let price
   return (
     <div>
       <Modal
@@ -56,13 +55,19 @@ const DetailCourse = () => {
         title="CHI TIẾT KHÓA HỌC"
         onCancel={showDetaillModal}
         centered
-        footer={[<Button style={{background: "red", color: "white"}} onClick={showDetaillModal}>Thoát</Button>]}
+        footer={[
+          <Button
+            style={{ background: "red", color: "white" }}
+            onClick={showDetaillModal}
+          >
+            Thoát
+          </Button>,
+        ]}
       >
         <Form {...Layout}>
           <Item label="MÃ KHÓA HỌC">
             <span style={{ color: "red" }} name="id">
-              {" "}
-              {postData.id}{" "}
+              { postData.id}
             </span>
           </Item>
 
@@ -72,9 +77,9 @@ const DetailCourse = () => {
             </span>
           </Item>
 
-          <Item label="GIÁ KHÓA HỌC" >
+          <Item label="GIÁ KHÓA HỌC">
             <span style={{ color: "red" }} name="price" key="price">
-              {postData.price}
+              { postData.price}
               VND
             </span>
           </Item>
@@ -85,46 +90,36 @@ const DetailCourse = () => {
               rows={4}
               name="description"
               placeholder="nhập nội dung khóa học "
-              onChange={handeChange}
             >
-              {postData.description}
+              {
+              postData.description}
             </span>
           </Item>
 
-          <Item label="THỜI LƯỢNG KH " key="courseTime">
-            <span
-              name="courseTime"
-              onChange={handeChange}
-              style={{ color: "green" }}
-            >
-              {postData.courseTime}
+          <Item label="THỜI LƯỢNG KH ">
+            <span name="courseTime" style={{ color: "green" }}>
+              {
+              postData.courseTime}
             </span>
           </Item>
 
-          <Item label="THỜI LƯỢNG LỚP HỌC " key="classTime">
-            <span
-              name="classTime"
-              onChange={handeChange}
-              style={{ color: "green" }}
-            >
-              {postData.classTime}
+          <Item label="THỜI LƯỢNG LỚP HỌC ">
+            <span name="classTime" style={{ color: "green" }}>
+              {
+               postData.classTime}
             </span>
           </Item>
 
-          <Item label="SỐ HỌC SINH " key="maxNumberOfStudents">
-            <span
-              name="maxNumberOfStudents"
-              onChange={handeChange}
-              style={{ color: "green" }}
-            >
-              {postData.maxNumberOfStudents}
+          <Item label="SỐ HỌC SINH ">
+            <span name="maxNumberOfStudents" style={{ color: "green" }}>
+              {
+              postData.maxNumberOfStudents}
             </span>
           </Item>
 
-          <Item label="ẢNH" key="image">
-            <span name="image" onChange={handeChange}>
-              {postData.image}
-            </span>
+          <Item label="ẢNH">
+            <span name="image">{
+             postData.image}</span>
           </Item>
         </Form>
       </Modal>

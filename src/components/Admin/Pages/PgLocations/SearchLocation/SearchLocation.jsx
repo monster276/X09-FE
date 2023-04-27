@@ -2,15 +2,14 @@ import { React, useContext, useEffect, useState } from "react";
 import Axios from "axios";
 import "./SearchLocation.css";
 import { ListContext } from "../ListLocation/ListLocation";
+import { SreachDeBounce } from "../../hooks"
 import { Space, Button, Input, AutoComplete, Modal, Form, Select, message } from "antd";
+import swal from 'sweetalert';
 const { Search } = Input;
-const onFinishFailed = (errorInfo) => {
-  console.log("Failed:", errorInfo);
-};
-const onFinish = (values) => {
-  console.log("Success:", values);
-};
+
+
 const SearchLocation = () => {
+  const [form] = Form.useForm();
   const [createModalOpen, setcreateModalOpen] = useState(false);
   const {
     setloading,
@@ -25,10 +24,13 @@ const SearchLocation = () => {
     baseUrlLocations,
     Layout,
   } = useContext(ListContext);
+
+
+  const debounced = SreachDeBounce(searchValue , 700)
   // get data
   useEffect(() => {
     getSearchData();
-  }, [searchValue]);
+  }, [debounced]);
     
   // hiện message 
   
@@ -45,7 +47,7 @@ const SearchLocation = () => {
 
   const getSearchData = async () => {
     const { data } = await Axios.get(
-      `https://x09-be.onrender.com/api/locations?keyword=${searchValue}`
+      `https://x09-be.onrender.com/api/locations?keyword=${debounced}`
     );
     setloading(false);
     setData(
@@ -66,20 +68,34 @@ const SearchLocation = () => {
     console.log(postData);
   };
 
-  const PostlistData = async () => {
+  const onFinish = async () => {
     const config = {
       headers: {
         "Content-Type": "application/json",
       },
     };
+
     const { newData } = await Axios.post(
       baseUrlLocations,
       postData,
       config,
       handleCreateCancel()
     );
+    setTimeout(()=>{
+      swal({
+        title: "Tuyệt Vời",
+        text: "Bạn Đã Thêm Cở Sở Thành Công",
+        icon: "success",
+        button: "Thoát",
+      })
+    }, 2000)
     getData(newData);
+    setTimeout(() => {
+      form.resetFields()
+    }, 500)
+    form.validateFields();
   };
+
 
   return (
     <div>
@@ -100,7 +116,7 @@ const SearchLocation = () => {
               placeholder="nhập tìm kiếm"
               enterButton="Tìm Kiếm"
               onChange={(e) => setSearchValue(e.target.value)}
-              value={searchValue}
+              value={debounced}
             />
           </AutoComplete>
         </Space>
@@ -121,25 +137,12 @@ const SearchLocation = () => {
           title="TẠO MỚI CỞ SỞ"
           destroyOnClose={true}
           onCancel={handleCreateCancel}
-          centered
-          footer={[
-            <Button
-              style={{ background: "red", color: "white" }}
-              onClick={handleCreateCancel}
-            >
-              Thoát
-            </Button>,
-            <Button
-              style={{ background: "blue", color: "white" }}
-              type="primary"
-              onClick={PostlistData}
-              htmlType="Luu"
-            >
-              Lưu
-            </Button>,
-          ]}
+          cancelButtonProps={{ style: { display: 'none' } }}
+          okButtonProps={{ style: { display: 'none' } }}
         >
           <Form {...Layout}
+           form={form}
+           onFinish={onFinish}
           name="basic"
           labelCol={{
             span: 8,
@@ -229,6 +232,12 @@ const SearchLocation = () => {
                 onChange={handeChange}
               />
             </Form.Item>
+            <div style={{marginLeft: 310, marginTop: 50 }} >
+              <Button style={{background: "red", color: "white" }} onClick={handleCreateCancel}>Thoát</Button>,
+              <Button  style={{background: "blue", color: "white", marginLeft: 15}} type="submit" value="Submit" htmlType="submit" >
+                Lưu lại
+              </Button>,
+            </div>
           </Form>
         </Modal>
       </div>
