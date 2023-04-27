@@ -6,9 +6,9 @@ import EditCourse from "../EditCourse/EditCourse";
 import DetailCourse from "../DetailCourse/DetailCourse";
 import DeleteCourse from "../DeleteCourse/DeleteCourse";
 import SearchCourse from "../Search/SearchCourse";
-const baseUrl = "https://x09-be.onrender.com/api/courses";
-import swal from 'sweetalert';
 
+import swal from 'sweetalert';
+const baseUrl = "https://x09-be.onrender.com/api/courses";
 const Layout = {
   labelCol: {
     span: 8,

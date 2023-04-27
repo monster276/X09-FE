@@ -16,3 +16,6 @@ export const updateASingleClassroom = (payload,params) => {
 export const deleteASingleClassroom = (params) => {
     return deleteRequest(`${base_api}Classrooms`, params);
 }
+export const getClassroomByUser = (params) => {
+    return get(`${base_api}classrooms/myclassrooms`, params);
+}

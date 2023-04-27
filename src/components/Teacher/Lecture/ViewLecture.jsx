@@ -21,7 +21,7 @@ export function ViewLecture() {
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [courses, setCourses] = useState([]);
-
+  
   useEffect(() => {
     fetchCourses();
     fetchLecture();
@@ -59,14 +59,15 @@ export function ViewLecture() {
           </Col>
           <Col span={8}>
             <Form.Item
-              label="Tên bài học"
+              label="Tên bài giảng"
               name="name"
-              rules={[{ required: true, message: "Vui lòng nhập tên bài học" }]}
+              rules={[{ required: true, message: "Vui lòng chọn bài giảng" }]}
             >
-              <Input placeholder="Tên bài học"></Input>
+             <Input></Input>
             </Form.Item>
           </Col>
-          <Lesson></Lesson>
+          
+          <Lesson lectureId={param.id}></Lesson>
           <Col span={24} style={{ textAlign: "right" }}>
             <Button onClick={() => navigate(-1)}>Quay lại</Button>
           

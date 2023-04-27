@@ -3,17 +3,24 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import * as _unitOfWork from "../api"
 import { link, path } from "../Router/RouterConfig";
+import { cleanObj} from "../helper/objHelper"
 const {Search} = Input
+
 export function Lecture() {
   const navigate = useNavigate()
   const [formSearch] = Form.useForm();
   const [lectures, setLectures] = useState([]);
+  
+
   useEffect(() => {
     fetchLectures()
   }, []);
 
-  const fetchLectures = async () => {
-    let res = await _unitOfWork.getAllLecture()
+  const fetchLectures = async (value) => {
+    let payload = {
+      ...cleanObj(value)
+    }
+    let res = await _unitOfWork.getAllLecture(payload)
     if(res){
       setLectures(res.lectures.map((item,index) => ({...item,stt:index+1})))
     }
@@ -64,15 +71,15 @@ export function Lecture() {
 
   return (
     <>
-      <Form form={formSearch} layout="vertical">
+      <Form form={formSearch} layout="vertical" onFinish={fetchLectures}>
         <Row gutter={32}>
-          <Col span={6}>
-            <Form.Item label="Khóa Học" >
+          {/* <Col span={6}>
+            <Form.Item label="Khóa Học" name="course" >
               <Input placeholder="Khóa Học"></Input>
             </Form.Item>
-          </Col>
+          </Col> */}
           <Col span={6}>
-            <Form.Item label="Tên Bài Giảng" >
+            <Form.Item label="Tên Bài Giảng" name = "name" >
               <Input placeholder="Tên Bài Giảng"></Input>
             </Form.Item>
           </Col>

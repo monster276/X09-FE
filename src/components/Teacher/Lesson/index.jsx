@@ -7,7 +7,7 @@ import { CreateLesson } from "./CreateLesson";
 import { UpdateLesson } from "./UpdateLesson";
 import { ViewLesson } from "./ViewLesson";
 const { Search } = Input;
-export function Lesson() {
+export function Lesson({lectureId}) {
   const navigate = useNavigate();
   const [lessons, setLessons] = useState([]);
   const [showCreateLesson, setShowCreateLesson] = useState(false);
@@ -15,11 +15,15 @@ export function Lesson() {
   const [showViewLesson, setShowViewLesson] = useState(false);
   const [lessonTarget, setLessonTarget] = useState(null);
   useEffect(() => {
-    fetchLessons();
-  }, []);
+    if(lectureId)
+      fetchLessons();
+  }, [lectureId]);
 
   const fetchLessons = async () => {
-    let res = await _unitOfWork.getAllLesson();
+    let payload ={}
+    if(lectureId)
+      payload = {lecture:lectureId}
+    let res = await _unitOfWork.getAllLesson(payload);
     if (res) {
       setLessons(
         res.lessons.map((item, index) => ({ ...item, stt: index + 1 }))
@@ -54,25 +58,21 @@ export function Lesson() {
       dataIndex: "content",
       key: "content",
     },
-    {
-      title: "Ghi Chú",
-      key: "action",
-      render: (_, record) => (
-        <Space size="middle">
-          <Button onClick={() => onClickViewLesson(record)}>Chi tiết</Button>
-          <Button type="primary" onClick={() => onClickUpdateLesson(record)}>
-            Cập nhật
-          </Button>
-          <Button
-            danger
-            type="primary"
-            onClick={() => handleDelete(record._id)}
-          >
-            Xóa
-          </Button>
-        </Space>
-      ),
-    },
+    // {
+    //   title: "Ghi Chú",
+    //   key: "action",
+    //   render: (_, record) => (
+    //     <Space size="middle">
+    //       <Button onClick={() => onClickViewLesson(record)}>Chi tiết</Button>
+    //       <Button type="primary" onClick={() => onClickUpdateLesson(record)}>
+    //         Cập nhật
+    //       </Button>
+    //       <Button danger type="primary" onClick={() => handleDelete(record._id)}>
+    //         Xóa
+    //       </Button>
+    //     </Space>
+    //   ),
+    // },
   ];
 
   const onClickCreateLesson = () => setShowCreateLesson(true);
@@ -110,11 +110,11 @@ export function Lesson() {
           </Button>
         </Col>
       </Row> */}
-      <div style={{ width: "100%", textAlign: "right" }}>
+      {/* <div style={{ width: "100%", textAlign: "right" }}>
         <Button type="primary" onClick={() => onClickCreateLesson()}>
           Thêm mới
         </Button>
-      </div>
+      </div> */}
       <Table columns={columns} dataSource={lessons} />
       <CreateLesson
         isModalOpen={showCreateLesson}

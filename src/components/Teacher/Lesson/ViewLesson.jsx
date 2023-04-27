@@ -57,11 +57,11 @@ export function ViewLesson({isModalOpen,lesson,onCancel,onCallback}) {
         <Row gutter={32}>
           <Col span={8}>
             <Form.Item
-              label="Bài giảng"
+              label="Tên bài giảng"
               name="lecture"
               rules={[{ required: true, message: "Vui lòng chọn khóa học" }]}
             >
-              <Select placeholder="Bài giảng">
+              <Select placeholder="Tên bài giảng">
                 {lectures?.map((item, index) => (
                   <Option id={index} key={item._id}>
                     {item.name}

@@ -17,7 +17,7 @@ function MenuComponent() {
         type="primary"
         onClick={toggleCollapsed}
         style={{
-          marginBottom: 16,
+          marginBottom: 32,
         }}
       >
         {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}

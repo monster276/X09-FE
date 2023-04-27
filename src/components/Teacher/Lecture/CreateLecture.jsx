@@ -64,11 +64,11 @@ export function CreateLecture() {
           </Col>
           <Col span={8}>
             <Form.Item
-              label="Tên bài học"
+              label="Tên bài giảng"
               name="name"
               rules={[{ required: true, message: "Vui lòng nhập tên bài học" }]}
             >
-              <Input placeholder="Tên bài học"></Input>
+              <Input placeholder="Tên bài giảng"></Input>
             </Form.Item>
           </Col>
           <Lesson></Lesson>
