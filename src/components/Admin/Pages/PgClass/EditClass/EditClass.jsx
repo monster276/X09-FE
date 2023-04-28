@@ -40,12 +40,6 @@ const EditClass = ({ classId }) => {
     setData,
     setloading,
   } = useContext(ListContext);
-
-  const handeChange = (e) => {
-    const { name, value } = e.target;
-    setPostData({ ...postData, [name]: value });
-    console.log(postData);
-  };
   useEffect(() => {
     if (classId) {
       fetchClassroom();
@@ -111,6 +105,7 @@ const EditClass = ({ classId }) => {
 
     let payload = {
       _id: classId,
+      students:[],
       ...form.getFieldsValue(),
     };
     payload.startTime = moment(payload.startTime)
@@ -121,7 +116,7 @@ const EditClass = ({ classId }) => {
       .format("YYYY-MM-DD");
     let res = await _unitOfWork.updateASingleClassroom(payload, classId);
     if (res) {
-      navigate(-1);
+     showEditlModal()
     }
   };
 
@@ -286,9 +281,9 @@ const EditClass = ({ classId }) => {
             <Col span={24}>
               <Table columns={attendanceColumns} dataSource={attendances} />
             </Col>
-            <Col span={24} style={{ textAlign: "right" }}>
+            <Col span={24} style={{ textAlign: "right", marginTop:20 }}>
               <Button
-                style={{ background: "red", color: "white" }}
+                style={{ background: "red", color: "white", marginLeft: 20 }}
                 onClick={showEditlModal}
               >
                 Quay lại

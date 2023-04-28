@@ -19,7 +19,7 @@ const Layout = {
 };
 export const ListContext = createContext();
 const ListClass = () => {
-  const [classId,setClassId]= useState(null)
+  const [classId, setClassId] = useState(null);
   const [loading, setloading] = useState(true);
   const [data, setData] = useState([]);
   const [searchValue, setSearchValue] = useState("");
@@ -28,16 +28,16 @@ const ListClass = () => {
   const [EditsModalOpen, setEditModalOpen] = useState(false);
   const [DetailsModalOpen, setDetailModalOpen] = useState(false);
   const [postData, setPostData] = useState({
-    _id:"",
+    _id: "",
     id: "",
-    course:"",
-    location:"",
+    course: "",
+    location: "",
     nameclass: "",
     startTime: "",
     endTime: "",
-    numberOfLessons:"",
-    classTime:"",
-    schedule:"",
+    numberOfLessons: "",
+    classTime: "",
+    schedule: "",
   });
   useEffect(() => {
     getData();
@@ -47,10 +47,15 @@ const ListClass = () => {
     setdeletesModalOpen(!deletesModalOpen);
   };
   const showEditlModal = (value) => {
-    setClassId(value._id)
+    if(!EditsModalOpen)
+      setClassId(value._id);
+    else
+      getData()
     setEditModalOpen(!EditsModalOpen);
   };
-  const showDetaillModal = () => {
+  const showDetaillModal = (value) => {
+    if(!DetailsModalOpen)
+    setClassId(value._id);
     setDetailModalOpen(!DetailsModalOpen);
   };
   const SeleArtista = (artista, caso, value) => {
@@ -60,14 +65,12 @@ const ListClass = () => {
   const SeleDetail = (artistaDetail, casoDetail) => {
     setPostData(artistaDetail);
     casoDetail === "Detail" && showDetaillModal();
-  }
-
+  };
 
   const getData = async () => {
     let res = await _unitOfWork.getAllClassroom();
-    if (res)
-      setData(res.classrooms.map((c, i) => ({ ...c, stt: i + 1 })));
-  }
+    if (res) setData(res.classrooms.map((c, i) => ({ ...c, stt: i + 1 })));
+  };
   const columns = [
     {
       title: "STT",
@@ -88,25 +91,19 @@ const ListClass = () => {
       title: "Giảng viên",
       dataIndex: "user",
       key: "user",
-      render: ( _,record) => (
-        <>{record.user?.fullName}</>
-      ),
+      render: (_, record) => <>{record.user?.fullName}</>,
     },
     {
       title: "Khóa Học",
       dataIndex: "course",
       key: "course",
-      render: (value, record) => (
-        <>{record.course?.name}</>
-      ),
+      render: (value, record) => <>{record.course?.name}</>,
     },
     {
       title: "Cơ sở",
       dataIndex: "location",
       key: "location",
-      render: (value, record) => (
-        <>{record.location?.name}</>
-      ),
+      render: (value, record) => <>{record.location?.name}</>,
     },
 
     {
@@ -145,64 +142,77 @@ const ListClass = () => {
     {
       title: "Chức Năng",
       width: 100,
-      render: (fila,record) => (
-        <Space size="middle"> {" "}
-          <Button style={{background: "blue", color: "white"}} onClick={() => SeleArtista(fila, "Editar",record)}> Chỉnh Sửa </Button>
-          <Button style={{background: "red", color: "white"}} onClick={() => SeleArtista(fila, "Delete")}> xóa </Button>
-          <Button style={{background: "green", color: "white"}} onClick={() => SeleDetail(fila, "Detail")}> Chi Tiết </Button>
+      render: (fila, record) => (
+        <Space size="middle">
+          {" "}
+          <Button
+            style={{ background: "blue", color: "white" }}
+            onClick={() => SeleArtista(fila, "Editar", record)}
+          >
+            {" "}
+            Chỉnh Sửa{" "}
+          </Button>
+          {/* <Button style={{background: "red", color: "white"}} onClick={() => SeleArtista(fila, "Delete")}> xóa </Button> */}
+          <Button
+            style={{ background: "green", color: "white" }}
+            onClick={() => SeleDetail(fila, "Detail")}
+          >
+            {" "}
+            Chi Tiết{" "}
+          </Button>
         </Space>
       ),
     },
   ];
 
   return (
-    <ListContext.Provider
-      value={{
-        options,
-        searchValue,
-        data,
-        loading,
-        postData,
-        deletesModalOpen,
-        DetailsModalOpen,
-        Layout,
-        EditsModalOpen,
-        setOptions,
-        setSearchValue,
-        getData,
-        setloading,
-        setData,
-        setPostData,
-        showDeletelModal,
-        showDetaillModal,
-        showEditlModal,
-      }}
-    >
-      <div>
-        <SearchClass/>
+    <>
+      <ListContext.Provider
+        value={{
+          options,
+          searchValue,
+          data,
+          loading,
+          postData,
+          deletesModalOpen,
+          DetailsModalOpen,
+          Layout,
+          EditsModalOpen,
+          setOptions,
+          setSearchValue,
+          getData,
+          setloading,
+          setData,
+          setPostData,
+          showDeletelModal,
+          showDetaillModal,
+          showEditlModal,
+        }}
+      >
         <div>
-        {loading ? (
-          "Loading"
-        ) : (
-          <Table
-            className="TableCS"
-            columns={columns}
-            dataSource={data}
-            rowKey="id"
-          ></Table>
-        )}
+          <SearchClass />
           <div>
-            <EditClass classId={classId} />
-          </div>
-          <div>
-            <DeleteClass/>
-          </div>
-          <div>
-            <DetailClass/>
+            {loading ? (
+              "Loading"
+            ) : (
+              <Table
+                className="TableCS"
+                columns={columns}
+                dataSource={data}
+                rowKey="id"
+              ></Table>
+            )}
+            <div>
+              <EditClass classId={classId} />
+            </div>
+            <div>{/* <DeleteClass/> */}</div>
+            <div>
+              <DetailClass classId={classId} />
+            </div>
           </div>
         </div>
-      </div>
-    </ListContext.Provider>
+      </ListContext.Provider>
+    </>
   );
 };
 
