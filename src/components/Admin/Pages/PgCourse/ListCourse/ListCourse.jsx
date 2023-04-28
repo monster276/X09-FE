@@ -191,7 +191,7 @@ const ListCourse = () => {
             variant="outlined"
             shape="rounded"
             color="secondary"
-            count={10}
+            count={3}
             page={page}
             onChange={handleChangePagination}
           />

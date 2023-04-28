@@ -56,12 +56,13 @@ const ListLocation = () => {
   };
   const SeleDetail = (artistaDetail, casoDetail) => {
     setPostData(artistaDetail);
-    casoDetail === "Detail"&&showDetaillModal();
-  }
-  
+    casoDetail === "Detail" && showDetaillModal();
+  };
 
   const getData = async () => {
-    const { data } = await Axios.get(baseUrlLocations + "?pageNumber=" + `${page}`);
+    const { data } = await Axios.get(
+      baseUrlLocations + "?pageNumber=" + `${page}`
+    );
     setloading(false);
     setData(
       data.locations.map((row) => ({
@@ -73,8 +74,6 @@ const ListLocation = () => {
       }))
     );
   };
-
-  
 
   const columnLocations = [
     {
@@ -95,12 +94,12 @@ const ListLocation = () => {
       key: "status",
       width: 90,
       render: (fila) => {
-        if(fila === true ){
-          return <span>Hoạt Động</span>
-        }else {
-          return <span>Ngừng Hoạt Động</span>
+        if (fila === true) {
+          return <span>Hoạt Động</span>;
+        } else {
+          return <span>Ngừng Hoạt Động</span>;
         }
-      }
+      },
     },
     {
       title: "Địa Chỉ ",
@@ -109,17 +108,27 @@ const ListLocation = () => {
       width: 250,
     },
     {
-      title: "Chức Năng", 
-      width: 90, 
-      render: (fila ) => (
+      title: "Chức Năng",
+      width: 90,
+      render: (fila) => (
         <Space size="middle">
           {" "}
-          <Button key={showEditlModal} style={{background: "blue", color: "white"}} onClick={() => SeleArtista(fila, "Editar")}>
+          <Button
+            key={showEditlModal}
+            style={{ background: "blue", color: "white" }}
+            onClick={() => SeleArtista(fila, "Editar")}
+          >
             {" "}
             Chỉnh Sửa{" "}
           </Button>
           {/* <Button style={{background: "red", color: "white"}} onClick={() => SeleArtista(fila, "Delete")}> xóa </Button> */}
-          <Button style={{background: "green", color: "white"}} onClick={() => SeleDetail(fila, "Detail")}> Chi Tiết </Button>
+          <Button
+            style={{ background: "green", color: "white" }}
+            onClick={() => SeleDetail(fila, "Detail")}
+          >
+            {" "}
+            Chi Tiết{" "}
+          </Button>
         </Space>
       ),
     },
@@ -152,23 +161,21 @@ const ListLocation = () => {
       <div>
         <SearchLocation />
         <div>
-          {loading ? (
-            "Loading"
-          ) : (
-            <Table
-              className="TableCS"
-              columns={columnLocations}
-              dataSource={data}
-              rowKey="id"
-              pagination={false}
-            ></Table>
-          )}
-            <Pagination
+          <Table
+            loading={loading}
+            className="TableCS"
+            columns={columnLocations}
+            dataSource={data}
+            rowKey="id"
+            pagination={false}
+          ></Table>
+
+          <Pagination
             style={{ marginLeft: 920, marginTop: 20, marginBottom: 20 }}
             variant="outlined"
             shape="rounded"
             color="secondary"
-            count={4}
+            count={3}
             page={page}
             onChange={handleChangePagination}
           />

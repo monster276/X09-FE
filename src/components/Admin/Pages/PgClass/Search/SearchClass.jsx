@@ -70,7 +70,7 @@ const SearchClass = () => {
 
   const getSearchData = async () => {
     const { data } = await Axios.get(
-      `https://x09-be.onrender.com/api/classrooms?location=64366220bfc9ed5f01855`
+      `https://x09-be.onrender.com/api/classrooms`
     );
     setloading(false);
     setData(
