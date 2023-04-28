@@ -117,31 +117,6 @@ const ListCourse = () => {
         })),
     },
     {
-      title: "Thường Lượng KH",
-      dataIndex: "courseTime",
-      key: "courseTime",
-      width: 90,
-    },
-    {
-      title: "Thường Lượng Giờ Học",
-      dataIndex: "classTime",
-      key: "classTime",
-      width: 90,
-    },
-    {
-      title: "Số Học Sinh",
-      dataIndex: "maxNumberOfStudents",
-      key: "maxNumberOfStudents",
-      width: 90,
-    },
-    {
-      title: "Ảnh",
-      textAlign: "center",
-      dataIndex: "image",
-      key: "image",
-      width: 200,
-    },
-    {
       title: "Chức Năng",
       width: 100,
       render: (fila) => (
@@ -154,13 +129,13 @@ const ListCourse = () => {
             {" "}
             Chỉnh Sửa{" "}
           </Button>
-          <Button
+          {/* <Button
             style={{ background: "red", color: "white" }}
             onClick={() => SeleArtista(fila, "Delete")}
           >
             {" "}
             xóa{" "}
-          </Button>
+          </Button> */}
           <Button
             style={{ background: "green", color: "white" }}
             onClick={() => SeleDetail(fila, "Detail")}

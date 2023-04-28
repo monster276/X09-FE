@@ -92,6 +92,7 @@ const EditUsers = () => {
         <Form {...Layout}>
           <Item label="Họ và tên " key="fullName">
             <Input
+              disabled
               name="fullName"
               onChange={handeChange}
               placeholder="nhập Họ và tên"

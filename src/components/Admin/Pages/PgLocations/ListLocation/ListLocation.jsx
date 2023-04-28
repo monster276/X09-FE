@@ -118,7 +118,7 @@ const ListLocation = () => {
             {" "}
             Chỉnh Sửa{" "}
           </Button>
-          <Button style={{background: "red", color: "white"}} onClick={() => SeleArtista(fila, "Delete")}> xóa </Button>
+          {/* <Button style={{background: "red", color: "white"}} onClick={() => SeleArtista(fila, "Delete")}> xóa </Button> */}
           <Button style={{background: "green", color: "white"}} onClick={() => SeleDetail(fila, "Detail")}> Chi Tiết </Button>
         </Space>
       ),
@@ -168,7 +168,7 @@ const ListLocation = () => {
             variant="outlined"
             shape="rounded"
             color="secondary"
-            count={10}
+            count={4}
             page={page}
             onChange={handleChangePagination}
           />

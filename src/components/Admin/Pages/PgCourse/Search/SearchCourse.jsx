@@ -1,7 +1,7 @@
 
 import { React, useContext, useEffect, useState } from "react";
 import Axios from "axios";
-import "./Search.css";
+import "./SearchCourse.css";
 import { ListContext } from "../ListCourse/ListCourse";
 import { SreachDeBounce } from "../../hooks"
 import { Space, Button, Input, AutoComplete, Modal, Form, Spin  } from "antd";
@@ -116,7 +116,7 @@ const SearchCourse = () => {
             onSelect={onSelect}
           >
             <Search
-              className="Search"
+              
               size="large"
               placeholder="nhập tìm kiếm"
               enterButton="Tìm Kiếm"
@@ -127,7 +127,7 @@ const SearchCourse = () => {
         </Space>
         <Space>
           <Button
-            type="primary"
+            // type="primary"
             onClick={handleCreateCancel}
             className="ButtonTM"
           >
@@ -270,7 +270,7 @@ const SearchCourse = () => {
               <Input name="maxNumberOfStudents" onChange={handeChange} />
             </Form.Item>
 
-            <Form.Item
+            {/* <Form.Item
               label="ảnh"
               rules={[
                 {
@@ -281,7 +281,7 @@ const SearchCourse = () => {
               name="anh"
             >
               <Input  name="image" onChange={handeChange} />
-            </Form.Item>
+            </Form.Item> */}
             <div style={{marginLeft: 310, marginTop: 50 }} >
               <Button style={{background: "red", color: "white" }} onClick={handleCreateCancel}>Thoát</Button>,
               <Button  style={{background: "blue", color: "white", marginLeft: 15}} type="submit" value="Submit" htmlType="submit" >
