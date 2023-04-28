@@ -53,23 +53,23 @@ export function FacilityManagement() {
       dataIndex: "address",
       key: "address",
     },
-    {
-      title: "Action",
-      key: "action",
-      render: (text, record) => (
-        <Space size="middle">
-            <Button  onClick={() => navigate(link.viewFacility + "/" + record._id)}>
-            Chi tiết
-          </Button>
-          <Button type="primary" onClick={() => navigate(link.updateFacility + "/" + record._id)}>
-            Cập nhật
-          </Button>
-          <Button danger type="primary" onClick={() => handleDelete(record._id)}>
-            Xóa
-          </Button>
-        </Space>
-      ),
-    },
+    // {
+    //   title: "Action",
+    //   key: "action",
+    //   render: (text, record) => (
+    //     <Space size="middle">
+    //         <Button  onClick={() => navigate(link.viewFacility + "/" + record._id)}>
+    //         Chi tiết
+    //       </Button>
+    //       <Button type="primary" onClick={() => navigate(link.updateFacility + "/" + record._id)}>
+    //         Cập nhật
+    //       </Button>
+    //       <Button danger type="primary" onClick={() => handleDelete(record._id)}>
+    //         Xóa
+    //       </Button>
+    //     </Space>
+    //   ),
+    // },
   ];
   return (
     <>

@@ -5,7 +5,7 @@
 // }
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import routesTeacher, { path } from "./RouterConfig";
+import  { path } from "./RouterConfig";
 import { Lecture } from "../Lecture";
 import { Classroom } from "../Classroom";
 import { ClassroomDetail } from "../Classroom/ClassroomDetail";
