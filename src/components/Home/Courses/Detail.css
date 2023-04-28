@@ -4,6 +4,11 @@
     margin-left: 55%;
 }
 
+.modal-content h1{
+  font-size: 60px;
+  text-align: center;
+}
+
 .heads{
     background-color: white;
 }
@@ -33,20 +38,24 @@
 
 .container h4{
   text-align: center;
+  font-size: 100px;
   font-family: 'Times New Roman', Times, serif;
   font-weight: 100;
+  margin-top: 5%;
 }
 
 .container p{
   text-align: center;
   color: black;
   font-size: 25px;
-  margin-top: -2%;
+  margin-top: 4%;
 }
 
 .container img{
   width: 35%;
   margin-left: 10%;
+  display: inline-block;
+  margin-top: 1%;
 }
 
 .detail-content1{
@@ -215,4 +224,14 @@ li{
 .custom-input:focus {
   border-color: #1890ff;
   outline: none;
+}
+
+.ant-btn-primary {
+  background-color: white;
+  border-color: blue;
+}
+
+.ant-btn-primary:hover {
+  background-color: blue;
+  color: blue;
 }

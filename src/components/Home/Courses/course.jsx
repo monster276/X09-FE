@@ -1,7 +1,6 @@
 import React from 'react';
 import './course.css';
-import { Layout, Menu, Button, Avatar } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+import { Layout, Menu, Button } from 'antd';
 import { Card } from 'antd';
 import { Link } from 'react-router-dom';
 import { FacebookOutlined, YoutubeOutlined, TwitterOutlined } from '@ant-design/icons';
@@ -12,15 +11,18 @@ const { Meta } = Card;
 const course = () => {
   return (
     <Layout>
-      <Header className="heads">
-            <Avatar icon={<UserOutlined />} />
-            <Menu mode="horizontal" defaultSelectedKeys={['1']}>
-              <Menu.Item key="1">Trang chủ</Menu.Item>
-              <Menu.Item key="2">Khóa học</Menu.Item>
-              <Menu.Item key="3">Về chúng tôi</Menu.Item>
-            </Menu>
-            <Button type="primary"><Link to="/login">Đăng nhập</Link></Button>
-      </Header>
+      <Header className="header">
+              <div className="header-brand">
+                <img src="https://2sao.vietnamnetjsc.vn/images/2019/06/23/16/58/ngoc-trinh-1.jpg" alt="" className="brand-logo" />
+                <div className="brand-name">EvoEdu</div>
+              </div>
+              <Menu mode="horizontal" className="header-nav" defaultSelectedKeys={['1']}>
+                <Menu.Item key="1"><Link to="/">Trang chủ</Link></Menu.Item>
+                <Menu.Item key="2"><Link to="/course">Khóa học</Link></Menu.Item>
+                <Menu.Item key="3"><Link to="/detail">Chi tiết</Link></Menu.Item>
+              </Menu>
+              <Button type="primary" size="large" className="login-btn"><Link to="/login">Đăng nhập</Link></Button>
+          </Header>
         <Content>
           <div className="contents3">
               <Card

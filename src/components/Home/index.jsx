@@ -1,7 +1,7 @@
 import React from "react";
 import './index.css';
-import { Layout, Menu, Button, Avatar } from 'antd';
-import { UserOutlined, FacebookOutlined, TwitterOutlined, YoutubeOutlined  } from '@ant-design/icons';
+import { Layout, Menu, Button } from 'antd';
+import { FacebookOutlined, TwitterOutlined, YoutubeOutlined  } from '@ant-design/icons';
 
 import { Card } from 'antd';
 import { Link } from 'react-router-dom';
@@ -12,18 +12,17 @@ const { Meta } = Card;
 export default function Index(props) {
     return (
         <Layout>
-          <Header className="heads">
-            <div className="left">
-              <Avatar icon={<UserOutlined />} />
-              <Menu mode="horizontal" defaultSelectedKeys={['1']}>
-                <Menu.Item key="1">Trang chủ</Menu.Item>
-                <Menu.Item key="2">Khóa học</Menu.Item>
-                <Menu.Item key="3">Giới thiệu</Menu.Item>
+          <Header className="header">
+              <div className="header-brand">
+                <img src="https://2sao.vietnamnetjsc.vn/images/2019/06/23/16/58/ngoc-trinh-1.jpg" alt="" className="brand-logo" />
+                <div className="brand-name">EvoEdu</div>
+              </div>
+              <Menu mode="horizontal" className="header-nav" defaultSelectedKeys={['1']}>
+                <Menu.Item key="1"><Link to="/">Trang chủ</Link></Menu.Item>
+                <Menu.Item key="2"><Link to="/course">Khóa học</Link></Menu.Item>
+                <Menu.Item key="3"><Link to="/detail">Chi tiết</Link></Menu.Item>
               </Menu>
-            </div>
-            <div className="right">
-              <Button type="primary"><Link to="/login">Đăng nhập</Link></Button>
-            </div>
+              <Button type="primary" size="large" className="login-btn"><Link to="/login">Đăng nhập</Link></Button>
           </Header>
           <Content className="body">
             <div className="image">
@@ -38,7 +37,7 @@ export default function Index(props) {
               <img alt="coding" className="cod" src="https://images.hdqwalls.com/wallpapers/i-love-coding-xl.jpg"/>           
             </div>
             <div className="contents1">
-            <h3>Cùng học và làm việc trong một môi trường vui vẻ, hòa đồng và đầy nhiệt huyết</h3>
+            <h3 id="contents1-title1">Cùng học và làm việc trong một môi trường vui vẻ, hòa đồng và đầy nhiệt huyết</h3>
             <p className="top">Các khóa học đang hot</p>
               <Card
                 className="card1"
@@ -88,7 +87,7 @@ export default function Index(props) {
               </Card>
             </div>
             <div className="stuff-container">
-              <h3>Những lợi ích mà bạn có thể nhận được</h3>
+              <h3 id="contents1-title2">Những lợi ích mà bạn có thể nhận được</h3>
               <Card
                 className="card3"
                 hoverable

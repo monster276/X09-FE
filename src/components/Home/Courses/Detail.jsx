@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import './Detail.css';
-import { Layout, Menu, Button, Avatar, Card, Modal, Select, Input } from 'antd';
+import { Layout, Menu, Button, Card, Modal, Select, Input } from 'antd';
 import { Link } from 'react-router-dom';
-import { UserOutlined, TeamOutlined, ClockCircleOutlined, CalendarOutlined, CheckOutlined } from '@ant-design/icons';
+import { TeamOutlined, ClockCircleOutlined, CalendarOutlined, CheckOutlined } from '@ant-design/icons';
 import { FacebookOutlined, YoutubeOutlined, TwitterOutlined } from '@ant-design/icons';
 
 const { Header, Content, Footer } = Layout;
@@ -20,15 +20,18 @@ const Detail = () => {
 
   return (
     <Layout>
-        <Header className="heads">
-            <Avatar icon={<UserOutlined />} />
-            <Menu mode="horizontal" defaultSelectedKeys={['1']}>
-              <Menu.Item key="1">Trang chủ</Menu.Item>
-              <Menu.Item key="2">Khóa học</Menu.Item>
-              <Menu.Item key="3">Về chúng tôi</Menu.Item>
-            </Menu>
-            <Button type="primary"><Link to="/login">Đăng nhập</Link></Button>
-      </Header>
+        <Header className="header">
+              <div className="header-brand">
+                <img src="https://2sao.vietnamnetjsc.vn/images/2019/06/23/16/58/ngoc-trinh-1.jpg" alt="" className="brand-logo" />
+                <div className="brand-name">EvoEdu</div>
+              </div>
+              <Menu mode="horizontal" className="header-nav" defaultSelectedKeys={['1']}>
+                <Menu.Item key="1"><Link to="/">Trang chủ</Link></Menu.Item>
+                <Menu.Item key="2"><Link to="/course">Khóa học</Link></Menu.Item>
+                <Menu.Item key="3"><Link to="/detail">Chi tiết</Link></Menu.Item>
+              </Menu>
+              <Button type="primary" size="large" className="login-btn"><Link to="/login">Đăng nhập</Link></Button>
+          </Header>
         <Content>
             <div className="container">
                 <h4>Khóa học python</h4>
@@ -115,10 +118,10 @@ const Detail = () => {
                   width={1000}   
                   okText="Đăng Ký"  
                   cancelButtonProps={{ style: { fontSize: '20px', padding: '12px 24px', height: '50px' } }}
-                  okButtonProps={{ style: { fontSize: '20px', padding: '12px 24px', height: '50px'  } }}
+                  okButtonProps={{ style: { fontSize: '20px', padding: '12px 24px', height: '50px', background: 'blue'  } }}
                 >
                   <h1>Đăng Ký</h1>
-                  <p>Khóa học python</p>
+                  <p>Khóa học: python</p>
                   <div className="modal-information">
                     <p>Cơ sở:</p>
                     <Select
