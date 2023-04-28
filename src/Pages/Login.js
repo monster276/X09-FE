@@ -82,9 +82,9 @@ const Login = () => {
           <div className="flex justify-center">
             <img className="max-w-[70px] mb-5" src={ava} alt="" />
           </div>
-          <h3 className="text-4xl dark:text-white font-bold text-center mb-10 mt-2">
+          {/* <h3 className="text-4xl dark:text-white font-bold text-center mb-10 mt-2">
             XIN CHÀO
-          </h3>
+          </h3> */}
           <div className="flex flex-col text-gray-400 py-2">
             <label
               htmlFor="email"

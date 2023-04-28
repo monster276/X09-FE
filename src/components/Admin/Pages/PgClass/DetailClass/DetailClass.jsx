@@ -41,11 +41,6 @@ const DetailClass = ({ classId }) => {
     setloading,
   } = useContext(ListContext);
 
-  const handeChange = (e) => {
-    const { name, value } = e.target;
-    setPostData({ ...postData, [name]: value });
-    console.log(postData);
-  };
   useEffect(() => {
     if (classId) {
       fetchClassroom();

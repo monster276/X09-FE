@@ -51,6 +51,7 @@ const ListEnrollCourse = () => {
       dataIndex: "course",
       key: "course",
       width: 150,
+     
     },
     {
       title: "Tên Người Đăng Ký ",
@@ -106,17 +107,15 @@ const ListEnrollCourse = () => {
       <div>
         <SearchEnrollCourse />
         <div>
-        {loading ? (
-          "Loading"
-        ) : (
+       
           <Table
+            loading={loading}
             className="TableCS"
             columns={columns}
             dataSource={data}
             rowKey="id"
             pagination={false}
           ></Table>
-        )}
           <Pagination
             style={{ marginLeft: 920, marginTop: 20, marginBottom: 20 }}
             variant="outlined"

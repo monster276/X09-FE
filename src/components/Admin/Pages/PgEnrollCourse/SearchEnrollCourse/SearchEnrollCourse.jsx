@@ -63,7 +63,7 @@ const SearchEnrollCourse = () => {
             onSelect={onSelect}
           >
             <Search
-              className="Search"
+              
               size="large"
               placeholder="nhập tìm kiếm"
               enterButton="Tìm Kiếm"

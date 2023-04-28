@@ -29,7 +29,7 @@ const ListUsres = () => {
   const [EditsModalOpen, setEditModalOpen] = useState(false);
   const [DetailsModalOpen, setDetailModalOpen] = useState(false);
   const [postData, setPostData] = useState({
-    _id:"",
+    _id: "",
     fullName: "",
     email: "",
     username: "",
@@ -57,8 +57,8 @@ const ListUsres = () => {
   };
   const SeleDetail = (artistaDetail, casoDetail) => {
     setPostData(artistaDetail);
-    casoDetail === "Detail"&&showDetaillModal();
-  }
+    casoDetail === "Detail" && showDetaillModal();
+  };
   const getData = async () => {
     const config = {
       headers: {
@@ -74,13 +74,12 @@ const ListUsres = () => {
         username: row.username,
         password: row.password,
         phoneNumber: row.phoneNumber,
-      })) 
+      }))
     );
   };
 
   const getDetail = async () => {
-    await Axios.get(baseUrlUsers + "/" + postData._id,
-    {
+    await Axios.get(baseUrlUsers + "/" + postData._id, {
       headers: {
         token: `Bearer ${JSON.parse(localStorage.getItem("accesstoken"))}`,
       },
@@ -134,12 +133,22 @@ const ListUsres = () => {
       render: (fila) => (
         <Space size="middle">
           {" "}
-          <Button key="sua" style={{background: "blue", color: "white"}} onClick={() => SeleArtista(fila, "Editar")}>
+          <Button
+            key="sua"
+            style={{ background: "blue", color: "white" }}
+            onClick={() => SeleArtista(fila, "Editar")}
+          >
             {" "}
             Chỉnh Sửa{" "}
           </Button>
           {/* <Button  style={{background: "red", color: "white"}}   onClick={() => SeleArtista(fila, "Delete")}> xóa </Button> */}
-          <Button  style={{background: "green", color: "white"}}  onClick={() => SeleDetail(fila, "Detail")}> Chi Tiết </Button>
+          <Button
+            style={{ background: "green", color: "white" }}
+            onClick={() => SeleDetail(fila, "Detail")}
+          >
+            {" "}
+            Chi Tiết{" "}
+          </Button>
         </Space>
       ),
     },
@@ -173,16 +182,14 @@ const ListUsres = () => {
       <div>
         <SearchUsers />
         <div>
-          {loading ? (
-            "Loading"
-          ) : (
-            <Table
-              className="TableCS"
-              columns={columnLocations}
-              dataSource={data}
-              rowKey="id"
-            ></Table>
-          )}
+          <Table
+            loading={loading}
+            className="TableCS"
+            columns={columnLocations}
+            dataSource={data}
+            rowKey="id"
+          ></Table>
+
           <Pagination
             style={{ marginLeft: 920, marginTop: 20, marginBottom: 20 }}
             variant="outlined"

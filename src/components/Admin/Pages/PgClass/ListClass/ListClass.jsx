@@ -54,9 +54,13 @@ const ListClass = () => {
     setEditModalOpen(!EditsModalOpen);
   };
   const showDetaillModal = (value) => {
+    // if(!DetailsModalOpen)
+    // setClassId(value._id);
+    // setDetailModalOpen(!DetailsModalOpen);
     if(!DetailsModalOpen)
-    setClassId(value._id);
-    setDetailModalOpen(!DetailsModalOpen);
+      setClassId(value._id);
+    else
+    setEditModalOpen(!DetailsModalOpen);
   };
   const SeleArtista = (artista, caso, value) => {
     setPostData(artista);
@@ -123,7 +127,7 @@ const ListClass = () => {
       ),
     },
     {
-      title: "Số bài giảng",
+      title: "Số buổi học",
       dataIndex: "numberOfLessons",
       key: "numberOfLessons",
     },
