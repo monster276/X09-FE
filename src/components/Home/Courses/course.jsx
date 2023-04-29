@@ -13,7 +13,7 @@ const course = () => {
     <Layout>
       <Header className="header">
               <div className="header-brand">
-                <img src="https://2sao.vietnamnetjsc.vn/images/2019/06/23/16/58/ngoc-trinh-1.jpg" alt="" className="brand-logo" />
+                <img src="https://images.pling.com/img/00/00/37/10/41/1288292/309554906fbff6e7f5e2cb96338812db66cd.png" alt="" className="brand-logo" />
                 <div className="brand-name">EvoEdu</div>
               </div>
               <Menu mode="horizontal" className="header-nav" defaultSelectedKeys={['1']}>
@@ -24,6 +24,7 @@ const course = () => {
               <Button type="primary" size="large" className="login-btn"><Link to="/login">Đăng nhập</Link></Button>
           </Header>
         <Content>
+          <h1 className='title'>Danh sách khóa học</h1>
           <div className="contents3">
               <Card
                 className="card5"
@@ -94,33 +95,31 @@ const course = () => {
               </Card>
             </div>
         </Content>
-        <Footer className="detail-footer">
-          <div className="detail-email">
-            <p>Email liên hệ: coderclass@gmail.com</p>
-            <h5>Địa chỉ:</h5>
-            <p>Cơ sở 1: Tầng 6, Tòa nhà Chigamex 22C Thành Công, Phường Thành Công, Quận Ba Đình, Hà Nội</p>
-            <p>Cơ sở 2: Tầng 2, 29T1 Hoàng Đạo Thuý, Phường Trung Hòa, Quận Cầu Giấy, Hà Nội</p>
-            <p>Cơ sở 3: Tầng 6, Tòa AZ Lâm Viên, 107 Nguyễn Phong Sắc, Phường Dịch Vọng Hậu, Quận Cầu Giấy, Hà Nội</p>
-          </div>
-          <div className="detail-icons-footer">
-            <p>Contact</p>
-            <a href="https://www.facebook.com/mindx.edu.vn/" target="_blank" rel="noopener noreferrer">
-              <FacebookOutlined/>
-            </a>
-            <a href="https://twitter.com/mindx_official" target="_blank" rel="noopener noreferrer">
-              <TwitterOutlined/>
-            </a>
-            <a href="https://www.youtube.com/channel/UCvZ8BKeWtJb-r1FmnYtRGrw" target="_blank" rel="noopener noreferrer">
-              <YoutubeOutlined/>
-            </a>
-          </div>
-          <div className="detail-hotline">
-            <p id="leader-text">Hotline</p>
-            <p>Khóa học cho sinh viên, người đi làm 024381277</p>
-            <p>Khóa học cho trẻ 5-17 tuổi - Hà Nội 024723178</p>
-            <p>Khóa học cho trẻ 5-17 tuổi - HCM 0287321337</p>
-            <p>Khóa học cho trẻ 5-17 tuổi - Tỉnh 0247356862</p>
-          </div>
+        <Footer className="footer2">
+            <div className="left-footer">
+              <p>Email liên hệ: evoedu@gmail.com</p>
+              <p>Cơ sở 1: Bắc Ninh - 09 Lê Thái Tổ</p>
+              <p>Cơ sở 2: HN - 22C Thành Công</p>
+              <p>Cơ sở 3: HN - 71 Nguyễn Chí Thanh</p>
+            </div>
+            <div className="mid-footer">
+              <h6>Contact</h6>
+              <a href="https://www.facebook.com/mindx.edu.vn/" target="_blank" rel="noopener noreferrer">
+                <FacebookOutlined/>
+              </a>
+              <a href="https://twitter.com/mindx_official" target="_blank" rel="noopener noreferrer">
+                <TwitterOutlined/>
+              </a>
+              <a href="https://www.youtube.com/channel/UCvZ8BKeWtJb-r1FmnYtRGrw" target="_blank" rel="noopener noreferrer">
+                <YoutubeOutlined/>
+              </a>
+            </div>
+            <div className="right-footer">
+              <h6>Hotline</h6>
+              <p>Khóa trẻ em: 0247318266</p>
+              <p>Khóa thanh thiếu niên: 0244306256</p>
+              <p>Khóa cho sinh viên, người đi làm: 02471105326</p>
+            </div>
           </Footer>
     </Layout>
   )
