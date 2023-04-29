@@ -1,7 +1,6 @@
 import React from 'react';
 import './course.css';
-import { Layout, Menu, Button, Avatar } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+import { Layout, Menu, Button } from 'antd';
 import { Card } from 'antd';
 import { Link } from 'react-router-dom';
 import { FacebookOutlined, YoutubeOutlined, TwitterOutlined } from '@ant-design/icons';
@@ -12,16 +11,19 @@ const { Meta } = Card;
 const course = () => {
   return (
     <Layout>
-      <Header className="heads">
-            <Avatar icon={<UserOutlined />} />
-            <Menu mode="horizontal" defaultSelectedKeys={['1']}>
-              <Menu.Item key="1">Trang chủ</Menu.Item>
-              <Menu.Item key="2">Khóa học</Menu.Item>
-              <Menu.Item key="3">Về chúng tôi</Menu.Item>
-            </Menu>
-            <Button type="primary"><Link to="/login">Đăng nhập</Link></Button>
-      </Header>
+      <Header className="header">
+              <div className="header-brand">
+                <img src="https://images.pling.com/img/00/00/37/10/41/1288292/309554906fbff6e7f5e2cb96338812db66cd.png" alt="" className="brand-logo" />
+                <div className="brand-name">EvoEdu</div>
+              </div>
+              <Menu mode="horizontal" className="header-nav" defaultSelectedKeys={['1']}>
+                <Menu.Item key="1"><Link to="/">Trang chủ</Link></Menu.Item>
+                <Menu.Item key="2"><Link to="/course">Khóa học</Link></Menu.Item>
+              </Menu>
+              <Button type="primary" size="large" className="login-btn"><Link to="/login">Đăng nhập</Link></Button>
+          </Header>
         <Content>
+          <h1 className='title-course'>Danh sách khóa học</h1>
           <div className="contents3">
               <Card
                 className="card5"
@@ -92,33 +94,31 @@ const course = () => {
               </Card>
             </div>
         </Content>
-        <Footer className="detail-footer">
-          <div className="detail-email">
-            <p>Email liên hệ: coderclass@gmail.com</p>
-            <h5>Địa chỉ:</h5>
-            <p>Cơ sở 1: Tầng 6, Tòa nhà Chigamex 22C Thành Công, Phường Thành Công, Quận Ba Đình, Hà Nội</p>
-            <p>Cơ sở 2: Tầng 2, 29T1 Hoàng Đạo Thuý, Phường Trung Hòa, Quận Cầu Giấy, Hà Nội</p>
-            <p>Cơ sở 3: Tầng 6, Tòa AZ Lâm Viên, 107 Nguyễn Phong Sắc, Phường Dịch Vọng Hậu, Quận Cầu Giấy, Hà Nội</p>
-          </div>
-          <div className="detail-icons-footer">
-            <p>Contact</p>
-            <a href="https://www.facebook.com/mindx.edu.vn/" target="_blank" rel="noopener noreferrer">
-              <FacebookOutlined/>
-            </a>
-            <a href="https://twitter.com/mindx_official" target="_blank" rel="noopener noreferrer">
-              <TwitterOutlined/>
-            </a>
-            <a href="https://www.youtube.com/channel/UCvZ8BKeWtJb-r1FmnYtRGrw" target="_blank" rel="noopener noreferrer">
-              <YoutubeOutlined/>
-            </a>
-          </div>
-          <div className="detail-hotline">
-            <p id="leader-text">Hotline</p>
-            <p>Khóa học cho sinh viên, người đi làm 024381277</p>
-            <p>Khóa học cho trẻ 5-17 tuổi - Hà Nội 024723178</p>
-            <p>Khóa học cho trẻ 5-17 tuổi - HCM 0287321337</p>
-            <p>Khóa học cho trẻ 5-17 tuổi - Tỉnh 0247356862</p>
-          </div>
+        <Footer className="footer2">
+            <div className="left-footer">
+              <p>Email liên hệ: evoedu@gmail.com</p>
+              <p>Cơ sở 1: Bắc Ninh - 09 Lê Thái Tổ</p>
+              <p>Cơ sở 2: HN - 22C Thành Công</p>
+              <p>Cơ sở 3: HN - 71 Nguyễn Chí Thanh</p>
+            </div>
+            <div className="mid-footer">
+              <h6>Contact</h6>
+              <a href="https://www.facebook.com/mindx.edu.vn/" target="_blank" rel="noopener noreferrer">
+                <FacebookOutlined/>
+              </a>
+              <a href="https://twitter.com/mindx_official" target="_blank" rel="noopener noreferrer">
+                <TwitterOutlined/>
+              </a>
+              <a href="https://www.youtube.com/channel/UCvZ8BKeWtJb-r1FmnYtRGrw" target="_blank" rel="noopener noreferrer">
+                <YoutubeOutlined/>
+              </a>
+            </div>
+            <div className="right-footer">
+              <h6>Hotline</h6>
+              <p>Khóa trẻ em từ 9 - 15 tuổi: 0247318266</p>
+              <p>Khóa thanh thiếu niên từ 15 - 18 tuổi: 0244306256</p>
+              <p>Khóa cho sinh viên, người đi làm: 02471105326</p>
+            </div>
           </Footer>
     </Layout>
   )

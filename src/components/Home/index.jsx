@@ -1,160 +1,183 @@
 import React from "react";
 import './index.css';
-import { Layout, Menu, Button, Avatar } from 'antd';
-import { UserOutlined, FacebookOutlined, TwitterOutlined, YoutubeOutlined  } from '@ant-design/icons';
-
-import { Card } from 'antd';
+import { Layout, Menu, Button, Card, Image, Typography, Popover } from 'antd';
+import { FacebookOutlined, TwitterOutlined, YoutubeOutlined, SmileOutlined, UserOutlined, UserSwitchOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 
 const { Header, Content, Footer } = Layout;
-const { Meta } = Card;
+const { Title, Paragraph } = Typography;
 
 export default function Index(props) {
+    const content1 = (
+      <Paragraph className="paragraph-large">
+        <h2 id="title-det">Khóa học Python</h2>
+        <ul>
+          <li>5502 lượt đăng ký</li>
+          <li>6.000.000 VNĐ</li>
+          <li>Học ngôn ngữ lập trình Python cơ bản</li>
+        </ul>
+      </Paragraph>
+    );
+
+    const content2 = (
+      <Paragraph className="paragraph-large">
+        <h2 id="title-det">Khóa học Vue</h2>
+        <ul>
+          <li>312 lượt đăng ký</li>
+          <li>2.000.000 VNĐ</li>
+          <li>Học ngôn ngữ lập trình Vue cơ bản</li>
+        </ul>
+      </Paragraph>
+    );
+
+    const content3 = (
+      <Paragraph className="paragraph-large">
+        <h2 id="title-det">Khóa học C</h2>
+        <ul>
+          <li>5502 lượt đăng ký</li>
+          <li>6.300.000 VNĐ</li>
+          <li>Học ngôn ngữ lập trình C cơ bản</li>
+        </ul>
+      </Paragraph>
+    );
+
+    const content4 = (
+      <Paragraph className="paragraph-large">
+        <h2 id="title-det">Khóa học C#</h2>
+        <ul>
+          <li>1502 lượt đăng ký</li>
+          <li>1.300.000 VNĐ</li>
+          <li>Học ngôn ngữ lập trình C# cơ bản</li>
+        </ul>
+      </Paragraph>
+    );
+
+    const content5 = (
+      <Paragraph className="paragraph-large">
+        <h2 id="title-det">Khóa học C++</h2>
+        <ul>
+          <li>1223 lượt đăng ký</li>
+          <li>4.300.000 VNĐ</li>
+          <li>Học ngôn ngữ lập trình C++ cơ bản</li>
+        </ul>
+      </Paragraph>
+    );
+
+    const content6 = (
+      <Paragraph className="paragraph-large">
+        <h2 id="title-det">Khóa học Kotlin</h2>
+        <ul>
+          <li>111 lượt đăng ký</li>
+          <li>5.100.000 VNĐ</li>
+          <li>Học ngôn ngữ lập trình Kotlin cơ bản</li>
+        </ul>
+      </Paragraph>
+    );
+
     return (
         <Layout>
-          <Header className="heads">
-            <div className="left">
-              <Avatar icon={<UserOutlined />} />
-              <Menu mode="horizontal" defaultSelectedKeys={['1']}>
-                <Menu.Item key="1">Trang chủ</Menu.Item>
-                <Menu.Item key="2">Khóa học</Menu.Item>
-                <Menu.Item key="3">Giới thiệu</Menu.Item>
+          <Header className="header">
+              <div className="header-brand">
+                <img src="https://images.pling.com/img/00/00/37/10/41/1288292/309554906fbff6e7f5e2cb96338812db66cd.png" alt="" className="brand-logo" />
+                <div className="brand-name">EvoEdu</div>
+              </div>
+              <Menu mode="horizontal" className="header-nav" defaultSelectedKeys={['1']}>
+                <Menu.Item key="1"><Link to="/">Trang chủ</Link></Menu.Item>
+                <Menu.Item key="2"><Link to="/course">Khóa học</Link></Menu.Item>
               </Menu>
-            </div>
-            <div className="right">
-              <Button type="primary"><Link to="/login">Đăng nhập</Link></Button>
-            </div>
+              <Button type="primary" size="large" className="login-btn"><Link to="/login">Đăng nhập</Link></Button>
           </Header>
           <Content className="body">
-            <div className="image">
-              <img alt="brown" className="brown" src="https://i.pinimg.com/736x/e7/ac/00/e7ac001415ff285c83003022d9085b44.jpg"/>
-              <h2>Tập tành làm coder với những kĩ năng:</h2>
-              <ul>
-                <li>Lập trình</li>
-                <li>Thiết kế UI/UX</li>
-                <li>Quản lý dự án</li>
-                <li>Tư duy</li>
-              </ul>
-              <img alt="coding" className="cod" src="https://images.hdqwalls.com/wallpapers/i-love-coding-xl.jpg"/>           
+            <div className="banner">
+              <h1>Cải thiện kỹ năng lập trình với EvoEdu - Nơi học tập và phát triển kỹ năng lập trình chuyên nghiệp</h1>
             </div>
-            <div className="contents1">
-            <h3>Cùng học và làm việc trong một môi trường vui vẻ, hòa đồng và đầy nhiệt huyết</h3>
-            <p className="top">Các khóa học đang hot</p>
-              <Card
-                className="card1"
-                hoverable
-                cover={
-                  <img alt="example" src="https://play-lh.googleusercontent.com/RslBy1o2NEBYUdRjQtUqLbN-ZM2hpks1mHPMiHMrpAuLqxeBPcFSAjo65nQHbTA53YYn" />
-                }
-              >
-                  <Meta title="HTML" description="6.900.000 VNĐ - 1000 lượt đăng ký" />
-              </Card>
-              <Card
-                className="card1"
-                hoverable
-                cover={<img alt="example" src="https://play-lh.googleusercontent.com/TxjQBGYHvMJsBX5dCvxQ4R-_4N-XrVhW6-p7D7TXanXKZMD8L-UkeMBWO1dtubGVNqU" />}
-              >
-                <Meta title="CSS" description="3.200.000 VNĐ - 485 lượt đăng ký" />
-              </Card>
-              <Card
-                className="card1"
-                hoverable
-                cover={<img alt="example" src="https://play-lh.googleusercontent.com/TzsxB3RFCBKOObTn0sw9jMHx3jwwULx9_1ig1kVDdOCUcuYFJFY3Eqzm8y7IjdhXr9I" />}
-              >
-                <Meta title="JavaScript" description="4.500.000 VNĐ- 3502 lượt đăng ký" />
-              </Card>
+            <div className="des">
+              <img alt="sthing" src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y29kaW5nfGVufDB8fDB8fA%3D%3D&w=1000&q=80"/>
+              <p>EvoEdu là trang web đào tạo lập trình chuyên nghiệp với chương trình đào tạo đa dạng và phong phú. Các giảng viên của chúng tôi là các chuyên gia lập trình có kinh nghiệm lâu năm trong ngành và luôn cập nhật những kiến thức mới nhất. Trang web của chúng tôi dành cho tất cả các đối tượng học viên, từ người mới bắt đầu đến những người muốn nâng cao kỹ năng của mình.</p>
             </div>
-            <div className="contents2">
-              <Card
-                className="card1"
-                hoverable
-                cover={<img alt="example" src="https://e1.pxfuel.com/desktop-wallpaper/514/124/desktop-wallpaper-2048x2048-python-logo-ipad-air-backgrounds-and-python-code.jpg" />}
-              >
-                <Meta title="Python" description="6.000.000 VNĐ - 5502 lượt đăng ký" />
-              </Card>
-              <Card
-                className="card1"
-                hoverable
-                cover={<img alt="example" src="https://stitcher.imgix.net/d0306685ac66e9612a315182b01f834a0c605361e271267595a34eeda86cb85c?w=850&h=850&sat=-100" />}
-              >
-                <Meta title="Vue" description="2.000.000 VNĐ - 312 lượt đăng ký" />
-              </Card>
-              <Card
-                className="card1"
-                hoverable
-                cover={<img alt="example" src="https://e1.pxfuel.com/desktop-wallpaper/796/952/desktop-wallpaper-disc-c-programming-language.jpg" />}
-              >
-                <Meta title="C" description="6.300.000 VNĐ - 2012 lượt đăng ký" />
-              </Card>
+            <h5 id="content-path">EvoEdu cùng các lộ trình dành cho</h5>
+              <div className="path">
+                <Card className="path-card1">
+                  <SmileOutlined style={{ fontSize: "32px" }} />
+                  <Title level={3}>Trẻ em</Title>
+                  <Paragraph style={{fontSize: "28px"}}>Độ tuổi từ 9 đến 15 tuổi</Paragraph>
+                </Card>
+                <Card className="path-card2">
+                  <UserOutlined  style={{ fontSize: "32px" }} />
+                  <Title level={3}>Thanh thiếu niên</Title>
+                  <Paragraph style={{fontSize: "28px"}}>Độ tuổi từ 15 đến 18 tuổi</Paragraph>
+                </Card>
+                <Card className="path-card3">
+                  <UserSwitchOutlined style={{ fontSize: "32px" }} />
+                  <Title level={3}>Người lớn</Title>
+                  <Paragraph style={{fontSize: "28px"}}>Độ tuổi từ sinh viên đến đi làm</Paragraph>
+                </Card>
+              </div>
+            <div className="spec">
+              <div className="course1">
+                <Card hoverable>
+                  <Popover content={content1} placement="center">
+                    <Image src="https://e1.pxfuel.com/desktop-wallpaper/514/124/desktop-wallpaper-2048x2048-python-logo-ipad-air-backgrounds-and-python-code.jpg" />
+                  </Popover>
+                </Card>
+                <Card hoverable>
+                  <Popover content={content2} placement="center">
+                    <Image src="https://stitcher.imgix.net/d0306685ac66e9612a315182b01f834a0c605361e271267595a34eeda86cb85c?w=850&h=850&sat=-100" />
+                  </Popover>
+                </Card>
+                <Card hoverable>
+                  <Popover content={content3} placement="center">
+                    <Image src="https://e1.pxfuel.com/desktop-wallpaper/796/952/desktop-wallpaper-disc-c-programming-language.jpg" />
+                  </Popover>
+                </Card>
+              </div>
+              <div className="course2">
+                <Card hoverable>
+                  <Popover content={content4} placement="center">
+                    <Image src="https://stitcher.imgix.net/66a8a497f71e8e7fb5c4b715346459ce87fb736e5e8dc04351b9538bc0613622?w=850&h=850&sat=-100" />
+                  </Popover>
+                </Card>
+                <Card hoverable>
+                  <Popover content={content5} placement="center">
+                    <Image src="https://e1.pxfuel.com/desktop-wallpaper/439/889/desktop-wallpaper-c-c-plus-plus.jpg" />
+                  </Popover>
+                </Card>
+                <Card hoverable>
+                  <Popover content={content6} placement="center">
+                    <Image src="https://e0.pxfuel.com/wallpapers/907/48/desktop-wallpaper-sl-5-4-and-black-friday-smartlauncher-kotlin.jpg" />
+                  </Popover>
+                </Card>
+              </div>
+              <Button className="landing-btn"><Link to="/course">Khám phá các khóa học ở đây</Link></Button>
             </div>
-            <div className="stuff-container">
-              <h3>Những lợi ích mà bạn có thể nhận được</h3>
-              <Card
-                className="card3"
-                hoverable
-                cover={<img alt="example" src="https://resources.mindx.vn/uploads/images/anh%208-320.jpeg" />}
-              >
-                <ul>
-                  <li>Trang bị những kiến thức, tư duy, kỹ năng số quan trọng để bắt kịp với cuộc Cách mạng Công nghệ 4.0 đang diễn ra mạnh mẽ trên khắp hành tinh</li>
-                  <li>Nuôi dưỡng ước mơ và hứng thú với lĩnh vực công nghệ, tạo điều kiện để con phát triển vượt trội, trở thành nhà lãnh đạo công nghệ tương lai</li>
-                  <li>Hỗ trợ chương trình học trước, trả tiền sau khi có việc làm, đem đến cơ hội tiếp cận công nghệ đồng đều cho tất cả học sinh</li>
-                </ul>
-              </Card>
-              <Card
-                className="card3"
-                hoverable
-                cover={<img alt="example" src="https://resources.mindx.vn/uploads/images/anh%2010-320.jpeg" />}
-              >
-                <ul>
-                  <li>Sáng tạo ra các sản phẩm game, web, ứng dụng di động thay vì chỉ tiêu thụ công nghệ</li>
-                  <li>Học thật vui và hào hứng qua các cuộc thi, trại hè, chương trình Khởi nghiệp, các buổi Hackathon, sự kiện với sự tham gia của các doanh nghiệp, nhà tuyển dụng, chuyên gia công nghệ</li>
-                  <li>Đào tạo toàn diện các kỹ năng chuyên nghiệp như làm việc nhóm, tư duy sản phẩm, quy trình làm việc, v.v...</li>
-                </ul>
-              </Card>
-              <Card
-                className="card3"
-                hoverable
-                cover={<img alt="example" src="https://resources.mindx.vn/uploads/images/48048090432_25fb00bbc7_c%20-320.jpg" />}
-              >
-                <ul>
-                  <li>Bảo trợ việc làm tại hơn 200 doanh nghiệp đối tác của chúng tôi tại Việt Nam, Singapore, Philippines, v.v. với mức lương lên đến $6.000/tháng</li>
-                  <li>Thực tập ở vị trí quản lý dự án và lập trình viên tại các công ty công nghệ từ khi còn ngồi trên ghế nhà trường</li>
-                  <li>Tự tin chuẩn bị hồ sơ du học/học bổng với các dự án thực chiến xuyên suốt quá trình học, các buổi hội thảo sửa CV và định hướng nghề nghiệp 1-1 với chuyên gia</li>
-                </ul>
-              </Card>
-            </div>
-            <Link to="/course"><Button className="btn1">Danh sách khóa học</Button></Link>
           </Content>
           <Footer className="footer1">
-          <div className="email">
-            <p>Email liên hệ: coderclass@gmail.com</p>
-            <h5>Địa chỉ:</h5>
-            <p>Cơ sở 1: Tầng 6, Tòa nhà Chigamex 22C Thành Công, Phường Thành Công, Quận Ba Đình, Hà Nội</p>
-            <p>Cơ sở 2: Tầng 2, 29T1 Hoàng Đạo Thuý, Phường Trung Hòa, Quận Cầu Giấy, Hà Nội</p>
-            <p>Cơ sở 3: Tầng 6, Tòa AZ Lâm Viên, 107 Nguyễn Phong Sắc, Phường Dịch Vọng Hậu, Quận Cầu Giấy, Hà Nội</p>
-          </div>
-          <div className="social-icons">
-            <p>Contact</p>
-            <a href="https://www.facebook.com/mindx.edu.vn/" target="_blank" rel="noopener noreferrer">
-              <FacebookOutlined/>
-            </a>
-            <a href="https://twitter.com/mindx_official" target="_blank" rel="noopener noreferrer">
-              <TwitterOutlined/>
-            </a>
-            <a href="https://www.youtube.com/channel/UCvZ8BKeWtJb-r1FmnYtRGrw" target="_blank" rel="noopener noreferrer">
-              <YoutubeOutlined/>
-            </a>
-          </div>
-          <div className="hotline">
-            <p id="leader-text">Hotline</p>
-            <p>Khóa học cho sinh viên, người đi làm 024381277</p>
-            <p>Khóa học cho trẻ 5-17 tuổi - Hà Nội 024723178</p>
-            <p>Khóa học cho trẻ 5-17 tuổi - HCM 0287321337</p>
-            <p>Khóa học cho trẻ 5-17 tuổi - Tỉnh 0247356862</p>
-          </div>
+            <div className="left-footer">
+              <p>Email liên hệ: evoedu@gmail.com</p>
+              <p>Cơ sở 1: Bắc Ninh - 09 Lê Thái Tổ</p>
+              <p>Cơ sở 2: HN - 22C Thành Công</p>
+              <p>Cơ sở 3: HN - 71 Nguyễn Chí Thanh</p>
+            </div>
+            <div className="mid-footer">
+              <h6>Contact</h6>
+              <a href="https://www.facebook.com/mindx.edu.vn/" target="_blank" rel="noopener noreferrer">
+                <FacebookOutlined className="icon-footer"/>
+              </a>
+              <a href="https://twitter.com/mindx_official" target="_blank" rel="noopener noreferrer">
+                <TwitterOutlined className="icon-footer"/>
+              </a>
+              <a href="https://www.youtube.com/channel/UCvZ8BKeWtJb-r1FmnYtRGrw" target="_blank" rel="noopener noreferrer">
+                <YoutubeOutlined className="icon-footer"/>
+              </a>
+            </div>
+            <div className="right-footer">
+              <h6>Hotline</h6>
+              <p>Khóa trẻ em từ 9 - 15 tuổi: 0247318266</p>
+              <p>Khóa thanh thiếu niên từ 15 - 18 tuổi: 0244306256</p>
+              <p>Khóa cho sinh viên, người đi làm: 02471105326</p>
+            </div>
           </Footer>
         </Layout>
       );
     };
-
 
