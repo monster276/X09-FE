@@ -13,7 +13,7 @@ img {
   padding-left: 5%;
   position: absolute;
   color: white;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 h4 {
@@ -46,8 +46,8 @@ p {
 }
 
 .header-nav {
-  width: 100%;
   margin-left: 2%;
+  width: 100%;
 }
 
 .header-brand {
@@ -100,16 +100,23 @@ p {
 
 .banner {
   width: 100%;
-  height: 400px;
-  background: linear-gradient(to right, #fc6b03, #ffffff);
+  height: 700px;
+  background: linear-gradient(to right, #24252e, #121218);
 }
 
 .banner h1 {
   text-align: center;
-  font-size: 70px;
+  font-size: 60px;
   padding-top: 5%;
   font-weight: 700;
+  color: white;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.banner img {
+  width: 30%;
+  margin-top: 1%;
+  margin-left: 35%;
 }
 
 .des {
@@ -162,7 +169,7 @@ p {
 .footer1 {
   width: 100%;
   margin: 0;
-  margin-top: 150%;
+  margin-top: 165%;
   background-color: #4a4a4a;
   color: white;
   font-size: 50px;
@@ -235,12 +242,11 @@ p {
 
 .mid-footer {
   width: 33.3%;
-  justify-content: space-between;
 }
 
 .mid-footer a {
-  padding-left: 15%;
-  font-size: 80px;
+  margin-left: 20%;
+  font-size: 40px;
 }
 
 .right-footer {
@@ -249,4 +255,8 @@ p {
 
 .footer1 h6 {
   text-align: center;
+}
+
+.paragraph-large li {
+  list-style: none;
 }
