@@ -1,30 +1,34 @@
-body{
-    margin: 0;
-    padding: 0;
+body {
+  margin: 0;
+  padding: 0;
 }
 
-img{
-    width: 100%;
+img {
+  width: 100%;
 }
 
-.body h2{
-    font-size: 40px;
-    padding-top: 5%;
-    padding-left: 5%;
-    position: absolute;    
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
+.body h2 {
+  font-size: 40px;
+  padding-top: 5%;
+  padding-left: 5%;
+  position: absolute;
+  color: white;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
-h4{
-    font-size: 65px;
+h4 {
+  font-size: 65px;
 }
 
-p{
-    color: white;
+p {
+  color: white;
 }
 
-#stuff-content{
+.paragraph-large li {
+  list-style: none;
+}
+
+#stuff-content {
   width: 100%;
   font-size: 40px;
   text-align: center;
@@ -43,6 +47,7 @@ p{
 
 .header-nav {
   width: 100%;
+  margin-left: 2%;
 }
 
 .header-brand {
@@ -68,39 +73,46 @@ p{
   background-color: #3498db;
 }
 
-.body{
-    width: 100%;
-    height: 200px;
+.body {
+  width: 100%;
+  height: 200px;
 }
 
-.paragraph-large{
+.paragraph-large {
   width: 450px;
   height: 250px;
   text-align: center;
   font-size: 25px;
 }
 
-.brown{
-    width: 100%;
-    height: 700px;
-    position: relative;
+.paragraph-large {
+  width: 450px;
+  height: 250px;
+  text-align: center;
+  font-size: 25px;
 }
 
-.banner{
+.brown {
+  width: 100%;
+  height: 700px;
+  position: relative;
+}
+
+.banner {
   width: 100%;
   height: 400px;
   background: linear-gradient(to right, #fc6b03, #ffffff);
 }
 
-.banner h1{
+.banner h1 {
   text-align: center;
   font-size: 70px;
   padding-top: 5%;
   font-weight: 700;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
-.des{
+.des {
   width: 80%;
   margin-top: 5%;
   margin-left: 10%;
@@ -109,11 +121,11 @@ p{
   background-color: gray;
 }
 
-.des img{
+.des img {
   width: 50%;
 }
 
-.des p{
+.des p {
   width: 40%;
   padding-left: 6%;
   padding-top: 5%;
@@ -121,7 +133,7 @@ p{
   font-size: 25px;
 }
 
-.spec{
+.spec {
   margin-top: 5%;
 }
 
@@ -142,33 +154,32 @@ p{
   margin-left: 2.5%;
 }
 
-.title-course h2{
+.title-course h2 {
   text-align: center;
   color: black;
 }
 
-.footer1{
-    width: 100%;
-    margin: 0;
-    margin-top: 150%;
-    background-color: #4A4A4A;
-    color: white;
-    font-size: 50px;
-    display: flex;
-    font-size: 25px;
-    justify-content: space-between;
-    flex-wrap: wrap;
+.footer1 {
+  width: 100%;
+  margin: 0;
+  margin-top: 150%;
+  background-color: #4a4a4a;
+  color: white;
+  font-size: 50px;
+  display: flex;
+  font-size: 25px;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
-
-.text{
-    margin-left: 30%;
-    margin-top: 5%;
-    font-family: sans-serif;
-    font-size: 70px;
+.text {
+  margin-left: 30%;
+  margin-top: 5%;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 70px;
 }
 
-.landing-btn{
+.landing-btn {
   width: 20%;
   height: 50px;
   margin-top: 5%;
@@ -177,7 +188,7 @@ p{
   border-radius: 10px;
 }
 
-.path-card1{
+.path-card1 {
   width: 20%;
   height: 200px;
   margin-top: 2%;
@@ -185,7 +196,7 @@ p{
   background: linear-gradient(to right, #f6e58d, #ffbe76);
 }
 
-.path-card2{
+.path-card2 {
   width: 20%;
   height: 200px;
   margin-top: 2%;
@@ -193,7 +204,7 @@ p{
   background: linear-gradient(to right, #f6e58d, #ffbe76);
 }
 
-.path-card3{
+.path-card3 {
   width: 20%;
   height: 200px;
   margin-top: 2%;
@@ -201,45 +212,41 @@ p{
   background: linear-gradient(to right, #f6e58d, #ffbe76);
 }
 
-.path{
+.path {
   width: 100%;
   height: 300px;
   display: flex;
   background: linear-gradient(to right, #ff6b6b, #c0c0c0);
 }
 
-#content-path{
+#content-path {
   text-align: center;
   font-size: 60px;
   margin-top: 5%;
 }
 
-.left-footer{
+.left-footer {
   width: 33.3%;
 }
 
-.left-footer p{
+.left-footer p {
   font-size: 22px;
 }
 
-.mid-footer{
+.mid-footer {
+  width: 33.3%;
+  justify-content: space-between;
+}
+
+.mid-footer a {
+  padding-left: 15%;
+  font-size: 80px;
+}
+
+.right-footer {
   width: 33.3%;
 }
 
-.mid-footer a{
-  margin-left: 20%;
-  font-size: 40px;
-}
-
-.right-footer{
-  width: 33.3%;
-}
-
-.footer1 h6{
+.footer1 h6 {
   text-align: center;
 }
-
-
-
-
-

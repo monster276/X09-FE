@@ -180,8 +180,8 @@ const Detail = () => {
             </div>
             <div className="right-footer">
               <h6>Hotline</h6>
-              <p>Khóa trẻ em: 0247318266</p>
-              <p>Khóa thanh thiếu niên: 0244306256</p>
+              <p>Khóa trẻ em từ 9 - 15 tuổi: 0247318266</p>
+              <p>Khóa thanh thiếu niên từ 15 - 18 tuổi: 0244306256</p>
               <p>Khóa cho sinh viên, người đi làm: 02471105326</p>
             </div>
           </Footer>
