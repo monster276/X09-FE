@@ -23,6 +23,11 @@ const Courses = () => {
     // eslint-disable-next-line
   }, []);
 
+  const formatter = new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  });
+
   return (
     <Layout>
       <Header className="header">
@@ -66,7 +71,7 @@ const Courses = () => {
             >
               <Meta
                 title={course.name}
-                description="6.000.000 VNĐ - 5502 lượt đăng ký"
+                description={formatter.format(course.price)}
               />
             </Card>
           ))}
