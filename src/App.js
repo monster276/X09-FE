@@ -10,13 +10,11 @@ import Teacher from "./components/Teacher/index";
 import Login from "./Pages/Login";
 import Detail from "./components/Home/Courses/Detail";
 import Course from "./components/Home/Courses/course";
-import Register from "./components/Home/Auth/Register";
 const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/course" element={<Course />} />
-      <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route path="admin/*" element={<Admin />} />
       <Route path="teacher/*" element={<Teacher />} />
