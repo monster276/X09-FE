@@ -1,22 +1,24 @@
 import React, { useState } from "react";
 import './Detail.css';
-import { Layout, Menu, Button, Card, Modal, Select, Input } from 'antd';
+import { Layout, Menu, Button, Card, Select, Input  } from 'antd';
+import Modal from 'react-modal';
 import { Link } from 'react-router-dom';
-import { TeamOutlined, ClockCircleOutlined, CalendarOutlined, CheckOutlined } from '@ant-design/icons';
+import { TeamOutlined, ClockCircleOutlined, CalendarOutlined, CheckOutlined,CloseOutlined } from '@ant-design/icons';
 import { FacebookOutlined, YoutubeOutlined, TwitterOutlined } from '@ant-design/icons';
 
 const { Header, Content, Footer } = Layout;
+const { Option } = Select;
 
 const Detail = () => {
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const onChange = (value) => {
-    console.log(`selected ${value}`);
+  const handleOpenModal = () => {
+    setIsOpen(true);
   };
-  const onSearch = (value) => {
-    console.log('search:', value);
+
+  const handleCloseModal = () => {
+    setIsOpen(false);
   };
-  
 
   return (
     <Layout>
@@ -106,54 +108,30 @@ const Detail = () => {
                     <p>Học viên được mentor, giảng viên giàu kinh nghiệm thực chiến tại các tập đoàn lớn hướng dẫn, đồng hành. Thắc mắc ở đâu, hỏi ngay ở đó, sẽ giúp bạn tiến bộ nhanh hơn gấp nhiều lần.</p>
                   </Card>
                 </div>
-                <Button className="detail-btn" onClick={() => setOpen(true)}>
+                <Button className="detail-btn" onClick={handleOpenModal}>
                   Đăng Ký Khóa Học
                 </Button>
-                <Modal
-                  centered
-                  open={open}
-                  onOk={() => setOpen(false)}
-                  onCancel={() => setOpen(false)}
-                  className="modal-content"
-                  width={1000}   
-                  okText="Đăng Ký"  
-                  cancelButtonProps={{ style: { fontSize: '20px', padding: '10px 20px', height: '50px', background: 'white', color: "black"  } }}
-                  okButtonProps={{ style: { fontSize: '20px', padding: '10px 20px', height: '50px', background: 'white', color: "black"} }}
-                >
-                  <h1>Đăng Ký</h1>
-                  <p>Khóa học: python</p>
-                  <div className="modal-information">
-                    <p>Cơ sở:</p>
-                    <Select
-                      showSearch
-                      placeholder="Chọn cơ sở"
-                      optionFilterProp="children"
-                      onChange={onChange}
-                      onSearch={onSearch}
-                      filterOption={(input, option) =>
-                        (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
-                      }
-                      options={[
-                        {
-                          value: 'Cơ sở 1',
-                          label: 'Cơ sở 1',
-                        },
-                        {
-                          value: 'Cơ sở 2',
-                          label: 'Cơ sở 2',
-                        },
-                        {
-                          value: 'Cơ sở 3',
-                          label: 'Cơ sở 3',
-                        },
-                      ]}
-                    />
-                    <p>Họ và Tên:</p>
-                    <Input placeholder="Nhập vào đây" className="custom-input" />
-                    <p>Email:</p>
-                    <Input placeholder="Nhập vào đây" className="custom-input" />
-                    <p>Số điện thoại:</p>
-                    <Input placeholder="Nhập vào đây" className="custom-input" />
+                <Modal isOpen={isOpen} onRequestClose={handleCloseModal}>
+                  <CloseOutlined className="regis-btn" onClick={handleCloseModal}/>
+                  <div className="regis-container">
+                    <div className="regis-pic">
+                      <img alt="idk" src="https://media.istockphoto.com/id/1146311489/vi/anh/n%C3%BAt-register-tr%C3%AAn-b%C3%A0n-ph%C3%ADm-m%C3%A1y-t%C3%ADnh.jpg?s=170667a&w=0&k=20&c=b2JXZkTnmi1IE5baGUsYA1qBXJgXwOJy2cGVEtXnt94="/>
+                    </div>
+                    <div className="register-title">
+                      <h2>Đăng ký khóa học</h2>
+                      <Select className="select-regis"defaultValue="Chọn cơ sở" style={{ width: 120 }}>
+                        <Option value="Cơ sở 1">Cơ sở 1</Option>
+                        <Option value="Cơ sở 2">Cơ sở 2</Option>
+                        <Option value="Cơ sở 3">Cơ sở 3</Option>
+                      </Select>
+                      <p>Họ và tên:</p>
+                      <Input placeholder="Nhập vào đây" className="regis-input"/>
+                      <p>Email:</p>
+                      <Input placeholder="Nhập vào đây" className="regis-input"/>
+                      <p>Số điện thoại:</p>
+                      <Input placeholder="Nhập vào đây" className="regis-input"/>
+                      <Button className="regis-submit">Đăng ký</Button>
+                    </div>
                   </div>
                 </Modal>
             </div>

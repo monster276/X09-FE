@@ -231,35 +231,58 @@ border-radius: 20px;
 border: 1px black solid;
 }
 
-.modal-content p{
-margin-left: 38%;
-font-size: 30px ;
-font-weight: 400;
+.regis-container{
+  width: 100%;
+  display: flex;
 }
 
-.modal-information{
-color: black;
-margin-left: 10%;
-font-size: 16px;
-font-weight: 300;
-margin-bottom: 10%;
+.regis-pic img{
+  width: 100%;
+  height: 800px;
 }
 
-.modal-information select{
-color: black;
+.register-title{
+  width: 50%;
 }
 
-.modal-information p{
-font-size: 20px;
-margin-left: 0;
+.register-title h2{
+  text-align: center;
+  font-size: 70px;  
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-.custom-modal{
-width: 90%;
+.register-title p{
+  color: black;
+  font-size: 30px;
+  margin-top: 3%;
+  margin-left: 15%;
 }
 
-.modal-content p{
-color: black;
+.select-regis{
+  margin-top: 10%;
+  margin-left: 15%;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.regis-input{
+  width: 70%;
+  height: 45px;
+  margin-top: 1%;
+  margin-left: 15%;
+  border-radius: 10px;
+}
+
+.regis-btn{
+  font-size: 30px;
+  margin-left: 99%;
+}
+
+.regis-submit{
+  width: 20%;
+  height: 40px;
+  font-size: 20px;
+  margin-top: 10%;
+  margin-left: 40%;
 }
 
 .custom-input {
