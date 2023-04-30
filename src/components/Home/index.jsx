@@ -90,6 +90,7 @@ export default function Index(props) {
           <Content className="body">
             <div className="banner">
               <h1>Cải thiện kỹ năng lập trình với EvoEdu - Nơi học tập và phát triển kỹ năng lập trình chuyên nghiệp</h1>
+              <img alt="idk" src="https://img4.goodfon.com/wallpaper/nbig/3/55/code-coding-laptop-programming.jpg"/>
             </div>
             <div className="des">
               <img alt="sthing" src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y29kaW5nfGVufDB8fDB8fA%3D%3D&w=1000&q=80"/>
@@ -161,13 +162,13 @@ export default function Index(props) {
             <div className="mid-footer">
               <h6>Contact</h6>
               <a href="https://www.facebook.com/mindx.edu.vn/" target="_blank" rel="noopener noreferrer">
-                <FacebookOutlined className="icon-footer"/>
+                <FacebookOutlined/>
               </a>
               <a href="https://twitter.com/mindx_official" target="_blank" rel="noopener noreferrer">
-                <TwitterOutlined className="icon-footer"/>
+                <TwitterOutlined/>
               </a>
               <a href="https://www.youtube.com/channel/UCvZ8BKeWtJb-r1FmnYtRGrw" target="_blank" rel="noopener noreferrer">
-                <YoutubeOutlined className="icon-footer"/>
+                <YoutubeOutlined/>
               </a>
             </div>
             <div className="right-footer">

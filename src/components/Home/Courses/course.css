@@ -9,7 +9,6 @@
 .container h4{
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-
 .ant-btn-primary {
   margin-right: 24px;
 }
@@ -54,11 +53,18 @@ margin-top: -10%;
 }
 
 .card5{
-width: 30%;
-margin-top: 12%;
-margin-left: 2.5%;
+width: 20%;
+margin-top: 14%;
+margin-left: 4%;
 font-size: large;
 }
+
+.card6{
+  width: 20%;
+  margin-top: 14%;
+  margin-left: 40%;
+  font-size: large;
+  }
 
 .footer2 h6{
 text-align: center;

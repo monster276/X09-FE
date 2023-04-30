@@ -46,8 +46,6 @@ const course = () => {
               >
                 <Meta title="C" description="6.300.000 VNĐ - 2012 lượt đăng ký" />
               </Card>
-            </div>
-            <div className="contents3">
               <Card
                 className="card5"
                 hoverable
@@ -55,6 +53,8 @@ const course = () => {
               >
                 <Meta title="C#" description="1.300.000 VNĐ  - 1502 lượt đăng ký" />
               </Card>
+            </div>
+            <div className="contents3">
               <Card
                 className="card5"
                 hoverable
@@ -69,8 +69,6 @@ const course = () => {
               >
                 <Meta title="Kotlin " description="5.100.000 VNĐ - 111 lượt đăng ký" />
               </Card>
-            </div>
-            <div className="contents3">
               <Card
                 className="card5"
                 hoverable
@@ -85,8 +83,10 @@ const course = () => {
               >
                 <Meta title="TypeScript" description="3.600.000 VNĐ - 312 lượt đăng ký" />
               </Card>
+            </div>
+            <div className="contents3">
               <Card
-                className="card5"
+                className="card6"
                 hoverable
                 cover={<img alt="example" src="https://e0.pxfuel.com/wallpapers/160/491/desktop-wallpaper-ruby-gem-png-ruby-gemstone.jpg" />}
               >

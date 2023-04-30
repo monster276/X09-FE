@@ -9,6 +9,11 @@ font-size: 60px;
 text-align: center;
 }
 
+.modal-content h1{
+  font-size: 60px;
+  text-align: center;
+}
+
 .heads{
   background-color: white;
 }
@@ -108,6 +113,28 @@ width: 50%;
 margin-left: 5%;
 margin-top: 3%;
 color: white;
+}
+
+.des-course{
+  width: 60%;
+  height: 300px;
+  display: flex;
+  margin-top: 2%;
+  margin-left: 20%;
+  background-color: rgb(87, 87, 87);
+
+}
+
+.des-course img{
+  width: 40%;
+  margin: 0;
+}
+
+.des-course p{
+  width: 50%;
+  margin-left: 5%;
+  margin-top: 3%;
+  color: white;
 }
 
 .detail-card1{
