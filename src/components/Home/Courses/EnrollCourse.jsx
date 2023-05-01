@@ -24,6 +24,7 @@ const EnrollCourse = (props) => {
 
   useEffect(() => {
     getLocations();
+    // eslint-disable-next-line
   }, []);
 
   const onClick = () => {
@@ -35,7 +36,7 @@ const EnrollCourse = (props) => {
       course: props.CourseId,
       location: "",
     });
-    
+
     toast.success("Đăng ký thành công!", {
       position: toast.POSITION.TOP_RIGHT,
     });
