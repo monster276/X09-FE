@@ -9,17 +9,17 @@ import {
   TwitterOutlined,
 } from "@ant-design/icons";
 import CourseContext from "../Context/course/CourseContext";
+import Loading from "../../loading/Loading";
 
 const { Header, Content, Footer } = Layout;
 const { Meta } = Card;
 
 const Courses = () => {
   const courseContext = useContext(CourseContext);
-  const { getCourses, courses } = courseContext;
+  const { getCourses, courses, loading } = courseContext;
 
   useEffect(() => {
     getCourses();
-    console.log(courses);
     // eslint-disable-next-line
   }, []);
 
@@ -58,23 +58,27 @@ const Courses = () => {
       <Content>
         <h1 className="title-course">Danh sách khóa học</h1>
         <div className="contents3">
-          {courses.map((course) => (
-            <Card
-              key={course._id}
-              className="card5"
-              hoverable
-              cover={
-                <Link to="/detail">
-                  <img alt="example" src={course.image} />
-                </Link>
-              }
-            >
-              <Meta
-                title={course.name}
-                description={formatter.format(course.price)}
-              />
-            </Card>
-          ))}
+          {!loading ? (
+            courses.map((course) => (
+              <Card
+                key={course._id}
+                className="card5"
+                hoverable
+                cover={
+                  <Link to={`/detail/${course._id}`}>
+                    <img alt="example" src={course.image} />
+                  </Link>
+                }
+              >
+                <Meta
+                  title={course.name}
+                  description={formatter.format(course.price)}
+                />
+              </Card>
+            ))
+          ) : (
+            <Loading />
+          )}
         </div>
       </Content>
       <Footer className="footer2">

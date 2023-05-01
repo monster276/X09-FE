@@ -1,4 +1,4 @@
-import { GET_COURSES } from "../types";
+import { GET_COURSES, COURSE_ERROR, GET_COURSE_DETAIL } from "../types";
 
 const CourseReducer = (state, action) => {
   switch (action.type) {
@@ -6,6 +6,18 @@ const CourseReducer = (state, action) => {
       return {
         ...state,
         courses: action.payload,
+        loading: false,
+      };
+    case GET_COURSE_DETAIL:
+      return {
+        ...state,
+        course: action.payload,
+        loading: false,
+      };
+    case COURSE_ERROR:
+      return {
+        ...state,
+        error: action.payload,
       };
     default:
       return state;
