@@ -22,12 +22,19 @@ const EnrollCourse = (props) => {
     location: "",
   });
 
+  const { fullName, email, phoneNumber, location } = enrollCourse;
+
   useEffect(() => {
     getLocations();
     // eslint-disable-next-line
   }, []);
 
-  const onClick = () => {
+  // onChange event for all input
+  const onChange = (e) => {
+    setEnrollCourse({ ...enrollCourse, [e.target.name]: e.target.value });
+  };
+
+  const onSubmit = () => {
     addEnrollCourse(enrollCourse);
     setEnrollCourse({
       fullName: "",
@@ -43,17 +50,10 @@ const EnrollCourse = (props) => {
     props.setIsOpen(false);
   };
 
-  const { fullName, email, phoneNumber, location } = enrollCourse;
-
-  // onChange event for all input
-  const onChange = (e) => {
-    setEnrollCourse({ ...enrollCourse, [e.target.name]: e.target.value });
-  };
-
   return (
     <Modal isOpen={props.isOpen} onRequestClose={props.handleCloseModal}>
       <ToastContainer />
-      <form>
+      <form onSubmit={onSubmit}>
         <CloseOutlined className="regis-btn" onClick={props.handleCloseModal} />
         <div className="regis-container">
           <div className="regis-pic">
@@ -113,7 +113,7 @@ const EnrollCourse = (props) => {
               value={props.course.name}
               disabled
             />
-            <Button className="regis-submit" onClick={onClick}>
+            <Button className="regis-submit" type="primary" htmlType="submit">
               Đăng ký
             </Button>
           </div>
