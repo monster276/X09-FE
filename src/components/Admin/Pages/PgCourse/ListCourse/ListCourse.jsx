@@ -174,17 +174,14 @@ const ListCourse = () => {
       <div>
         <SearchCourse />
         <div>
-          {loading ? (
-            "Loading"
-          ) : (
-            <Table
-              className="TableCS"
-              columns={columns}
-              dataSource={data}
-              rowKey="Id"
-              pagination={false}
-            ></Table>
-          )}
+          <Table
+            loading={loading}
+            className="TableCS"
+            columns={columns}
+            dataSource={data}
+            rowKey="Id"
+            pagination={false}
+          ></Table>
           <Pagination
             style={{ marginLeft: 920, marginTop: 20, marginBottom: 20 }}
             variant="outlined"

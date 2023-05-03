@@ -192,16 +192,14 @@ const ListClass = () => {
         <div>
           <SearchClass />
           <div>
-            {loading ? (
-              "Loading"
-            ) : (
-              <Table
-                className="TableCS"
-                columns={columns}
-                dataSource={data}
-                rowKey="id"
-              ></Table>
-            )}
+            <Table
+              loading={loading}
+              className="TableCS"
+              columns={columns}
+              dataSource={data}
+              rowKey="id"
+            ></Table>
+
             <div>
               <EditClass classId={classId} />
             </div>

@@ -1,14 +1,18 @@
+*{
+    padding: 0;
+    margin: 0;
+}
 
-
-.AdminApp{
+/* .AdminApp{
     display: flex;
     flex-direction: column;
     width: 98vw;
-    height:100vh;
-}
+    height:10vh;
+} */
 .SideMenuAndPage{
     display: flex;
     flex: 1;
     justify-content: flex-start;
     align-items: flex-start;
+    margin-right: 20px;
 }
