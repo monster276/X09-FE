@@ -9,6 +9,7 @@ const CourseState = (props) => {
     courses: [],
     course: {},
     error: null,
+    loading: false,
   };
 
   const [state, dispatch] = useReducer(CourseReducer, initialState);
@@ -49,6 +50,7 @@ const CourseState = (props) => {
         courses: state.courses,
         course: state.course,
         error: state.error,
+        loading: state.loading, 
         getCourses,
         getCourseDetail,
       }}
