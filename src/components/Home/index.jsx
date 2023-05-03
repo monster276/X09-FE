@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import "./index.css";
 import { Layout, Menu, Button, Card, Image, Typography, Popover } from "antd";
 import {
@@ -10,75 +10,24 @@ import {
   UserSwitchOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import CourseContext from "./Context/course/CourseContext";
 const { Header, Content, Footer } = Layout;
 const { Title, Paragraph } = Typography;
+const { Meta } = Card;
 
 export default function Index(props) {
-  const content1 = (
-    <Paragraph className="paragraph-large">
-      <h2 id="title-det">Khóa học Python</h2>
-      <ul>
-        <li>5502 lượt đăng ký</li>
-        <li>6.000.000 VNĐ</li>
-        <li>Học ngôn ngữ lập trình Python cơ bản</li>
-      </ul>
-    </Paragraph>
-  );
+  const courseContext = useContext(CourseContext);
+  const { getNewCourses, courses, loading } = courseContext;
 
-  const content2 = (
-    <Paragraph className="paragraph-large">
-      <h2 id="title-det">Khóa học Vue</h2>
-      <ul>
-        <li>312 lượt đăng ký</li>
-        <li>2.000.000 VNĐ</li>
-        <li>Học ngôn ngữ lập trình Vue cơ bản</li>
-      </ul>
-    </Paragraph>
-  );
+  const formatter = new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  });
 
-  const content3 = (
-    <Paragraph className="paragraph-large">
-      <h2 id="title-det">Khóa học C</h2>
-      <ul>
-        <li>5502 lượt đăng ký</li>
-        <li>6.300.000 VNĐ</li>
-        <li>Học ngôn ngữ lập trình C cơ bản</li>
-      </ul>
-    </Paragraph>
-  );
-
-  const content4 = (
-    <Paragraph className="paragraph-large">
-      <h2 id="title-det">Khóa học C#</h2>
-      <ul>
-        <li>1502 lượt đăng ký</li>
-        <li>1.300.000 VNĐ</li>
-        <li>Học ngôn ngữ lập trình C# cơ bản</li>
-      </ul>
-    </Paragraph>
-  );
-
-  const content5 = (
-    <Paragraph className="paragraph-large">
-      <h2 id="title-det">Khóa học C++</h2>
-      <ul>
-        <li>1223 lượt đăng ký</li>
-        <li>4.300.000 VNĐ</li>
-        <li>Học ngôn ngữ lập trình C++ cơ bản</li>
-      </ul>
-    </Paragraph>
-  );
-
-  const content6 = (
-    <Paragraph className="paragraph-large">
-      <h2 id="title-det">Khóa học Kotlin</h2>
-      <ul>
-        <li>111 lượt đăng ký</li>
-        <li>5.100.000 VNĐ</li>
-        <li>Học ngôn ngữ lập trình Kotlin cơ bản</li>
-      </ul>
-    </Paragraph>
-  );
+  useEffect(() => {
+    getNewCourses();
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <Layout>
@@ -154,38 +103,36 @@ export default function Index(props) {
         </div>
         <div className="spec">
           <div className="course1">
-            <Card hoverable>
-              <Popover content={content1} placement="center">
-                <Image src="https://e1.pxfuel.com/desktop-wallpaper/514/124/desktop-wallpaper-2048x2048-python-logo-ipad-air-backgrounds-and-python-code.jpg" />
-              </Popover>
-            </Card>
-            <Card hoverable>
-              <Popover content={content2} placement="center">
-                <Image src="https://stitcher.imgix.net/d0306685ac66e9612a315182b01f834a0c605361e271267595a34eeda86cb85c?w=850&h=850&sat=-100" />
-              </Popover>
-            </Card>
-            <Card hoverable>
-              <Popover content={content3} placement="center">
-                <Image src="https://e1.pxfuel.com/desktop-wallpaper/796/952/desktop-wallpaper-disc-c-programming-language.jpg" />
-              </Popover>
-            </Card>
-          </div>
-          <div className="course2">
-            <Card hoverable>
-              <Popover content={content4} placement="center">
-                <Image src="https://stitcher.imgix.net/66a8a497f71e8e7fb5c4b715346459ce87fb736e5e8dc04351b9538bc0613622?w=850&h=850&sat=-100" />
-              </Popover>
-            </Card>
-            <Card hoverable>
-              <Popover content={content5} placement="center">
-                <Image src="https://e1.pxfuel.com/desktop-wallpaper/439/889/desktop-wallpaper-c-c-plus-plus.jpg" />
-              </Popover>
-            </Card>
-            <Card hoverable>
-              <Popover content={content6} placement="center">
-                <Image src="https://e0.pxfuel.com/wallpapers/907/48/desktop-wallpaper-sl-5-4-and-black-friday-smartlauncher-kotlin.jpg" />
-              </Popover>
-            </Card>
+            {!loading ? (
+              courses.map((course) => (
+                <Card
+                  key={course._id}
+                  className="card5"
+                  hoverable
+                  cover={
+                    <Link to={`/detail/${course._id}`}>
+                      <img alt="example" src={course.image} />
+                    </Link>
+                  }
+                >
+                  <Meta
+                    title={course.name}
+                    description={formatter.format(course.price)}
+                  />
+                </Card>
+              ))
+            ) : (
+              <div
+                style={{
+                  color: "#000",
+                  marginTop: "344px",
+                  marginLeft: "600px",
+                  fontSize: "24px",
+                }}
+              >
+                Loading...
+              </div>
+            )}
           </div>
           <Button className="landing-btn">
             <Link to="/course">Khám phá các khóa học ở đây</Link>

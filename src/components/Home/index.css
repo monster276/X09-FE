@@ -146,6 +146,7 @@ p {
 
 .course1 {
   display: flex;
+  flex-wrap: wrap;
 }
 .course1 .ant-card {
   width: 30%;

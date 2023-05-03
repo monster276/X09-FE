@@ -2,7 +2,12 @@ import React, { useReducer } from "react";
 import axios from "axios";
 import CourseContext from "./CourseContext";
 import CourseReducer from "./CourseReducer";
-import { GET_COURSES, GET_COURSE_DETAIL, COURSE_ERROR } from "../types";
+import {
+  GET_COURSES,
+  GET_NEW_COURSES,
+  GET_COURSE_DETAIL,
+  COURSE_ERROR,
+} from "../types";
 
 const CourseState = (props) => {
   const initialState = {
@@ -20,6 +25,24 @@ const CourseState = (props) => {
       dispatch({
         type: GET_COURSES,
         payload: res.data.courses,
+      });
+    } catch (error) {
+      dispatch({
+        type: COURSE_ERROR,
+        payload: error.response.data.message,
+      });
+    }
+  };
+
+  const getNewCourses = async () => {
+    try {
+      const res = await axios.get(
+        "https://x09-be.onrender.com/api/courses/top"
+      );
+      console.log(res.data);
+      dispatch({
+        type: GET_NEW_COURSES,
+        payload: res.data,
       });
     } catch (error) {
       dispatch({
@@ -50,8 +73,9 @@ const CourseState = (props) => {
         courses: state.courses,
         course: state.course,
         error: state.error,
-        loading: state.loading, 
+        loading: state.loading,
         getCourses,
+        getNewCourses,
         getCourseDetail,
       }}
     >
