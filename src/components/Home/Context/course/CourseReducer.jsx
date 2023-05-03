@@ -1,4 +1,9 @@
-import { GET_COURSES, COURSE_ERROR, GET_COURSE_DETAIL } from "../types";
+import {
+  GET_COURSES,
+  COURSE_ERROR,
+  GET_COURSE_DETAIL,
+  SET_LOADING,
+} from "../types";
 
 const CourseReducer = (state, action) => {
   switch (action.type) {
@@ -18,6 +23,11 @@ const CourseReducer = (state, action) => {
       return {
         ...state,
         error: action.payload,
+      };
+    case SET_LOADING:
+      return {
+        ...state,
+        loading: true,
       };
     default:
       return state;

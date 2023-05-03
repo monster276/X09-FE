@@ -77,7 +77,16 @@ const Courses = () => {
               </Card>
             ))
           ) : (
-            <Loading />
+            <div
+              style={{
+                color: "#000",
+                marginTop: "344px",
+                marginLeft: "600px",
+                fontSize: "24px",
+              }}
+            >
+              Loading...
+            </div>
           )}
         </div>
       </Content>
