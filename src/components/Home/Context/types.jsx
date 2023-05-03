@@ -1,4 +1,5 @@
 export const GET_COURSES = "GET_COURSES";
+export const GET_NEW_COURSES = "GET_NEW_COURSES";
 export const GET_COURSE_DETAIL = "GET_COURSE_DETAIL";
 export const COURSE_ERROR = "COURSE_ERROR";
 export const SET_LOADING = "SET_LOADING";

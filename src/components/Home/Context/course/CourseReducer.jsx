@@ -1,5 +1,6 @@
 import {
   GET_COURSES,
+  GET_NEW_COURSES,
   COURSE_ERROR,
   GET_COURSE_DETAIL,
   SET_LOADING,
@@ -8,6 +9,12 @@ import {
 const CourseReducer = (state, action) => {
   switch (action.type) {
     case GET_COURSES:
+      return {
+        ...state,
+        courses: action.payload,
+        loading: false,
+      };
+    case GET_NEW_COURSES:
       return {
         ...state,
         courses: action.payload,
