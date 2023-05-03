@@ -47,20 +47,16 @@ const ListClass = () => {
     setdeletesModalOpen(!deletesModalOpen);
   };
   const showEditlModal = (value) => {
-    if(!EditsModalOpen)
-      setClassId(value._id);
-    else
-      getData()
+    if (!EditsModalOpen) setClassId(value._id);
+    else getData();
     setEditModalOpen(!EditsModalOpen);
   };
   const showDetaillModal = (value) => {
     // if(!DetailsModalOpen)
     // setClassId(value._id);
     // setDetailModalOpen(!DetailsModalOpen);
-    if(!DetailsModalOpen)
-      setClassId(value._id);
-    else
-    setEditModalOpen(!DetailsModalOpen);
+    if (!DetailsModalOpen) setClassId(value._id);
+    else setEditModalOpen(!DetailsModalOpen);
   };
   const SeleArtista = (artista, caso, value) => {
     setPostData(artista);
@@ -140,7 +136,7 @@ const ListClass = () => {
       title: "Lịch Học",
       dataIndex: "schedule",
       key: "schedule",
-      render: (value, record) => <>{value.join(",")}</>,
+      render: (value, record) => <>{value + " "}</>,
     },
 
     {
@@ -196,16 +192,14 @@ const ListClass = () => {
         <div>
           <SearchClass />
           <div>
-            {loading ? (
-              "Loading"
-            ) : (
-              <Table
-                className="TableCS"
-                columns={columns}
-                dataSource={data}
-                rowKey="id"
-              ></Table>
-            )}
+            <Table
+              loading={loading}
+              className="TableCS"
+              columns={columns}
+              dataSource={data}
+              rowKey="id"
+            ></Table>
+
             <div>
               <EditClass classId={classId} />
             </div>

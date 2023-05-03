@@ -3,7 +3,7 @@ import './Footer.css';
 
 import { Typography } from 'antd';
 
-function Footer() {
+function FooterPage() {
   return (
     <div>
       <div className='Footer'>
@@ -13,4 +13,4 @@ function Footer() {
   );
 }
 
-export default Footer;
+export default FooterPage;

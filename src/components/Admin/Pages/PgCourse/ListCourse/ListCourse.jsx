@@ -9,8 +9,7 @@ import SearchCourse from "../Search/SearchCourse";
 import Pagination from "@mui/material/Pagination";
 import { Table, Space, Button } from "antd";
 
-
-import swal from 'sweetalert';
+import swal from "sweetalert";
 const baseUrl = "https://x09-be.onrender.com/api/courses";
 const Layout = {
   labelCol: {
@@ -175,17 +174,14 @@ const ListCourse = () => {
       <div>
         <SearchCourse />
         <div>
-          {loading ? (
-            "Loading"
-          ) : (
-            <Table
-              className="TableCS"
-              columns={columns}
-              dataSource={data}
-              rowKey="Id"
-              pagination={false}
-            ></Table>
-          )}
+          <Table
+            loading={loading}
+            className="TableCS"
+            columns={columns}
+            dataSource={data}
+            rowKey="Id"
+            pagination={false}
+          ></Table>
           <Pagination
             style={{ marginLeft: 920, marginTop: 20, marginBottom: 20 }}
             variant="outlined"

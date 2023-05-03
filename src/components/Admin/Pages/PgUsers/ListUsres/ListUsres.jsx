@@ -65,7 +65,7 @@ const ListUsres = () => {
         token: `Bearer ${JSON.parse(localStorage.getItem("accesstoken"))}`,
       },
     };
-    const { data } = await Axios.get(baseUrlUsers, config);
+    const { data } = await Axios.get(baseUrlUsers+ '?' + `pageNumber=${page}`, config);
     setData(
       data.users.map((row) => ({
         _id: row._id,
@@ -125,7 +125,7 @@ const ListUsres = () => {
       title: "Số Điện Thoại",
       dataIndex: "phoneNumber",
       key: "phoneNumber",
-      width: 250,
+      width: 100,
     },
     {
       title: "Chức Năng",
@@ -188,6 +188,7 @@ const ListUsres = () => {
             columns={columnLocations}
             dataSource={data}
             rowKey="id"
+            pagination={false}
           ></Table>
 
           <Pagination

@@ -122,7 +122,7 @@ const SearchLocation = () => {
         </Space>
         <Space>
           <Button
-            type="primary"
+            // type="primary"
             onClick={handleCreateCancel}
             className="ButtonTM"
             Key={handleCreateCancel}

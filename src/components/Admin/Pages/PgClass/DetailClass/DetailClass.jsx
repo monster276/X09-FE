@@ -30,15 +30,8 @@ const DetailClass = ({ classId }) => {
   ]);
   const [attendances, setAttendances] = useState([]);
   const {
-    postData,
     showDetaillModal,
-    Layout,
     DetailsModalOpen,
-    setPostData,
-    baseUrlClass,
-    data,
-    setData,
-    setloading,
   } = useContext(ListContext);
 
   useEffect(() => {
