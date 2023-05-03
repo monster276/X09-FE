@@ -105,7 +105,7 @@ const EditClass = ({ classId }) => {
 
     let payload = {
       _id: classId,
-      students:[],
+      students: [],
       ...form.getFieldsValue(),
     };
     payload.startTime = moment(payload.startTime)
@@ -116,7 +116,7 @@ const EditClass = ({ classId }) => {
       .format("YYYY-MM-DD");
     let res = await _unitOfWork.updateASingleClassroom(payload, classId);
     if (res) {
-     showEditlModal()
+      showEditlModal();
     }
   };
 
@@ -279,9 +279,21 @@ const EditClass = ({ classId }) => {
               </Form.Item>
             </Col>
             <Col span={24}>
-              <Table columns={attendanceColumns} dataSource={attendances} />
+              <Table
+                rowSelection={{
+                  onChange: (selectedRowKeys, selectedRows) => {
+                    console.log(
+                      `selectedRowKeys: ${selectedRowKeys}`,
+                      "selectedRows: ",
+                      selectedRows
+                    );
+                  },            
+                }}
+                columns={attendanceColumns}
+                dataSource={attendances.map(e => ({...e,key:e._id}))}
+              />
             </Col>
-            <Col span={24} style={{ textAlign: "right", marginTop:20 }}>
+            <Col span={24} style={{ textAlign: "right", marginTop: 20 }}>
               <Button
                 style={{ background: "red", color: "white", marginLeft: 20 }}
                 onClick={showEditlModal}

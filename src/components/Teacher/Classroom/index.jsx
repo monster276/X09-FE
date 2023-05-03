@@ -22,7 +22,7 @@ export function Classroom() {
     }
     let res = await _unitOfWork.getClassroomByUser(payload);
     if (res)
-      setClassrooms(res.map((c, i) => ({ ...c, stt: i + 1 })));
+      setClassrooms(res.classrooms.map((c, i) => ({ ...c, stt: i + 1 })));
   };
   const handleDelete = async (value) => {
     let res = await _unitOfWork.deleteASingleClassroom(value);
@@ -121,13 +121,13 @@ export function Classroom() {
     <>
       <Form form={formSearch} layout="vertical" onFinish={fetchClassroom}>
         <Row gutter={32}>
-          <Col span={6}>
+          {/* <Col span={6}>
             <Form.Item label="Mã lớp" name = "id" >
               <Input ></Input>
             </Form.Item>
-          </Col>
+          </Col> */}
           <Col span={6}>
-            <Form.Item label="Tên lớp" name = "name" >
+            <Form.Item label="Tên lớp" name = "keyword" >
               <Input></Input>
             </Form.Item>
           </Col>

@@ -37,7 +37,6 @@ export function ClassroomDetail() {
       },
     },
     {
-   
       title: "Họ tên",
       dataIndex: "studentName",
       key: "studentName",
@@ -50,13 +49,12 @@ export function ClassroomDetail() {
     .map((s) => {
       return {
         title: s.lesson,
-       
         children: [
           {
             title: "Điểm danh",
             dataIndex: s.id,
             key: s.id,
-            width:"100px",
+            className:"attend-col",
             render: (text, record) => {
               let attend = record.attendances.find(
                 (e) => e.lesson == s.lesson
@@ -78,7 +76,7 @@ export function ClassroomDetail() {
             title: "Chấm điểm",
             dataIndex: s.id,
             key: s.id,
-            width:"100px",
+            className:"attend-col",
             render: (text, record) => {
               let attend = record.attendances.find(
                 (e) => e.lesson == s.lesson
@@ -97,7 +95,7 @@ export function ClassroomDetail() {
             title: "Nhận xét",
             dataIndex: s.id,
             key: s.id,
-            width:"100px",
+            className:"attend-col",
             render: (text, record) => {
               let attend = record.attendances.find(
                 (e) => e.lesson == s.lesson
@@ -119,7 +117,7 @@ export function ClassroomDetail() {
       <Table
         columns={[...studentColumns, ...scheduleColums]}
         dataSource={attendances}
-        // scroll={{ x: true }}
+        scroll={{ x: true }}
       />
     </>
   );

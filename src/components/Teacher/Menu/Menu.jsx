@@ -42,13 +42,13 @@ function MenuComponent() {
           <Link to={path.register}>
             <span>DS Đăng kí Học</span>
           </Link>
-        </Menu.Item>
-        <Menu.Item key="4">
+        </Menu.Item> */}
+        {/* <Menu.Item key="4">
           <Link to={path.classroomManagement}>
             <span>Quản lý lớp học</span>
           </Link>
-        </Menu.Item>
-        <Menu.Item key="5">
+        </Menu.Item> */}
+        {/* <Menu.Item key="5">
           <Link to={path.facilityManagement}>
             <span>Quản lý cơ sở</span>
           </Link>
