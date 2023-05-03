@@ -9,7 +9,6 @@ import {
   TwitterOutlined,
 } from "@ant-design/icons";
 import CourseContext from "../Context/course/CourseContext";
-import Loading from "../../loading/Loading";
 
 const { Header, Content, Footer } = Layout;
 const { Meta } = Card;
