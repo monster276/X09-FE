@@ -9,8 +9,7 @@ import SearchCourse from "../Search/SearchCourse";
 import Pagination from "@mui/material/Pagination";
 import { Table, Space, Button } from "antd";
 
-
-import swal from 'sweetalert';
+import swal from "sweetalert";
 const baseUrl = "https://x09-be.onrender.com/api/courses";
 const Layout = {
   labelCol: {
