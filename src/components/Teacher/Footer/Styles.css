@@ -1,4 +1,4 @@
-.footer1{
+/* .footer1{
     width: 100%;
     margin: 0;
     margin-top: 180%;
@@ -10,4 +10,18 @@
     font-size: 25px;
     justify-content: space-between;
     flex-wrap: wrap;
+} */
+.Footer{
+    height: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background: black;
+}
+.Title {
+    padding: 5px;
+    color: white;
+    font-size: 25px;
+    margin-top: 20px;
+   
 }
