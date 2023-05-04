@@ -178,6 +178,8 @@ p {
   font-size: 25px;
   justify-content: space-between;
   flex-wrap: wrap;
+  position: absolute;
+  bottom: -3000px;
 }
 
 .text {
@@ -188,7 +190,7 @@ p {
 }
 
 .landing-btn {
-  width: 20%;
+  width: 30%;
   height: 50px;
   margin-top: 5%;
   margin-left: 40%;
