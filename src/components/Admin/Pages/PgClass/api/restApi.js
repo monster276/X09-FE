@@ -3,19 +3,29 @@ const headerDefault = {
   "Content-Type": "application/json",
 };
 
+const getToken = () => {
+  return 'Bearer ' + JSON.parse(localStorage.getItem('accesstoken'));
+}
+
 const parseParams = (url, params) => {
-  if (params) {
+  if (params && typeof(params) == "object") {
     const qs = Object.keys(params)
       .map(
         (key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
       )
       .join("&");
     return url + "?" + qs;
-  } else return url;
+  }
+  else if(params){
+    return url + "/" + params;
+  } 
+  else return url ;
 };
 
-function get(route, params) {
+function get(route, params, token=getToken()) {
   const headers = {
+    'authorization':token,
+    token:token,
     ...headerDefault,
   };
   const url = parseParams(route, params);
@@ -23,8 +33,10 @@ function get(route, params) {
   return fetch(url, options).then(handleStatus).catch(catchError);
 }
 
-function post(route, payload, params) {
+function post(route, payload, params, token = getToken()) {
   const headers = {
+    'authorization':token,
+    token:token,
     ...headerDefault,
   };
   const url = parseParams(route, params);
@@ -38,8 +50,10 @@ function post(route, payload, params) {
     .catch(catchError);
 }
 
-function put(route, payload, params = null) {
+function put(route, payload, params = null, token = getToken()) {
   const headers = {
+    'authorization':token,
+    token:token,
     ...headerDefault,
   };
   let url = parseParams(route, params);
@@ -48,8 +62,10 @@ function put(route, payload, params = null) {
     .catch(catchError);
 }
 
-function deleteRequest(route, params) {
+function deleteRequest(route, params,token = getToken()) {
   const headers = {
+    'authorization':token,
+    token:token,
     ...headerDefault,
   };
   const url = parseParams(route, params);

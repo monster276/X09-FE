@@ -2,3 +2,9 @@
     border: 1px #eee solid;
     border-collapse: collapse;
 }
+.ant-btn-primary{
+    background-color: #1677ff !important;
+}
+.ant-btn-primary.ant-btn-dangerous{
+    background-color: #ff4d4f !important;
+}

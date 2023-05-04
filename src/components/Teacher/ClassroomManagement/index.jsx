@@ -101,7 +101,7 @@ export function ClassroomManagement() {
     },
 
     {
-      title: "Action",
+      title: "Ghi Chú",
       key: "action",
       render: (text, record) => (
         <Space size="middle">

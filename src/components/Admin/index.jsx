@@ -5,9 +5,9 @@ import { createAxios } from "../../createInstance";
 import { getAllUsers } from "../../redux/apiRequest";
 import { loginSuccess } from "../../redux/authSlice";
 import "./index.css";
-import { Space } from "antd";
-import Header from "./components/header/header";
-import Footer from "./components/Footer/Footer";
+import { Space, Layout, theme, Menu } from "antd";
+import HeaderPage from "./components/header/header";
+import FooterPage from "./components/Footer/Footer";
 import SideMenu from "./components/SideMenu/SideMenu";
 import PageContent from "./components/PageContent/PageContent";
 import { Route, Routes } from "react-router-dom";
@@ -25,14 +25,60 @@ export default function Index() {
       getAllUsers(user?.accessToken, dispatch, axiosJWT);
     }
   }, []);
+  const {
+    token: { colorBgContainer },
+  } = theme.useToken();
+  const { Header, Content, Footer, Sider } = Layout;
+
   return (
-    <div className="AdminApp">
-      <Header />
-      <Space className="SideMenuAndPage">
-        <SideMenu />
-        <PageContent></PageContent>
-      </Space>
-      <Footer />
+    <div>
+      <Sider
+        breakpoint="lg"
+        collapsedWidth="0"
+        onBreakpoint={(broken) => {
+          console.log(broken);
+        }}
+        onCollapse={(collapsed, type) => {
+          console.log(collapsed, type);
+        }}
+      >
+        <Menu  mode="inline">
+          <SideMenu />
+        </Menu>
+      </Sider>
+      <Layout style={{ height: "100%" }}>
+        <Header
+          // style={{
+          //   padding: 0,
+          //   background: colorBgContainer,
+          // }}
+        >
+          <HeaderPage />
+        </Header>
+        <Content
+          style={{
+            margin: "24px 16px 0",
+          }}
+        >
+          <div
+            style={{
+              padding: 24,
+              minHeight: 360,
+              background: colorBgContainer,
+            }}
+          >
+            <PageContent />
+          </div>
+        </Content>
+        <Footer
+          style={{
+            textAlign: "center",
+          }}
+        >
+          {/* <FooterPage /> */}
+          Ant Design ©2023 Created by Ant UED
+        </Footer>
+      </Layout>
     </div>
   );
 }

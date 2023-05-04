@@ -17,7 +17,7 @@ function MenuComponent() {
         type="primary"
         onClick={toggleCollapsed}
         style={{
-          marginBottom: 16,
+          marginBottom: 32,
         }}
       >
         {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -38,17 +38,17 @@ function MenuComponent() {
             <span>Bài giảng</span>
           </Link>
         </Menu.Item>
-        <Menu.Item key="3">
+        {/* <Menu.Item key="3">
           <Link to={path.register}>
             <span>DS Đăng kí Học</span>
           </Link>
-        </Menu.Item>
-        <Menu.Item key="4">
+        </Menu.Item> */}
+        {/* <Menu.Item key="4">
           <Link to={path.classroomManagement}>
             <span>Quản lý lớp học</span>
           </Link>
-        </Menu.Item>
-        <Menu.Item key="5">
+        </Menu.Item> */}
+        {/* <Menu.Item key="5">
           <Link to={path.facilityManagement}>
             <span>Quản lý cơ sở</span>
           </Link>
@@ -57,7 +57,7 @@ function MenuComponent() {
           <Link to={path.lesson}>
             <span>Bài học</span>
           </Link>
-        </Menu.Item>
+        </Menu.Item> */}
       </Menu>
     </>
   );

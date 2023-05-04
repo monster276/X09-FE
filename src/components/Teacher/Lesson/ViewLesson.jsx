@@ -10,14 +10,15 @@ import {
   Button,
   Select,
   InputNumber,
+  Modal,
 } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import * as _unitOfWork from "../api";
 const { Option } = Select;
 const { TextArea } = Input;
 
-export function ViewLesson() {
-  const param = useParams();
+export function ViewLesson({isModalOpen,lesson,onCancel,onCallback}) {
+  const param = lesson;
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [lectures, setLectures] = useState([]);
@@ -42,15 +43,25 @@ export function ViewLesson() {
  
   return (
     <>
+     <Modal
+        Key="id"
+        visible={isModalOpen}
+        title="Chi Tiết Lớp Học "
+        onCancel={onCancel}
+        centered
+        footer={[
+          <Button onClick={onCancel}>Thoát</Button>,
+        ]}
+      >
       <Form form={form} layout="vertical" >
         <Row gutter={32}>
           <Col span={8}>
             <Form.Item
-              label="Bài giảng"
+              label="Tên bài giảng"
               name="lecture"
               rules={[{ required: true, message: "Vui lòng chọn khóa học" }]}
             >
-              <Select placeholder="Bài giảng">
+              <Select placeholder="Tên bài giảng">
                 {lectures?.map((item, index) => (
                   <Option id={index} key={item._id}>
                     {item.name}
@@ -89,12 +100,13 @@ export function ViewLesson() {
               <TextArea placeholder="nôi dung" rows={4}></TextArea>
             </Form.Item>
           </Col>
-          <Col span={24} style={{ textAlign: "right" }}>
+          {/* <Col span={24} style={{ textAlign: "right" }}>
             <Button onClick={() => navigate(-1)}>Quay lại</Button>
           
-          </Col>
+          </Col> */}
         </Row>
       </Form>
+      </Modal>
     </>
   );
 }

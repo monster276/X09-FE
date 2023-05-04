@@ -18,7 +18,7 @@ import { ListContext } from "../ListClass/ListClass";
 import * as _unitOfWork from "../api";
 import moment from "moment";
 const { Option } = Select;
-const EditClass = () => {
+const EditClass = ({ classId }) => {
   const param = useParams();
   const navigate = useNavigate();
   const [form] = Form.useForm();
@@ -40,26 +40,22 @@ const EditClass = () => {
     setData,
     setloading,
   } = useContext(ListContext);
-
-  const handeChange = (e) => {
-    const { name, value } = e.target;
-    setPostData({ ...postData, [name]: value });
-    console.log(postData);
-  };
   useEffect(() => {
-    fetchClassroom();
-    fetchLocations();
-    fetchCourses();
-    // fetchTeacher();
-    fetchAttendances();
-  }, []);
+    if (classId) {
+      fetchClassroom();
+      fetchLocations();
+      fetchCourses();
+      // fetchTeacher();
+      fetchAttendances();
+    }
+  }, [classId]);
   useEffect(() => {
     console.log("set code");
     form.setFieldValue("id", classCodeArr.join(" "));
   }, [classCodeArr]);
 
   const fetchClassroom = async () => {
-    let res = await _unitOfWork.getASingleClassroom(param.id);
+    let res = await _unitOfWork.getASingleClassroom(classId);
     if (res) {
       console.log(res);
       form.setFieldsValue({
@@ -86,7 +82,7 @@ const EditClass = () => {
     if (res) setTeachers(res.teachers);
   };
   const fetchAttendances = async () => {
-    let res = await _unitOfWork.getAllAttendance({ classroom: param.id });
+    let res = await _unitOfWork.getAllAttendance({ classroom: classId });
     if (res)
       setAttendances(
         res.studentsAttendances.map((c, i) => ({ ...c, stt: i + 1 }))
@@ -108,7 +104,8 @@ const EditClass = () => {
     form.validateFields();
 
     let payload = {
-      _id: param.id,
+      _id: classId,
+      students: [],
       ...form.getFieldsValue(),
     };
     payload.startTime = moment(payload.startTime)
@@ -117,9 +114,9 @@ const EditClass = () => {
     payload.endTime = moment(payload.endTime)
       .add("hours", 7)
       .format("YYYY-MM-DD");
-    let res = await _unitOfWork.updateASingleClassroom(payload, param.id);
+    let res = await _unitOfWork.updateASingleClassroom(payload, classId);
     if (res) {
-      navigate(-1);
+      showEditlModal();
     }
   };
 
@@ -282,11 +279,23 @@ const EditClass = () => {
               </Form.Item>
             </Col>
             <Col span={24}>
-              <Table columns={attendanceColumns} dataSource={attendances} />
+              <Table
+                rowSelection={{
+                  onChange: (selectedRowKeys, selectedRows) => {
+                    console.log(
+                      `selectedRowKeys: ${selectedRowKeys}`,
+                      "selectedRows: ",
+                      selectedRows
+                    );
+                  },            
+                }}
+                columns={attendanceColumns}
+                dataSource={attendances.map(e => ({...e,key:e._id}))}
+              />
             </Col>
-            <Col span={24} style={{ textAlign: "right" }}>
+            <Col span={24} style={{ textAlign: "right", marginTop: 20 }}>
               <Button
-                style={{ background: "red", color: "white" }}
+                style={{ background: "red", color: "white", marginLeft: 20 }}
                 onClick={showEditlModal}
               >
                 Quay lại

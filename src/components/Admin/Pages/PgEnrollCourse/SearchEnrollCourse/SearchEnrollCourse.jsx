@@ -1,6 +1,6 @@
 import { React, useContext, useEffect, useState } from "react";
 import Axios from "axios";
-import "./Search.css";
+import "./SearchEnrollCourse.css";
 import { SreachDeBounce } from "../../hooks"
 import { ListContext } from "../LitsEnrollCourse/LitsEnrollCourse";
 import { Space, Button, Input, AutoComplete, Modal, Form,message  } from "antd";
@@ -63,7 +63,7 @@ const SearchEnrollCourse = () => {
             onSelect={onSelect}
           >
             <Search
-              className="Search"
+              
               size="large"
               placeholder="nhập tìm kiếm"
               enterButton="Tìm Kiếm"

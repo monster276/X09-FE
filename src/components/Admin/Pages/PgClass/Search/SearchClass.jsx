@@ -3,6 +3,8 @@ import Axios from "axios";
 import "./Search.css";
 import swal from "sweetalert";
 import { ListContext } from "../ListClass/ListClass";
+import { SreachDeBounce } from "../../hooks"
+
 import {
   Space,
   Button,
@@ -46,7 +48,8 @@ const SearchClass = () => {
     baseUrlClass,
     Layout,
   } = useContext(ListContext);
-
+  
+  const debounced = SreachDeBounce(searchValue , 700)
   useEffect(() => {
     getCourse();
     getLocation();
@@ -54,7 +57,7 @@ const SearchClass = () => {
   }, []);
   useEffect(() => {
     getSearchData();
-  }, [searchValue]);
+  }, [debounced]);
 
   const mockVal = (str, repeat = 1) => ({
     value: str.repeat(repeat),
@@ -67,7 +70,7 @@ const SearchClass = () => {
 
   const getSearchData = async () => {
     const { data } = await Axios.get(
-      `https://x09-be.onrender.com/api/classrooms?keyword=${searchValue}`
+      `https://x09-be.onrender.com/api/classrooms`
     );
     setloading(false);
     setData(
@@ -84,6 +87,7 @@ const SearchClass = () => {
       }))
     );
   };
+  
   const handleCreateCancel = () => {
     setcreateModalOpen(!createModalOpen);
   };
@@ -230,6 +234,7 @@ const SearchClass = () => {
             style={{
               height: 10,
               width: 460,
+              background: "none"
             }}
             onSearch={(text) => setOptions(getPanelValue(text))}
             options={options}
@@ -242,7 +247,7 @@ const SearchClass = () => {
               placeholder="nhập tìm kiếm"
               enterButton="Tìm Kiếm"
               onChange={(e) => setSearchValue(e.target.value)}
-              value={searchValue}
+              value={debounced}
             />
           </AutoComplete>
         </Space>

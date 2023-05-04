@@ -13,6 +13,7 @@ import {
 } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import * as _unitOfWork from "../api";
+import { Lesson } from "../Lesson";
 const { Option } = Select;
 
 export function ViewLecture() {
@@ -20,7 +21,7 @@ export function ViewLecture() {
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [courses, setCourses] = useState([]);
-
+  
   useEffect(() => {
     fetchCourses();
     fetchLecture();
@@ -36,8 +37,6 @@ export function ViewLecture() {
         form.setFieldsValue({ ...res, course: res.course?._id });
     }
   };
-
- 
 
   return (
     <>
@@ -60,17 +59,18 @@ export function ViewLecture() {
           </Col>
           <Col span={8}>
             <Form.Item
-              label="Tên bài học"
+              label="Tên bài giảng"
               name="name"
-              rules={[{ required: true, message: "Vui lòng nhập tên bài học" }]}
+              rules={[{ required: true, message: "Vui lòng chọn bài giảng" }]}
             >
-              <Input placeholder="Tên bài học"></Input>
+             <Input></Input>
             </Form.Item>
           </Col>
-
+          
+          <Lesson lectureId={param.id}></Lesson>
           <Col span={24} style={{ textAlign: "right" }}>
             <Button onClick={() => navigate(-1)}>Quay lại</Button>
-           
+          
           </Col>
         </Row>
       </Form>

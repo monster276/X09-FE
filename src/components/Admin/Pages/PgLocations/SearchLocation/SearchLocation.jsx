@@ -26,7 +26,7 @@ const SearchLocation = () => {
   } = useContext(ListContext);
 
 
-  const debounced = SreachDeBounce(searchValue , 700)
+  const debounced = SreachDeBounce(searchValue , 1000)
   // get data
   useEffect(() => {
     getSearchData();
@@ -111,10 +111,10 @@ const SearchLocation = () => {
             onSelect={onSelect}
           >
             <Search
-              className="Search"
               size="large"
               placeholder="nhập tìm kiếm"
               enterButton="Tìm Kiếm"
+              onSearch={getSearchData}
               onChange={(e) => setSearchValue(e.target.value)}
               value={debounced}
             />
@@ -122,7 +122,7 @@ const SearchLocation = () => {
         </Space>
         <Space>
           <Button
-            type="primary"
+            // type="primary"
             onClick={handleCreateCancel}
             className="ButtonTM"
             Key={handleCreateCancel}

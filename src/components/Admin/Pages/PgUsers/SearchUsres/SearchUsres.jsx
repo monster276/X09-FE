@@ -117,7 +117,7 @@ const SearchUsers = () => {
         </Space>
         <Space>
           <Button
-            type="primary"
+            // type="primary"
             onClick={handleCreateCancel}
             className="ButtonTM"
             Key="id"

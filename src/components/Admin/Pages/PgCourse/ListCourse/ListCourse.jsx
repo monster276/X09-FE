@@ -5,10 +5,12 @@ import EditCourse from "../EditCourse/EditCourse";
 import DetailCourse from "../DetailCourse/DetailCourse";
 import DeleteCourse from "../DeleteCourse/DeleteCourse";
 import SearchCourse from "../Search/SearchCourse";
+
 import Pagination from "@mui/material/Pagination";
 import { Table, Space, Button } from "antd";
-const baseUrl = "https://x09-be.onrender.com/api/courses";
 
+import swal from "sweetalert";
+const baseUrl = "https://x09-be.onrender.com/api/courses";
 const Layout = {
   labelCol: {
     span: 8,
@@ -114,31 +116,6 @@ const ListCourse = () => {
         })),
     },
     {
-      title: "Thường Lượng KH",
-      dataIndex: "courseTime",
-      key: "courseTime",
-      width: 90,
-    },
-    {
-      title: "Thường Lượng Giờ Học",
-      dataIndex: "classTime",
-      key: "classTime",
-      width: 90,
-    },
-    {
-      title: "Số Học Sinh",
-      dataIndex: "maxNumberOfStudents",
-      key: "maxNumberOfStudents",
-      width: 90,
-    },
-    {
-      title: "Ảnh",
-      textAlign: "center",
-      dataIndex: "image",
-      key: "image",
-      width: 200,
-    },
-    {
       title: "Chức Năng",
       width: 100,
       render: (fila) => (
@@ -151,13 +128,13 @@ const ListCourse = () => {
             {" "}
             Chỉnh Sửa{" "}
           </Button>
-          <Button
+          {/* <Button
             style={{ background: "red", color: "white" }}
             onClick={() => SeleArtista(fila, "Delete")}
           >
             {" "}
             xóa{" "}
-          </Button>
+          </Button> */}
           <Button
             style={{ background: "green", color: "white" }}
             onClick={() => SeleDetail(fila, "Detail")}
@@ -197,23 +174,20 @@ const ListCourse = () => {
       <div>
         <SearchCourse />
         <div>
-          {loading ? (
-            "Loading"
-          ) : (
-            <Table
-              className="TableCS"
-              columns={columns}
-              dataSource={data}
-              rowKey="Id"
-              pagination={false}
-            ></Table>
-          )}
+          <Table
+            loading={loading}
+            className="TableCS"
+            columns={columns}
+            dataSource={data}
+            rowKey="Id"
+            pagination={false}
+          ></Table>
           <Pagination
             style={{ marginLeft: 920, marginTop: 20, marginBottom: 20 }}
             variant="outlined"
             shape="rounded"
             color="secondary"
-            count={10}
+            count={3}
             page={page}
             onChange={handleChangePagination}
           />

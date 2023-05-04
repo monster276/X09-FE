@@ -13,6 +13,7 @@ import {
 } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import * as _unitOfWork from "../api";
+import { Lesson } from "../Lesson";
 const { Option } = Select;
 
 export function UpdateLecture() {
@@ -20,6 +21,7 @@ export function UpdateLecture() {
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [courses, setCourses] = useState([]);
+  const [lessons,setLessons] = useState([])
 
   useEffect(() => {
     fetchCourses();
@@ -27,7 +29,7 @@ export function UpdateLecture() {
   }, []);
 
   const fetchCourses = async () => {
-    let res = await _unitOfWork.getAllCourse();
+    let res = await _unitOfWork.getAllCourse({lessons:param.id});
     if (res) setCourses(res.courses);
   };
   const fetchLecture = async () => {
@@ -79,7 +81,7 @@ export function UpdateLecture() {
               <Input placeholder="Tên bài học"></Input>
             </Form.Item>
           </Col>
-
+          <Lesson lectureId={param.id}></Lesson>
           <Col span={24} style={{ textAlign: "right" }}>
             <Button onClick={() => navigate(-1)}>Quay lại</Button>
             <Button type="primary" htmlType="submit">

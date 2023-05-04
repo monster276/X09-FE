@@ -1,108 +1,27 @@
 import { Table, Select, Input, InputNumber } from "antd";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { path } from "../Router/RouterConfig";
+import * as _unitOfWork from "../api"
+import { useEffect, useState } from "react";
+
+
 
 const { Option } = Select;
 
-const course = {
-  name: "X-Cater",
-};
-const student = [
-  {
-    stt: "1",
-    studentName: "Hieu Trung Nguyen",
-    evaluates: [
-      {
-        lectureId: "1",
-        attendance: "DUNG_GIO",
-        point: "9",
-        comment: "okokok",
-      },
-      {
-        lectureId: "2",
-        attendance: "MUON",
-        point: "6",
-        comment: "di muon",
-      },
-      {
-        lectureId: "3",
-        attendance: "MUON",
-        point: "3",
-        comment: "di muon",
-      },
-    ],
-  },
-  {
-    stt: "1",
-    studentName: "Nguyen Trung Hieu",
-    evaluates: [
-      {
-        lectureId: "1",
-        attendance: "DUNG_GIO",
-        point: "10",
-        comment: "okokok",
-      },
-      {
-        lectureId: "2",
-        attendance: "MUON",
-        point: "5",
-        comment: "di muon",
-      },
-      {
-        lectureId: "3",
-        attendance: "VANG",
-        point: "0",
-        comment: "vang",
-      },
-    ],
-  },
-  {
-    stt: "2",
-    studentName: "Nguyen Hieu Trung",
-    evaluates: [
-      {
-        lectureId: "1",
-        attendance: "DUNG_GIO",
-        point: "8",
-        comment: "okokok",
-      },
-      {
-        lectureId: "2",
-        attendance: "MUON",
-        point: "3",
-        comment: "di muon",
-      },
-      {
-        lectureId: "3",
-        attendance: "MUON",
-        point: "1",
-        comment: "muon",
-      },
-    ],
-  },
-];
-const schedule = [
-  {
-    id: "1",
-    date: "01/03/2023",
-    lectureId: "1",
-    lectureName: "Bài học 1",
-  },
-  {
-    id: "2",
-    date: "02/03/2023",
-    lectureId: "2",
-    lectureName: "Bài học 2",
-  },
-  {
-    id: "3",
-    date: "03/03/2023",
-    lectureId: "3",
-    lectureName: "Bài học 3",
-  },
-];
-
 export function ClassroomDetail() {
+  const params = useParams();
+  const [attendances,setAttendances] = useState([])
+  const [lessons,setLessons] = useState([])
+
+  useEffect(()=> {fetchAttendance()},[])
+  
+  const fetchAttendance = async () => {
+    let res = await _unitOfWork.getAllAttendance({classroom:params.id})
+    if(res){
+      setAttendances(res.studentsAttendances)
+      setLessons(res.studentsAttendances[0].attendances)
+    }
+  } 
   const studentColumns = [
     {
       title: "STT",
@@ -110,36 +29,40 @@ export function ClassroomDetail() {
       key: "stt",
     },
     {
-      title: "Khóa Học",
-      dataIndex: "course",
-      key: "course",
-      render: () => {
-        return <span>{course.name}</span>;
+      title: "Lop Học",
+      dataIndex: "classroomName",
+      key: "classroomName",
+      render: (text,record) => {
+        return <span>{record.classroom?.name}</span>;
       },
     },
     {
       title: "Họ tên",
       dataIndex: "studentName",
       key: "studentName",
+      render: (text,record) => {
+        return <span>{record.student?.fullName}</span>;
+      },
     },
   ];
-  const scheduleColums = schedule
+  const scheduleColums = lessons
     .map((s) => {
       return {
-        title: s.date,
+        title: s.lesson,
         children: [
           {
             title: "Điểm danh",
             dataIndex: s.id,
             key: s.id,
+            className:"attend-col",
             render: (text, record) => {
-              let evaluate = record.evaluates.find(
-                (e) => e.lectureId == s.lectureId
+              let attend = record.attendances.find(
+                (e) => e.lesson == s.lesson
               );
               return (
                 <Select
                   style={{ width: "100%" }}
-                  defaultValue={evaluate?.attendance}
+                  defaultValue={attend?.presence}
                 >
                   <Option value="MUON">Muộn</Option>
                   <Option value="DUNG_GIO">Đúng giờ</Option>
@@ -153,14 +76,15 @@ export function ClassroomDetail() {
             title: "Chấm điểm",
             dataIndex: s.id,
             key: s.id,
+            className:"attend-col",
             render: (text, record) => {
-              let evaluate = record.evaluates.find(
-                (e) => e.lectureId == s.lectureId
+              let attend = record.attendances.find(
+                (e) => e.lesson == s.lesson
               );
               return (
                 <InputNumber
-                  style={{ width: "50%" }}
-                  defaultValue={evaluate?.point}
+                  style={{ width: "100%" }}
+                  defaultValue={attend?.score}
                   min="0"
                   max="10"
                 />
@@ -171,14 +95,15 @@ export function ClassroomDetail() {
             title: "Nhận xét",
             dataIndex: s.id,
             key: s.id,
+            className:"attend-col",
             render: (text, record) => {
-              let evaluate = record.evaluates.find(
-                (e) => e.lectureId == s.lectureId
+              let attend = record.attendances.find(
+                (e) => e.lesson == s.lesson
               );
               return (
                 <Input
                   style={{ width: "100%" }}
-                  defaultValue={evaluate?.comment}
+                  defaultValue={attend?.comment}
                 ></Input>
               );
             },
@@ -191,8 +116,8 @@ export function ClassroomDetail() {
     <>
       <Table
         columns={[...studentColumns, ...scheduleColums]}
-        dataSource={student}
-        scroll={{ x: 2000 }}
+        dataSource={attendances}
+        scroll={{ x: true }}
       />
     </>
   );
