@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import "./index.css";
+import landing from '../../images/landing2.jpg'
 import { Layout, Menu, Button, Card, Image, Typography, Popover } from "antd";
 import {
   FacebookOutlined,
@@ -36,7 +37,7 @@ export default function Index(props) {
       <Header className="header">
         <div className="header-brand">
           <img
-            src="https://images.pling.com/img/00/00/37/10/41/1288292/309554906fbff6e7f5e2cb96338812db66cd.png"
+            src="https://i.pinimg.com/originals/1c/54/f7/1c54f7b06d7723c21afc5035bf88a5ef.png"
             alt=""
             className="brand-logo"
           />
@@ -60,16 +61,10 @@ export default function Index(props) {
       </Header>
       <Content className="body">
         <div className="banner">
+          <img src={landing} alt="" />
           <h1>
-            Cải thiện kỹ năng lập trình với EvoEdu - Nơi học tập và phát triển
-            kỹ năng lập trình chuyên nghiệp
+            WITH EVOEDU, WE CAN DO IT.
           </h1>
-        </div>
-        <div className="des">
-          <img
-            alt="sthing"
-            src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y29kaW5nfGVufDB8fDB8fA%3D%3D&w=1000&q=80"
-          />
           <p>
             EvoEdu là trang web đào tạo lập trình chuyên nghiệp với chương trình
             đào tạo đa dạng và phong phú. Các giảng viên của chúng tôi là các
@@ -78,31 +73,33 @@ export default function Index(props) {
             cả các đối tượng học viên, từ người mới bắt đầu đến những người muốn
             nâng cao kỹ năng của mình.
           </p>
+          <button>KHOÁ HỌC</button>
         </div>
-        <h5 id="content-path">EvoEdu cùng các lộ trình dành cho</h5>
+        <h5 id="content-path">TỰ TIN CÙNG CÁC LỘ TRÌNH HỌC</h5>
         <div className="path">
           <Card className="path-card1">
-            <SmileOutlined style={{ fontSize: "32px" }} />
+            <SmileOutlined style={{ fontSize: "22px", margin: "15px" }} />
             <Title level={3}>Trẻ em</Title>
-            <Paragraph style={{ fontSize: "28px" }}>
+            <Paragraph style={{ fontSize: "19px" }}>
               Độ tuổi từ 9 đến 15 tuổi
             </Paragraph>
           </Card>
           <Card className="path-card2">
-            <UserOutlined style={{ fontSize: "32px" }} />
+            <UserOutlined style={{ fontSize: "22px",margin: "15px" }} />
             <Title level={3}>Thanh thiếu niên</Title>
-            <Paragraph style={{ fontSize: "28px" }}>
+            <Paragraph style={{ fontSize: "19px" }}>
               Độ tuổi từ 15 đến 18 tuổi
             </Paragraph>
           </Card>
           <Card className="path-card3">
-            <UserSwitchOutlined style={{ fontSize: "32px" }} />
+            <UserSwitchOutlined style={{ fontSize: "22px",margin: "15px" }} />
             <Title level={3}>Người lớn</Title>
-            <Paragraph style={{ fontSize: "28px" }}>
+            <Paragraph style={{ fontSize: "19px" }}>
               Độ tuổi từ sinh viên đến đi làm
             </Paragraph>
           </Card>
         </div>
+        <h5 id="content-path">CÁC KHOÁ HỌC CỦA CHÚNG TÔI</h5>
         <div className="spec">
           <div className="course1">
             {!loading ? (
@@ -113,7 +110,7 @@ export default function Index(props) {
                   hoverable
                   cover={
                     <Link to={`/detail/${course._id}`}>
-                      <img alt="example" src={course.image} />
+                      <img alt="example" src={course.image} className="courseImg" />
                     </Link>
                   }
                 >
@@ -136,7 +133,7 @@ export default function Index(props) {
             )}
           </div>
           {!loading && (
-            <Button className="landing-btn">
+            <Button className="landing-btn" style={{ fontSize: "22px", background: "#1781c7", width: "400px", fontWeight: "600", color:"white" }}>
               <Link to="/course">Khám phá các khóa học ở đây</Link>
             </Button>
           )}
