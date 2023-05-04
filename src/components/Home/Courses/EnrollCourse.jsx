@@ -89,6 +89,7 @@ const EnrollCourse = (props) => {
               name="fullName"
               value={fullName}
               onChange={onChange}
+              required
             />
             <p>Email:</p>
             <Input
@@ -97,6 +98,7 @@ const EnrollCourse = (props) => {
               name="email"
               value={email}
               onChange={onChange}
+              required
             />
             <p>Số điện thoại:</p>
             <Input
@@ -105,6 +107,7 @@ const EnrollCourse = (props) => {
               name="phoneNumber"
               value={phoneNumber}
               onChange={onChange}
+              required
             />
             <p>Khóa học:</p>
             <Input

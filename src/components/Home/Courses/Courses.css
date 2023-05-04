@@ -25,21 +25,9 @@
   margin-right: 24px;
 }
 
-.footer2 {
-  width: 100%;
-  margin: 0;
-  margin-top: 10%;
-  background-color: #4a4a4a;
-  color: white;
-  font-size: 50px;
-  display: flex;
-  font-size: 25px;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
 .title-course {
   text-align: center;
-  font-size: 100px;
+  font-size: 60px;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 100;
 }
@@ -57,7 +45,7 @@
 .footer2 {
   width: 100%;
   margin: 0;
-  margin-top: 10%;
+  margin-top: 165%;
   background-color: #4a4a4a;
   color: white;
   font-size: 50px;
@@ -65,6 +53,8 @@
   font-size: 25px;
   justify-content: space-between;
   flex-wrap: wrap;
+  position: absolute;
+  bottom: -1900px;
 }
 
 .contents-course {
@@ -87,8 +77,6 @@
 
 .footer2 h6 {
   text-align: center;
-  display: flex;
-  margin-top: -10%;
 }
 
 .card5 {
@@ -96,8 +84,4 @@
   margin-top: 12%;
   margin-left: 2.5%;
   font-size: large;
-}
-
-.footer2 h6 {
-  text-align: center;
 }

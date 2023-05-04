@@ -28,7 +28,7 @@ const Courses = () => {
   });
 
   return (
-    <Layout>
+    <div>
       <Header className="header">
         <div className="header-brand">
           <img
@@ -127,7 +127,7 @@ const Courses = () => {
           <p>Khóa cho sinh viên, người đi làm: 02471105326</p>
         </div>
       </Footer>
-    </Layout>
+    </div>
   );
 };
 
