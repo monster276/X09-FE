@@ -11,13 +11,14 @@ import {
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import CourseContext from "./Context/course/CourseContext";
+import Loader from "../loading/Loader";
 const { Header, Content, Footer } = Layout;
 const { Title, Paragraph } = Typography;
 const { Meta } = Card;
 
 export default function Index(props) {
   const courseContext = useContext(CourseContext);
-  const { getNewCourses, courses, loading } = courseContext;
+  const { getNewCourses, courses, dispatch, loading } = courseContext;
 
   const formatter = new Intl.NumberFormat("vi-VN", {
     style: "currency",
@@ -25,6 +26,7 @@ export default function Index(props) {
   });
 
   useEffect(() => {
+    dispatch({ type: "SET_LOADING" });
     getNewCourses();
     // eslint-disable-next-line
   }, []);
@@ -125,18 +127,19 @@ export default function Index(props) {
               <div
                 style={{
                   color: "#000",
-                  marginTop: "344px",
-                  marginLeft: "600px",
+                  margin: "126px auto 0",
                   fontSize: "24px",
                 }}
               >
-                Loading...
+                <Loader />
               </div>
             )}
           </div>
-          <Button className="landing-btn">
-            <Link to="/course">Khám phá các khóa học ở đây</Link>
-          </Button>
+          {!loading && (
+            <Button className="landing-btn">
+              <Link to="/course">Khám phá các khóa học ở đây</Link>
+            </Button>
+          )}
         </div>
       </Content>
       <Footer className="footer1">
