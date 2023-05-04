@@ -41,7 +41,7 @@ export default function Index(props) {
             alt=""
             className="brand-logo"
           />
-          <div className="brand-name">EvoEdu</div>
+          <div className="brand-name"><Link to="/">EvoEdu</Link></div>
         </div>
         <Menu
           mode="horizontal"

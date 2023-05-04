@@ -1,6 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Layout, Menu, Button, Card } from "antd";
 import { Link, useParams } from "react-router-dom";
+import landing from '../../../images/landing2.jpg'
+
 import "./Detail.css";
 import {
   TeamOutlined,
@@ -15,6 +17,7 @@ import {
 } from "@ant-design/icons";
 import CourseContext from "../Context/course/CourseContext";
 import EnrollCourse from "./EnrollCourse";
+import { alignProperty } from "@mui/material/styles/cssUtils";
 
 const { Header, Content, Footer } = Layout;
 
@@ -38,15 +41,16 @@ const Detail = () => {
   };
 
   return (
-    <Layout>
+    <Layout >
+      <div className="container-body">  
       <Header className="header">
         <div className="header-brand">
           <img
-            src="https://images.pling.com/img/00/00/37/10/41/1288292/309554906fbff6e7f5e2cb96338812db66cd.png"
+            src="https://i.pinimg.com/originals/1c/54/f7/1c54f7b06d7723c21afc5035bf88a5ef.png"
             alt=""
             className="brand-logo"
           />
-          <div className="brand-name">EvoEdu</div>
+          <div className="brand-name"><Link to="/">EvoEdu</Link></div>
         </div>
         <Menu
           mode="horizontal"
@@ -69,25 +73,25 @@ const Detail = () => {
           <h4>Khóa học {`${course.name}`}</h4>
           <div className="des-course">
             <img alt="idk" src={`${course.image}`} />
-            <p>{course.description}</p>
+            <p style={{fontSize:"24px"}}>{course.description}</p>
           </div>
           <div className="detail-content1">
-            <Card className="detail-card" bordered={false}>
+            <Card className="detail-card" bordered={false} style={{height:"300px", alignItems:"center", justifyContent:"center"}}>
               <TeamOutlined className="detail-icons" />
               <h4 id="card-heading">Đối tượng</h4>
               <p>Những người hiện chưa có kiến thức nền tảng </p>
             </Card>
-            <Card className="detail-card" bordered={false}>
+            <Card className="detail-card" bordered={false} style={{height:"300px"}}>
               <ClockCircleOutlined className="detail-icons" />
               <h4 id="card-heading">Thời gian học</h4>
               <p>{course.courseTime}</p>
             </Card>
-            <Card className="detail-card" bordered={false}>
+            <Card className="detail-card" bordered={false} style={{height:"300px"}}>
               <CalendarOutlined className="detail-icons" />
               <h4 id="card-heading">Số buổi</h4>
               <p>16 buổi</p>
             </Card>
-            <Card className="detail-card" bordered={false}>
+            <Card className="detail-card" bordered={false} style={{height:"300px"}}>
               <CheckOutlined className="detail-icons" />
               <h4 id="card-heading">Số học viên</h4>
               <p>10-15 học viên/ nhóm lớp. Mentor theo dõi sát sao</p>
@@ -128,7 +132,7 @@ const Detail = () => {
               <p>
                 Được cam kết đầu ra, hỗ trợ giới thiệu việc làm, gần như 100%
                 các bạn sinh viên có khả năng đi làm fulltime có việc ngay sau
-                khi tốt nghiệp MindX.
+                khi tốt nghiệp EvoEdu
               </p>
             </Card>
             <Card className="detail-card1" bordered={false}>
@@ -156,6 +160,8 @@ const Detail = () => {
           />
         </div>
       </Content>
+      
+      </div>
       <Footer className="footer3">
         <div className="left-footer">
           <p>Email liên hệ: evoedu@gmail.com</p>
@@ -193,7 +199,7 @@ const Detail = () => {
           <p>Khóa thanh thiếu niên từ 15 - 18 tuổi: 0244306256</p>
           <p>Khóa cho sinh viên, người đi làm: 02471105326</p>
         </div>
-      </Footer>
+        </Footer>
     </Layout>
   );
 };
