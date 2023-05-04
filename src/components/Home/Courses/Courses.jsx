@@ -34,11 +34,11 @@ const Courses = () => {
       <Header className="header">
         <div className="header-brand">
           <img
-            src="https://images.pling.com/img/00/00/37/10/41/1288292/309554906fbff6e7f5e2cb96338812db66cd.png"
+            src="https://i.pinimg.com/originals/1c/54/f7/1c54f7b06d7723c21afc5035bf88a5ef.png"
             alt=""
             className="brand-logo"
           />
-          <div className="brand-name">EvoEdu</div>
+          <div className="brand-name"><Link to="/">EvoEdu</Link></div>
         </div>
         <Menu
           mode="horizontal"
