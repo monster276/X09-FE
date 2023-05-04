@@ -9,15 +9,17 @@ import {
   TwitterOutlined,
 } from "@ant-design/icons";
 import CourseContext from "../Context/course/CourseContext";
+import Loader from "../../loading/Loader";
 
 const { Header, Content, Footer } = Layout;
 const { Meta } = Card;
 
 const Courses = () => {
   const courseContext = useContext(CourseContext);
-  const { getCourses, courses, loading } = courseContext;
+  const { getCourses, courses, loading, dispatch } = courseContext;
 
   useEffect(() => {
+    dispatch({ type: "SET_LOADING" });
     getCourses();
     // eslint-disable-next-line
   }, []);
@@ -79,12 +81,11 @@ const Courses = () => {
             <div
               style={{
                 color: "#000",
-                marginTop: "344px",
-                marginLeft: "600px",
+                margin: "400px auto 0",
                 fontSize: "24px",
               }}
             >
-              Loading...
+              <Loader />
             </div>
           )}
         </div>
