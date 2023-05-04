@@ -4,6 +4,7 @@ body {
 }
 
 img {
+
   width: 100%;
 }
 
@@ -35,7 +36,7 @@ p {
 }
 
 .header {
-  position: relative;
+  position: fixed;
   top: 0px;
   left: 0px;
   width: 100%;
@@ -43,6 +44,7 @@ p {
   justify-content: space-between;
   gap: 20px;
   background-color: #fff;
+  z-index: 10;
 }
 
 .header-nav {
@@ -71,6 +73,7 @@ p {
 
 .header .login-btn {
   background-color: #3498db;
+  margin-right: 20px;
 }
 
 .body {
@@ -101,22 +104,49 @@ p {
 .banner {
   width: 100%;
   height: 700px;
-  background: linear-gradient(to right, #24252e, #121218);
+  background: white;
+  display: flex;
 }
 
 .banner h1 {
   text-align: center;
-  font-size: 60px;
-  padding-top: 5%;
-  font-weight: 700;
-  color: white;
-  font-family: Arial, Helvetica, sans-serif;
+  font-size: 40px;
+  padding-top: 10%;
+  padding-left: 65%;
+  font-weight: 800;
+  color: rgb(173, 102, 170);
+  font-family: 'Poppins', sans-serif;
+  font-style: italic;
+  position: absolute;
 }
-
+.banner p {
+  text-align: center;
+  font-size: 20px;
+  padding-top: 17%;
+  padding-left: 63%;
+  padding-right: 20px;
+  font-weight: 50;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  position: absolute;
+}
+.banner button {
+  position: absolute;
+  background-color: #ff6b6b;
+  margin-top: 27%;
+  margin-left: 75%;
+  width: 200px;
+  height: 60px;
+  padding: 5px;
+  border-radius: 8px;
+  font-size: 25px;
+  font-weight: bold;
+  color: white;
+}
 .banner img {
-  width: 30%;
-  margin-top: 1%;
-  margin-left: 35%;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
 .des {
@@ -141,21 +171,22 @@ p {
 }
 
 .spec {
-  margin-top: 5%;
 }
 
 .course1 {
   display: flex;
   flex-wrap: wrap;
+  padding: 0;
 }
 .course1 .ant-card {
   width: 30%;
   margin-left: 2.5%;
 }
 
+
 .course2 {
   display: flex;
-  margin-top: 3%;
+  margin-top: 20px;
 }
 .course2 .ant-card {
   width: 30%;
@@ -170,7 +201,7 @@ p {
 .footer1 {
   width: 100%;
   margin: 0;
-  margin-top: 165%;
+  margin-top: 5%;
   background-color: #4a4a4a;
   color: white;
   font-size: 50px;
@@ -179,7 +210,7 @@ p {
   justify-content: space-between;
   flex-wrap: wrap;
   position: absolute;
-  bottom: -3000px;
+  bottom: -1530px;
 }
 
 .text {
@@ -196,9 +227,11 @@ p {
   margin-left: 40%;
   font-size: 25px;
   border-radius: 10px;
+  background-color: #3498db;
 }
 
 .path-card1 {
+  align-items: center;
   width: 20%;
   height: 200px;
   margin-top: 2%;
@@ -220,19 +253,31 @@ p {
   margin-top: 2%;
   margin-left: 10%;
   background: linear-gradient(to right, #f6e58d, #ffbe76);
+  font-size: 18px;
 }
 
 .path {
-  width: 100%;
+  width: 80%;
   height: 300px;
   display: flex;
   background: linear-gradient(to right, #ff6b6b, #c0c0c0);
+  margin-top: 30px;
+  
+  align-items: center;
+  margin-left: 10%;
+  border-radius: 16px;
+  font-size: 18px;
 }
 
 #content-path {
   text-align: center;
-  font-size: 60px;
-  margin-top: 5%;
+  font-size: 30px;
+  margin-top: 30px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  font-style: italic;
+  color: rgb(173, 102, 170);
+
 }
 
 .left-footer {
@@ -240,7 +285,9 @@ p {
 }
 
 .left-footer p {
-  font-size: 22px;
+  font-size: 18px;
+  margin-bottom: 5px;
+  margin-top: 5px;
 }
 
 .mid-footer {
@@ -249,11 +296,20 @@ p {
 
 .mid-footer a {
   margin-left: 20%;
-  font-size: 40px;
+  font-size: 30px;
 }
 
 .right-footer {
   width: 33.3%;
+  font-size: 18px;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  padding-left: 100px;
+}
+.right-footer p {
+  font-size: 18px;
+  margin-bottom: 5px;
+  margin-top: 5px;
 }
 
 .footer1 h6 {
@@ -262,4 +318,7 @@ p {
 
 .paragraph-large li {
   list-style: none;
+}
+.brand-name {
+  font-weight: 700;
 }

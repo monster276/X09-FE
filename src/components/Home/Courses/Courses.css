@@ -68,12 +68,7 @@
   margin-top: -10%;
 }
 
-.card5 {
-  width: 30%;
-  margin-top: 12%;
-  margin-left: 2.5%;
-  font-size: large;
-}
+
 
 .footer2 h6 {
   text-align: center;
@@ -81,7 +76,7 @@
 
 .card5 {
   width: 30%;
-  margin-top: 12%;
+  margin-top: 50px;
   margin-left: 2.5%;
   font-size: large;
 }
