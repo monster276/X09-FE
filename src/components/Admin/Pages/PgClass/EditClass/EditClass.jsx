@@ -202,19 +202,19 @@ const EditClass = ({ classId }) => {
       render: () => <Checkbox value="8">Chủ nhật</Checkbox>,
     },
   ];
-  // const attendanceColumns = [
-  //   {
-  //     title: "STT",
-  //     dataIndex: "stt",
-  //     key: "stt",
-  //   },
-  //   {
-  //     title: "Họ tên",
-  //     dataIndex: "fullName",
-  //     key: "fullName",
-  //     render: (value, record) => <>{record.student?.fullName}</>,
-  //   },
-  // ];
+  const attendanceColumns = [
+    {
+      title: "STT",
+      dataIndex: "stt",
+      key: "stt",
+    },
+    {
+      title: "Họ tên",
+      dataIndex: "fullName",
+      key: "fullName",
+      render: (value, record) => <>{record.student?.fullName}</>,
+    },
+  ];
   const enrollColumns = [
     {
       title: "STT",
@@ -360,6 +360,9 @@ const EditClass = ({ classId }) => {
                   ))}
                 </Select>
               </Form.Item>
+            </Col>
+            <Col span={24}>
+              <Table columns={attendanceColumns} dataSource={attendances} />
             </Col>
             {/* <Form.Item name="students">
               <Col span={24}>
