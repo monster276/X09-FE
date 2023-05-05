@@ -4,7 +4,6 @@ body {
 }
 
 img {
-
   width: 100%;
 }
 
@@ -115,7 +114,7 @@ p {
   padding-left: 65%;
   font-weight: 800;
   color: rgb(173, 102, 170);
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-style: italic;
   position: absolute;
 }
@@ -184,7 +183,6 @@ p {
   margin-left: 2.5%;
 }
 
-
 .course2 {
   display: flex;
   margin-top: 20px;
@@ -211,7 +209,7 @@ p {
   justify-content: space-between;
   flex-wrap: wrap;
   position: absolute;
-  bottom: -1530px;
+  bottom: -1800px;
 }
 
 .text {
@@ -263,7 +261,7 @@ p {
   display: flex;
   background: linear-gradient(to right, #ff6b6b, #c0c0c0);
   margin-top: 30px;
-  
+
   align-items: center;
   margin-left: 10%;
   border-radius: 16px;
@@ -277,8 +275,7 @@ p {
   font-weight: bold;
   font-style: italic;
   color: rgb(173, 102, 170);
-  font-family: 'Montserrat', sans-serif;
-
+  font-family: "Montserrat", sans-serif;
 }
 
 .left-footer {
