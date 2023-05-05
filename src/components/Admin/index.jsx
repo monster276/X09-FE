@@ -73,10 +73,12 @@ export default function Index() {
         <Footer
           style={{
             textAlign: "center",
+            fontSize: "22px",
+            fontWeight:"bold"
           }}
         >
           {/* <FooterPage /> */}
-          Team 2 ©2023 Web Training Management
+          EVO EDU ©2023 Web Training Management
         </Footer>
       </Layout>
     </div>

@@ -23,7 +23,7 @@ const Homepage = () => {
     return `${minute}:${second}`;
   };
   return (
-    <div>
+    <div className="main-container" style={{margin: "0 auto"}}>
       <Row>
         <Col style={{ marginLeft: 42 }} span={6}>
           <Link to="/">
@@ -113,7 +113,7 @@ const Homepage = () => {
         }}
       >
         <ReactPlayer
-          url="https://www.youtube.com/watch?v=R4crl5ivIHs"
+          url="https://www.youtube.com/watch?v=AZ0ja83nMVc"
           width="1240px"
           height="660px"
           playing={true}
