@@ -72,20 +72,24 @@ const SearchClass = () => {
 
   const getSearchData = async () => {
     const { data } = await Axios.get(
-      `https://x09-be.onrender.com/api/classrooms`
+      `https://x09-be.onrender.com/api/classrooms?keyword=${searchValue}`
     );
     setloading(false);
+
+    let count = 1;
+
     setData(
       data.classrooms.map((row) => ({
+        stt: count++,
         _id: row._id,
         id: row.id,
-        nameclass: row.name,
-        fullname: row.user._id,
-        fullname: row.user.fullName,
-        location: row.location._id,
-        location: row.location.name,
-        course: row.course._id,
-        course: row.course.name,
+        name: row.name,
+        user: row.user,
+        location: row.location,
+        course: row.course,
+        schedule: row.schedule,
+        numberOfLessons: row.numberOfLessons,
+        classTime: row.classTime,
       }))
     );
   };
@@ -278,7 +282,7 @@ const SearchClass = () => {
               width: 460,
               background: "none",
             }}
-            onSearch={(text) => setOptions(getPanelValue(text))}
+            onSubmit={(text) => setOptions(getPanelValue(text))}
             options={options}
             onSelect={onSelect}
             type="primary"
