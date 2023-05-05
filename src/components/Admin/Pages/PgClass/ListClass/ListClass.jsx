@@ -32,7 +32,7 @@ const ListClass = () => {
     id: "",
     course: "",
     location: "",
-    user: "6414297a8bf413a25126fc5e",
+    user: "",
     name: "",
     startTime: "",
     endTime: "",

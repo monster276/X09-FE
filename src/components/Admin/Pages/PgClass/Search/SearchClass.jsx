@@ -31,6 +31,8 @@ const SearchClass = () => {
   const [locations, setLocations] = useState([]);
   const [teachers, setTeachers] = useState([]);
   const [enrollCourses, setEnrollCourses] = useState([]);
+  const [courseId, setCourseId] = useState("");
+  const [locationId, setLocationId] = useState("");
 
   const [createModalOpen, setcreateModalOpen] = useState(false);
   const {
@@ -54,7 +56,7 @@ const SearchClass = () => {
     getEnrollCourse();
     getTeachers();
     // fetchTeacher();
-  }, []);
+  }, [courseId, locationId]);
   useEffect(() => {
     getSearchData();
   }, [debounced]);
@@ -134,7 +136,7 @@ const SearchClass = () => {
 
   const getEnrollCourse = async () => {
     const { data } = await Axios.get(
-      `https://x09-be.onrender.com/api/enrollCourse`
+      `https://x09-be.onrender.com/api/enrollCourse?course=${courseId}&location=${locationId}`
     );
 
     setloading(false);
@@ -322,11 +324,13 @@ const SearchClass = () => {
                 >
                   <Select
                     placeholder="Khóa học"
-                    onChange={(postData) =>
+                    onChange={(value) => {
                       handeChange({
-                        target: { value: postData, name: "course" },
-                      })
-                    }
+                        target: { value: value, name: "course" },
+                      });
+                      console.log(value);
+                      setCourseId(value);
+                    }}
                   >
                     {courses?.map((item, index) => (
                       <Option id={index} key={item._id}>
@@ -346,11 +350,12 @@ const SearchClass = () => {
                 >
                   <Select
                     placeholder="Cơ sở"
-                    onChange={(postData) =>
+                    onChange={(value) => {
                       handeChange({
-                        target: { value: postData, name: "location" },
-                      })
-                    }
+                        target: { value: value, name: "location" },
+                      });
+                      setLocationId(value);
+                    }}
                   >
                     {locations?.map((item, index) => (
                       <Option id={index} key={item._id}>
