@@ -1,10 +1,13 @@
 import { useState } from "react";
-import { Menu, Button } from "antd";
+import { Menu, Button, Space } from "antd";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { path } from "../Router/RouterConfig";
 import { Link } from "react-router-dom";
 import "./Menu.css";
-
+import {
+  HomeOutlined,
+  ReadOutlined,
+} from "@ant-design/icons";
 function MenuComponent() {
   const [collapsed, setCollapsed] = useState(false);
   const toggleCollapsed = () => {
@@ -13,7 +16,16 @@ function MenuComponent() {
 
   return (
     <>
-      <Button
+      <img
+        src="	https://i.pinimg.com/originals/1c/54/f7/1c54f7b06d7723c21afc5035bf88a5ef.png"
+        style={{
+          height: 100,
+          width: 130,
+          marginLeft: 31,
+          marginTop: 5,
+        }}
+      />
+      {/* <Button
         type="primary"
         onClick={toggleCollapsed}
         style={{
@@ -21,21 +33,27 @@ function MenuComponent() {
         }}
       >
         {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-      </Button>
+      </Button> */}
       <Menu
         defaultSelectedKeys={["1"]}
         mode="inline"
         theme="dark"
         inlineCollapsed={collapsed}
       >
-        <Menu.Item key="1">
+        <Menu.Item key="1" style={{ marginTop: 30 }}>
           <Link to={path.classroom}>
-            <span>Lớp học</span>
+            <Space>
+              <HomeOutlined style={{ fontSize: 15, marginBottom: 15 }} />
+              <span>Lớp học</span>
+            </Space>
           </Link>
         </Menu.Item>
         <Menu.Item key="2">
           <Link to={path.lecture}>
-            <span>Bài giảng</span>
+            <Space>
+              <ReadOutlined style={{ fontSize: 15, marginBottom: 15 }} />
+              <span>Bài giảng</span>
+            </Space>
           </Link>
         </Menu.Item>
         {/* <Menu.Item key="3">

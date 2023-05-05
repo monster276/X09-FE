@@ -1,7 +1,22 @@
-.container--header{
+/* .container--header{
     background-color: #BAA3A3;
     width: 100%;
     display: flex;
     justify-content: flex-end;
     
+} */
+.Buttonheader{
+    background: blue !important;
+    height: 40px;
+    width: 140px;
+    color: white;
+    font-size: 20;
+    border: none;
 }
+:hover.Buttonheader {
+    height: 40px;
+    font-size: 20;
+    background: red !important;
+    color: white !important;
+    text-decoration: none;
+} 

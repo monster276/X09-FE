@@ -150,13 +150,8 @@ const EditCourse = () => {
             />
           </Item>
 
-          <Item label="ảnh" key="image">
-            <Input
-              disabled
-              name="image"
-              onChange={handeChange}
-              value={postData && postData.image}
-            />
+          <Item label="ẢNH">
+            <img name="image" src={postData.image} />
           </Item>
         </Form>
       </Modal>

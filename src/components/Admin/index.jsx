@@ -76,7 +76,7 @@ export default function Index() {
           }}
         >
           {/* <FooterPage /> */}
-          Ant Design ©2023 Created by Ant UED
+          Team 2 ©2023 Web Training Management
         </Footer>
       </Layout>
     </div>
