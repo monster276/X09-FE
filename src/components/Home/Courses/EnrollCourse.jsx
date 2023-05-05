@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import { Button, Select, Input } from "antd";
 import { ToastContainer, toast } from "react-toastify";
 import { CloseOutlined } from "@ant-design/icons";
+import { useForm } from "react-hook-form";
 import EnrollContext from "../Context/enrollCourse/EnrollContext";
 import LocationContext from "../Context/location/LocationContext";
 import "./Detail.css";
@@ -13,13 +14,19 @@ const EnrollCourse = (props) => {
   const { addEnrollCourse } = enrollContext;
   const locationContext = useContext(LocationContext);
   const { getLocations, locations } = locationContext;
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
   const [enrollCourse, setEnrollCourse] = useState({
     fullName: "",
     email: "",
     phoneNumber: "",
     course: props.CourseId,
-    location: "",
+    location: "64435027edac2684b9443bb5",
   });
 
   const { fullName, email, phoneNumber, location } = enrollCourse;
@@ -50,67 +57,121 @@ const EnrollCourse = (props) => {
     props.setIsOpen(false);
   };
 
+  console.log(watch("fullName", "email", "phoneNUmber"));
+
   return (
-    <Modal isOpen={props.isOpen} onRequestClose={props.handleCloseModal} style={{ margintop:"2%"}}>
+    <Modal
+      isOpen={props.isOpen}
+      onRequestClose={props.handleCloseModal}
+      style={{ margintop: "2%" }}
+    >
       <ToastContainer />
-      <form onSubmit={onSubmit}>
-        <CloseOutlined className="regis-btn" onClick={props.handleCloseModal} style={{ paddingTop:"2%"}} />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <CloseOutlined
+          className="regis-btn"
+          onClick={props.handleCloseModal}
+          style={{ paddingTop: "2%" }}
+        />
         <div className="regis-container">
           <div className="regis-pic">
-            <img
-              alt="idk"
-              src="https://wondercopier.in/Images/signup.png"
-            />
+            <img alt="idk" src="https://wondercopier.in/Images/signup.png" />
           </div>
           <div className="register-title">
             <h2>Đăng ký khóa học</h2>
             <p>Chọn cơ sở:</p>
-            <Select
+            <select
               className="select-regis"
               defaultValue="Chọn cơ sở"
-              style={{ width: 200 }}
               name="location"
               value={location}
-              onChange={(value) =>
+              onChange={(e) =>
                 setEnrollCourse({
                   ...enrollCourse,
-                  location: value,
+                  location: e.target.value,
                 })
               }
             >
               {locations.map((location) => (
-                <Option value={location._id}>{location.name}</Option>
+                <option value={location._id}>{location.name}</option>
               ))}
-            </Select>
+            </select>
             <p>Họ và tên:</p>
-            <Input
+            <input
+              {...register("fullName", {
+                required: true,
+                maxLength: 30,
+                pattern:
+                  /[^a-z0-9A-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễếệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]/u,
+              })}
               placeholder="Nhập vào đây"
               className="regis-input"
               name="fullName"
               value={fullName}
               onChange={onChange}
-              required
             />
+            {errors.fullName?.type === "required" && (
+              <p style={{ color: "red", fontSize: "16px" }}>
+                Không được để trống thông tin này
+              </p>
+            )}
+            {errors.fullName?.type === "maxLength" && (
+              <p style={{ color: "red", fontSize: "16px" }}>
+                độ dài không được quá 30 kí tự
+              </p>
+            )}
+            {errors.fullName?.type === "pattern" && (
+              <p style={{ color: "red", fontSize: "16px" }}>
+                Định dạng họ tên không đúng
+              </p>
+            )}
             <p>Email:</p>
-            <Input
+            <input
+              {...register("email", {
+                required: true,
+                pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              })}
               placeholder="Nhập vào đây"
               className="regis-input"
               name="email"
               value={email}
               onChange={onChange}
-              required
             />
+            {errors.email?.type === "required" && (
+              <p style={{ color: "red", fontSize: "16px" }}>
+                Không được để trống thông tin này
+              </p>
+            )}
+            {errors?.email?.type === "pattern" && (
+              <p style={{ color: "red", fontSize: "16px" }}>
+                Định dạng email không đúng
+              </p>
+            )}
             <p>Số điện thoại:</p>
-            <Input
+            <input
+              {...register("phoneNumber", {
+                required: true,
+                pattern:
+                  /^(?:0\.(?:0[0-9]|[0-9]\d?)|[0-9]\d*(?:\.\d{1,2})?)(?:e[+-]?\d+)?$/,
+              })}
               placeholder="Nhập vào đây"
               className="regis-input"
               name="phoneNumber"
               value={phoneNumber}
               onChange={onChange}
-              required
             />
+            {errors.phoneNumber?.type === "required" && (
+              <p style={{ color: "red", fontSize: "16px" }}>
+                Không được để trống thông tin này
+              </p>
+            )}
+            {errors.phoneNumber?.type === "pattern" && (
+              <p style={{ color: "red", fontSize: "16px" }}>
+                Định dạng số điện thoại không đúng
+              </p>
+            )}
             <p>Khóa học:</p>
-            <Input
+            <input
+              style={{ backgroundColor: "gray" }}
               placeholder="Nhập vào đây"
               className="regis-input"
               value={props.course.name}
