@@ -9,15 +9,17 @@ import {
   TwitterOutlined,
 } from "@ant-design/icons";
 import CourseContext from "../Context/course/CourseContext";
+import Loader from "../../loading/Loader";
 
 const { Header, Content, Footer } = Layout;
 const { Meta } = Card;
 
 const Courses = () => {
   const courseContext = useContext(CourseContext);
-  const { getCourses, courses, loading } = courseContext;
+  const { getCourses, courses, loading, dispatch } = courseContext;
 
   useEffect(() => {
+    dispatch({ type: "SET_LOADING" });
     getCourses();
     // eslint-disable-next-line
   }, []);
@@ -28,15 +30,15 @@ const Courses = () => {
   });
 
   return (
-    <Layout>
+    <div>
       <Header className="header">
         <div className="header-brand">
           <img
-            src="https://images.pling.com/img/00/00/37/10/41/1288292/309554906fbff6e7f5e2cb96338812db66cd.png"
+            src="https://i.pinimg.com/originals/1c/54/f7/1c54f7b06d7723c21afc5035bf88a5ef.png"
             alt=""
             className="brand-logo"
           />
-          <div className="brand-name">EvoEdu</div>
+          <div className="brand-name"><Link to="/">EvoEdu</Link></div>
         </div>
         <Menu
           mode="horizontal"
@@ -79,12 +81,11 @@ const Courses = () => {
             <div
               style={{
                 color: "#000",
-                marginTop: "344px",
-                marginLeft: "600px",
+                margin: "400px auto 0",
                 fontSize: "24px",
               }}
             >
-              Loading...
+              <Loader />
             </div>
           )}
         </div>
@@ -127,7 +128,7 @@ const Courses = () => {
           <p>Khóa cho sinh viên, người đi làm: 02471105326</p>
         </div>
       </Footer>
-    </Layout>
+    </div>
   );
 };
 

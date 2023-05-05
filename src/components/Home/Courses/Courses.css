@@ -25,23 +25,13 @@
   margin-right: 24px;
 }
 
-.footer2 {
-  width: 100%;
-  margin: 0;
-  margin-top: 10%;
-  background-color: #4a4a4a;
-  color: white;
-  font-size: 50px;
-  display: flex;
-  font-size: 25px;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
 .title-course {
   text-align: center;
-  font-size: 100px;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 100;
+  font-size: 40px;
+  color: rgb(173, 102, 170);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  margin-top: 5%;
 }
 
 .headdd {
@@ -57,7 +47,7 @@
 .footer2 {
   width: 100%;
   margin: 0;
-  margin-top: 10%;
+  margin-top: 165%;
   background-color: #4a4a4a;
   color: white;
   font-size: 50px;
@@ -65,6 +55,8 @@
   font-size: 25px;
   justify-content: space-between;
   flex-wrap: wrap;
+  position: absolute;
+  bottom: -1900px;
 }
 
 .contents-course {
@@ -75,29 +67,18 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  margin-top: -10%;
+  margin-top: 3%;
+}
+
+
+
+.footer2 h6 {
+  text-align: center;
 }
 
 .card5 {
   width: 30%;
-  margin-top: 12%;
+  margin-top: 50px;
   margin-left: 2.5%;
   font-size: large;
-}
-
-.footer2 h6 {
-  text-align: center;
-  display: flex;
-  margin-top: -10%;
-}
-
-.card5 {
-  width: 30%;
-  margin-top: 12%;
-  margin-left: 2.5%;
-  font-size: large;
-}
-
-.footer2 h6 {
-  text-align: center;
 }

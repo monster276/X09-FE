@@ -74,6 +74,7 @@ const CourseState = (props) => {
         course: state.course,
         error: state.error,
         loading: state.loading,
+        dispatch,
         getCourses,
         getNewCourses,
         getCourseDetail,

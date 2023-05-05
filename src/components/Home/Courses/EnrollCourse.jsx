@@ -51,15 +51,15 @@ const EnrollCourse = (props) => {
   };
 
   return (
-    <Modal isOpen={props.isOpen} onRequestClose={props.handleCloseModal}>
+    <Modal isOpen={props.isOpen} onRequestClose={props.handleCloseModal} style={{ margintop:"2%"}}>
       <ToastContainer />
       <form onSubmit={onSubmit}>
-        <CloseOutlined className="regis-btn" onClick={props.handleCloseModal} />
+        <CloseOutlined className="regis-btn" onClick={props.handleCloseModal} style={{ paddingTop:"2%"}} />
         <div className="regis-container">
           <div className="regis-pic">
             <img
               alt="idk"
-              src="https://media.istockphoto.com/id/1146311489/vi/anh/n%C3%BAt-register-tr%C3%AAn-b%C3%A0n-ph%C3%ADm-m%C3%A1y-t%C3%ADnh.jpg?s=170667a&w=0&k=20&c=b2JXZkTnmi1IE5baGUsYA1qBXJgXwOJy2cGVEtXnt94="
+              src="https://wondercopier.in/Images/signup.png"
             />
           </div>
           <div className="register-title">
@@ -89,6 +89,7 @@ const EnrollCourse = (props) => {
               name="fullName"
               value={fullName}
               onChange={onChange}
+              required
             />
             <p>Email:</p>
             <Input
@@ -97,6 +98,7 @@ const EnrollCourse = (props) => {
               name="email"
               value={email}
               onChange={onChange}
+              required
             />
             <p>Số điện thoại:</p>
             <Input
@@ -105,6 +107,7 @@ const EnrollCourse = (props) => {
               name="phoneNumber"
               value={phoneNumber}
               onChange={onChange}
+              required
             />
             <p>Khóa học:</p>
             <Input
