@@ -54,7 +54,9 @@ const EnrollCourse = (props) => {
     <Modal isOpen={props.isOpen} onRequestClose={props.handleCloseModal} style={{ margintop:"2%"}}>
       <ToastContainer />
       <form onSubmit={onSubmit}>
-        <CloseOutlined className="regis-btn" onClick={props.handleCloseModal} style={{ paddingTop:"2%"}} />
+        <CloseOutlined className="regis-btn" onClick={props.handleCloseModal} style={{
+          paddingTop: "2%"
+        }} />
         <div className="regis-container">
           <div className="regis-pic">
             <img
