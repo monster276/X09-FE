@@ -171,7 +171,7 @@ const ListLocation = () => {
           ></Table>
 
           <Pagination
-            style={{ marginLeft: 920, marginTop: 20, marginBottom: 20 }}
+            style={{ marginLeft: 990, marginTop: 20, marginBottom: 20 }}
             variant="outlined"
             shape="rounded"
             color="secondary"

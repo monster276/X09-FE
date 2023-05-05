@@ -21,7 +21,7 @@ function SideMenu() {
         <Space direction="vertical" className="img">
           <Space wrap size={16}>
             <img
-              src="https://cei.vn/wp-content/uploads/2019/08/khoa-hoc-va-hoc-phi-tai-trung-tam-anh-ngu-langmaster.jpg"
+              src="https://i.pinimg.com/originals/1c/54/f7/1c54f7b06d7723c21afc5035bf88a5ef.png"
               style={{
                 height: 120,
                 width: 120,

@@ -118,8 +118,8 @@ const DetailCourse = () => {
           </Item>
 
           <Item label="ẢNH">
-            <span name="image">{
-             postData.image}</span>
+            <img name="image" src={
+             postData.image}/>
           </Item>
         </Form>
       </Modal>

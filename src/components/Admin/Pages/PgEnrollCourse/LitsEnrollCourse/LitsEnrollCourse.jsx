@@ -29,7 +29,7 @@ const ListEnrollCourse = () => {
     setPage(value);
   };
   const getData = async () => {
-    const { data } = await Axios.get(`https://x09-be.onrender.com/api/enrollCourse`);
+    const { data } = await Axios.get(baseUrlenrollCourse+"?page=" + `${page}`);
     setloading(false);
     setData(
       data.enrollCourses.map((row) => ({
@@ -117,11 +117,11 @@ const ListEnrollCourse = () => {
             pagination={false}
           ></Table>
           <Pagination
-            style={{ marginLeft: 920, marginTop: 20, marginBottom: 20 }}
+            style={{ marginLeft: 990, marginTop: 20, marginBottom: 20 }}
             variant="outlined"
             shape="rounded"
             color="secondary"
-            count={10}
+            count={3}
             page={page}
             onChange={handleChangePagination}
           />
