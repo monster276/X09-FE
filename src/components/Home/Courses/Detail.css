@@ -1,3 +1,7 @@
+.container-body {
+  margin: 0 auto;
+  font-family: 'Montserrat', sans-serif;
+}
 #image {
   width: 45%;
   height: 500px;
@@ -43,9 +47,9 @@
 
 .container h4 {
   text-align: center;
-  font-size: 100px;
-  font-family: "Times New Roman", Times, serif;
-  font-weight: 100;
+  font-size: 40px;
+  
+  font-weight: bold;
   margin-top: 5%;
 }
 
@@ -71,8 +75,8 @@
 
 .detail-content2 {
   width: 100%;
-  height: 1000px;
-  margin-top: 10%;
+  height: 850px;
+  margin-top: 3%;
   display: flex;
 }
 
@@ -81,7 +85,7 @@
 }
 
 #card-heading {
-  font-size: 40px;
+  font-size: 20px;
   text-align: center;
 }
 
@@ -97,13 +101,13 @@
   width: 60%;
   height: 300px;
   display: flex;
-  margin-top: 2%;
+  margin-top: 5%;
   margin-left: 20%;
   background-color: rgb(87, 87, 87);
 }
 
 .des-course img {
-  width: 40%;
+  width: 60%;
   margin: 0;
 }
 
@@ -173,12 +177,13 @@
 }
 
 .detail-card1 p {
-  font-size: 25px;
+  font-size: 20px;
 }
 
 .detail-icons {
-  font-size: 200px;
-  margin-left: 17%;
+  font-size: 40px;
+  margin-left: 40%;
+  align-items: center;
 }
 
 ul {
@@ -207,7 +212,7 @@ li {
 .footer3 {
   width: 100%;
   margin: 0;
-  margin-top: 10%;
+  margin-top: 4%;
   background-color: #4a4a4a;
   color: white;
   font-size: 50px;
@@ -253,7 +258,7 @@ li {
 
 .modal-content p {
   margin-left: 38%;
-  font-size: 30px;
+  font-size: 20px;
   font-weight: 400;
 }
 
@@ -287,8 +292,9 @@ li {
 }
 
 .regis-pic img {
-  width: 100%;
+  width: 80%;
   height: 800px;
+  object-fit: cover;
 }
 
 .register-title {
@@ -297,13 +303,13 @@ li {
 
 .register-title h2 {
   text-align: center;
-  font-size: 70px;
+  font-size: 30px;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 .register-title p {
   color: black;
-  font-size: 30px;
+  font-size: 20px;
   margin-top: 3%;
   margin-left: 15%;
 }

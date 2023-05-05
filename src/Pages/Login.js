@@ -17,7 +17,6 @@ import { toast } from 'react-toastify'
 import { loginUser } from '../redux/apiRequest'
 import { useDispatch } from 'react-redux'
 
-
 const schema = yup.object({
   username: yup.string().required('Tên đăng nhập không được để trống'),
   password: yup.string().required('Mật khẩu không được để trống'),
@@ -61,7 +60,6 @@ const Login = () => {
       password: values.password,
     }
     loginUser(newUser, dispatch, navigate)
-    
   }
 
   return (
@@ -99,7 +97,7 @@ const Login = () => {
                 type="username"
                 name="username"
                 id="username"
-                className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none w-full pl-10"
+                className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none w-[350px] pl-10"
                 placeholder="Nhập tên đăng nhập"
               />
             </div>
@@ -118,7 +116,7 @@ const Login = () => {
                 type={togglePassword ? 'text' : 'password'}
                 name="password"
                 id="password"
-                className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none w-full pl-10"
+                className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none w-[350px] pl-10"
                 placeholder="Nhập mật khẩu"
                 control={control}
               />
@@ -137,7 +135,7 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="w-full my-5 py-2 bg-orange-400 shadow-lg shadow-orange-400/50 hover:shadow-orange-400/40 text-white font-semibold rounded-lg"
+            className="w-full my-5 py-2 bg-blue-400 shadow-lg hover:shadow-orange-400/40 text-white font-semibold rounded-lg"
             onClick={() => setLoading(true)}
             style={{ height: '50px' }}
           >
