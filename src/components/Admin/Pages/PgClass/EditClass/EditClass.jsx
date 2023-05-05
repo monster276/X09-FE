@@ -12,6 +12,7 @@ import {
   Row,
   Col,
 } from "antd";
+import Axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import swal from "sweetalert";
 import { ListContext } from "../ListClass/ListClass";
@@ -25,10 +26,11 @@ const EditClass = ({ classId }) => {
   const [classCodeArr, setClassCodeArr] = useState(["", "", ""]);
   const [courses, setCourses] = useState([]);
   const [locations, setLocations] = useState([]);
-  const [teachers, setTeachers] = useState([
-    { _id: "64141ea1e59fd2544534942a", name: "64141ea1e59fd2544534942a" },
-  ]);
+  const [teachers, setTeachers] = useState([]);
   const [attendances, setAttendances] = useState([]);
+  const [enrollCourses, setEnrollCourses] = useState([]);
+  const [courseId, setCourseId] = useState("");
+  const [locationId, setLocationId] = useState("");
   const {
     postData,
     showEditlModal,
@@ -47,6 +49,8 @@ const EditClass = ({ classId }) => {
       fetchCourses();
       // fetchTeacher();
       fetchAttendances();
+      getEnrollCourse();
+      getTeachers();
     }
   }, [classId]);
   useEffect(() => {
@@ -87,6 +91,51 @@ const EditClass = ({ classId }) => {
       setAttendances(
         res.studentsAttendances.map((c, i) => ({ ...c, stt: i + 1 }))
       );
+  };
+
+  const getEnrollCourse = async () => {
+    const { data } = await Axios.get(
+      `https://x09-be.onrender.com/api/enrollCourse`
+    );
+
+    setloading(false);
+    setEnrollCourses(
+      data.enrollCourses.map((row) => ({
+        _id: row._id,
+        fullName: row.fullName,
+        email: row.email,
+        phoneNumber: row.phoneNumber,
+        location: row.location,
+        course: row.course,
+      }))
+    );
+  };
+
+  const getTeachers = async () => {
+    const config = {
+      headers: {
+        token: `Bearer ${JSON.parse(localStorage.getItem("accesstoken"))}`,
+      },
+    };
+
+    const { data } = await Axios.get(
+      `https://x09-be.onrender.com/api/user`,
+      config
+    );
+
+    setTeachers(
+      data.users.map((row) => ({
+        _id: row._id,
+        fullName: row.fullName,
+        username: row.username,
+      }))
+    );
+  };
+
+  const handeChange = (e) => {
+    const { name, value } = e.target;
+    setPostData({ ...postData, [name]: value });
+    console.log(postData);
   };
 
   const onChangeCourse = (value) => {
@@ -153,7 +202,20 @@ const EditClass = ({ classId }) => {
       render: () => <Checkbox value="8">Chủ nhật</Checkbox>,
     },
   ];
-  const attendanceColumns = [
+  // const attendanceColumns = [
+  //   {
+  //     title: "STT",
+  //     dataIndex: "stt",
+  //     key: "stt",
+  //   },
+  //   {
+  //     title: "Họ tên",
+  //     dataIndex: "fullName",
+  //     key: "fullName",
+  //     render: (value, record) => <>{record.student?.fullName}</>,
+  //   },
+  // ];
+  const enrollColumns = [
     {
       title: "STT",
       dataIndex: "stt",
@@ -163,7 +225,28 @@ const EditClass = ({ classId }) => {
       title: "Họ tên",
       dataIndex: "fullName",
       key: "fullName",
-      render: (value, record) => <>{record.student?.fullName}</>,
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
+    },
+    {
+      title: "SĐT",
+      dataIndex: "phoneNumber",
+      key: "phoneNumber",
+    },
+    {
+      title: "Cơ sở",
+      dataIndex: "location",
+      key: "location",
+      render: (value, record) => <>{record.location?.name}</>,
+    },
+    {
+      title: "Khóa Học",
+      dataIndex: "course",
+      key: "course",
+      render: (value, record) => <>{record.course?.name}</>,
     },
   ];
   return (
@@ -272,27 +355,36 @@ const EditClass = ({ classId }) => {
                 <Select placeholder="Giảng viên">
                   {teachers?.map((item, index) => (
                     <Option id={index} key={item._id}>
-                      {item.name}
+                      {item.fullName}
                     </Option>
                   ))}
                 </Select>
               </Form.Item>
             </Col>
-            <Col span={24}>
-              <Table
-                rowSelection={{
-                  onChange: (selectedRowKeys, selectedRows) => {
-                    console.log(
-                      `selectedRowKeys: ${selectedRowKeys}`,
-                      "selectedRows: ",
-                      selectedRows
-                    );
-                  },            
-                }}
-                columns={attendanceColumns}
-                dataSource={attendances.map(e => ({...e,key:e._id}))}
-              />
-            </Col>
+            {/* <Form.Item name="students">
+              <Col span={24}>
+                <Table
+                  rowSelection={{
+                    onChange: (selectedRowKeys, selectedRows) => {
+                      console.log(
+                        `selectedRowKeys: ${selectedRowKeys}`,
+                        "selectedRows: ",
+                        selectedRows
+                      );
+                      handeChange({
+                        target: {
+                          value: selectedRowKeys,
+                          name: "students",
+                        },
+                      });
+                    },
+                  }}
+                  columns={enrollColumns}
+                  dataSource={enrollCourses.map((e) => ({ ...e, key: e._id }))}
+                />
+              </Col>
+            </Form.Item> */}
+
             <Col span={24} style={{ textAlign: "right", marginTop: 20 }}>
               <Button
                 style={{ background: "red", color: "white", marginLeft: 20 }}

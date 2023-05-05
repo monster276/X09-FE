@@ -76,11 +76,9 @@ const SearchClass = () => {
     );
     setloading(false);
 
-    let count = 1;
-
     setData(
-      data.classrooms.map((row) => ({
-        stt: count++,
+      data.classrooms.map((row, index) => ({
+        stt: index + 1,
         _id: row._id,
         id: row.id,
         name: row.name,
@@ -476,9 +474,9 @@ const SearchClass = () => {
               <Col span={24}>
                 <Form.Item
                   name="schedule"
-                  onChange={(postData) =>
+                  onChange={(value) =>
                     handeChange({
-                      target: { value: postData, name: "schedule" },
+                      target: { value: [value.target.value], name: "schedule" },
                     })
                   }
                 >
