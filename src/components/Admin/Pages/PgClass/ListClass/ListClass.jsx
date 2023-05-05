@@ -28,16 +28,16 @@ const ListClass = () => {
   const [EditsModalOpen, setEditModalOpen] = useState(false);
   const [DetailsModalOpen, setDetailModalOpen] = useState(false);
   const [postData, setPostData] = useState({
-    _id: "",
     id: "",
     course: "",
     location: "",
-    nameclass: "",
+    user: "",
+    name: "",
     startTime: "",
     endTime: "",
     numberOfLessons: "",
     classTime: "",
-    schedule: "",
+    schedule: ["2", "6"],
   });
   useEffect(() => {
     getData();

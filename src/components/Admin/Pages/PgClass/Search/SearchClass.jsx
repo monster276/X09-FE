@@ -3,7 +3,7 @@ import Axios from "axios";
 import "./Search.css";
 import swal from "sweetalert";
 import { ListContext } from "../ListClass/ListClass";
-import { SreachDeBounce } from "../../hooks"
+import { SreachDeBounce } from "../../hooks";
 
 import {
   Space,
@@ -29,10 +29,10 @@ const SearchClass = () => {
   const [classCodeArr, setClassCodeArr] = useState(["", "", ""]);
   const [courses, setCourses] = useState([]);
   const [locations, setLocations] = useState([]);
-  const [teachers, setTeachers] = useState([
-    { _id: "64141ea1e59fd2544534942a", name: "64141ea1e59fd2544534942a" },
-  ]);
+  const [teachers, setTeachers] = useState([]);
   const [enrollCourses, setEnrollCourses] = useState([]);
+  const [courseId, setCourseId] = useState("");
+  const [locationId, setLocationId] = useState("");
 
   const [createModalOpen, setcreateModalOpen] = useState(false);
   const {
@@ -48,13 +48,15 @@ const SearchClass = () => {
     baseUrlClass,
     Layout,
   } = useContext(ListContext);
-  
-  const debounced = SreachDeBounce(searchValue , 700)
+
+  const debounced = SreachDeBounce(searchValue, 700);
   useEffect(() => {
     getCourse();
     getLocation();
+    getEnrollCourse();
+    getTeachers();
     // fetchTeacher();
-  }, []);
+  }, [courseId, locationId]);
   useEffect(() => {
     getSearchData();
   }, [debounced]);
@@ -70,24 +72,26 @@ const SearchClass = () => {
 
   const getSearchData = async () => {
     const { data } = await Axios.get(
-      `https://x09-be.onrender.com/api/classrooms`
+      `https://x09-be.onrender.com/api/classrooms?keyword=${searchValue}`
     );
     setloading(false);
+
     setData(
-      data.classrooms.map((row) => ({
+      data.classrooms.map((row, index) => ({
+        stt: index + 1,
         _id: row._id,
         id: row.id,
-        nameclass: row.name,
-        fullname: row.user._id,
-        fullname: row.user.fullName,
-        location: row.location._id,
-        location: row.location.name,
-        course: row.course._id,
-        course: row.course.name,
+        name: row.name,
+        user: row.user,
+        location: row.location,
+        course: row.course,
+        schedule: row.schedule,
+        numberOfLessons: row.numberOfLessons,
+        classTime: row.classTime,
       }))
     );
   };
-  
+
   const handleCreateCancel = () => {
     setcreateModalOpen(!createModalOpen);
   };
@@ -131,6 +135,46 @@ const SearchClass = () => {
       }))
     );
   };
+
+  const getEnrollCourse = async () => {
+    const { data } = await Axios.get(
+      `https://x09-be.onrender.com/api/enrollCourse?course=${courseId}&location=${locationId}`
+    );
+
+    setloading(false);
+    setEnrollCourses(
+      data.enrollCourses.map((row) => ({
+        _id: row._id,
+        fullName: row.fullName,
+        email: row.email,
+        phoneNumber: row.phoneNumber,
+        location: row.location,
+        course: row.course,
+      }))
+    );
+  };
+
+  const getTeachers = async () => {
+    const config = {
+      headers: {
+        token: `Bearer ${JSON.parse(localStorage.getItem("accesstoken"))}`,
+      },
+    };
+
+    const { data } = await Axios.get(
+      `https://x09-be.onrender.com/api/user`,
+      config
+    );
+
+    setTeachers(
+      data.users.map((row) => ({
+        _id: row._id,
+        fullName: row.fullName,
+        username: row.username,
+      }))
+    );
+  };
+
   const onFinish = async (value) => {
     const config = {
       headers: {
@@ -234,9 +278,9 @@ const SearchClass = () => {
             style={{
               height: 10,
               width: 460,
-              background: "none"
+              background: "none",
             }}
-            onSearch={(text) => setOptions(getPanelValue(text))}
+            onSubmit={(text) => setOptions(getPanelValue(text))}
             options={options}
             onSelect={onSelect}
             type="primary"
@@ -282,11 +326,13 @@ const SearchClass = () => {
                 >
                   <Select
                     placeholder="Khóa học"
-                    onChange={(postData) =>
+                    onChange={(value) => {
                       handeChange({
-                        target: { value: postData, name: "course" },
-                      })
-                    }
+                        target: { value: value, name: "course" },
+                      });
+                      console.log(value);
+                      setCourseId(value);
+                    }}
                   >
                     {courses?.map((item, index) => (
                       <Option id={index} key={item._id}>
@@ -306,11 +352,12 @@ const SearchClass = () => {
                 >
                   <Select
                     placeholder="Cơ sở"
-                    onChange={(postData) =>
+                    onChange={(value) => {
                       handeChange({
-                        target: { value: postData, name: "location" },
-                      })
-                    }
+                        target: { value: value, name: "location" },
+                      });
+                      setLocationId(value);
+                    }}
                   >
                     {locations?.map((item, index) => (
                       <Option id={index} key={item._id}>
@@ -338,13 +385,13 @@ const SearchClass = () => {
               <Col span={8}>
                 <Form.Item
                   label="Tên lớp học"
-                  name="nameclass"
+                  name="name"
                   rules={[
                     { required: true, message: "Vui lòng nhập tên lớp học" },
                   ]}
                 >
                   <Input
-                    name="nameclass"
+                    name="name"
                     placeholder="Tên lớp học"
                     onChange={handeChange}
                   />
@@ -408,10 +455,17 @@ const SearchClass = () => {
               </Col>
               <Col span={8}>
                 <Form.Item label="Giảng viên" name="user">
-                  <Select placeholder="Giảng viên">
+                  <Select
+                    placeholder="Giảng viên"
+                    onChange={(postData) =>
+                      handeChange({
+                        target: { value: postData, name: "user" },
+                      })
+                    }
+                  >
                     {teachers?.map((item, index) => (
                       <Option id={index} key={item._id}>
-                        {item.name}
+                        {item.fullName}
                       </Option>
                     ))}
                   </Select>
@@ -420,9 +474,9 @@ const SearchClass = () => {
               <Col span={24}>
                 <Form.Item
                   name="schedule"
-                  onChange={(postData) =>
+                  onChange={(value) =>
                     handeChange({
-                      target: { value: postData, name: "schedule" },
+                      target: { value: [value.target.value], name: "schedule" },
                     })
                   }
                 >
@@ -438,10 +492,31 @@ const SearchClass = () => {
                 </Form.Item>
               </Col>
 
-              <Col span={24}>
+              {/* <Col span={24}>
                 {enrollCourses.length > 0 && (
                   <Table columns={enrollColumns} dataSource={enrollCourses} />
                 )}
+              </Col> */}
+              <Col span={24}>
+                <Table
+                  rowSelection={{
+                    onChange: (selectedRowKeys, selectedRows) => {
+                      console.log(
+                        `selectedRowKeys: ${selectedRowKeys}`,
+                        "selectedRows: ",
+                        selectedRows
+                      );
+                      handeChange({
+                        target: {
+                          value: selectedRowKeys,
+                          name: "students",
+                        },
+                      });
+                    },
+                  }}
+                  columns={enrollColumns}
+                  dataSource={enrollCourses.map((e) => ({ ...e, key: e._id }))}
+                />
               </Col>
               <Col span={24} style={{ textAlign: "right" }}>
                 <Button
