@@ -315,9 +315,15 @@ li {
 }
 
 .select-regis {
+  width: 300px;
   margin-top: 2%;
   margin-left: 15%;
   font-family: Arial, Helvetica, sans-serif;
+  height: 52px;
+  padding: 0px 24px;
+  background-color: white;
+  border: 1px solid;
+  border-radius: 10px;
 }
 
 .regis-input {
@@ -326,6 +332,8 @@ li {
   margin-top: 1%;
   margin-left: 15%;
   border-radius: 10px;
+  border: 1px solid;
+  padding: 0 12px;
 }
 
 .regis-btn {
