@@ -52,29 +52,16 @@ const LayoutComponent = (props) => {
         <Footer
           style={{
             textAlign: "center",
+            fontWeight: "500",
+            fontSize:"22px"
           }}
         >
           {/* <FooterPage /> */}
-          Team 2 ©2023 Web Training Management
+         EVO EDU ©2023 Web Training Management
         </Footer>
       </Layout>
     </>
   );
 };
 export default LayoutComponent;
-  // <Space direction="vertical" style={{ width: "100%"}} size={[0, 48]}>
-    //   <Layout>
-    //     <Sider style={{height:"100vh"}} >
-    //     <MenuComponent></MenuComponent>
-    //     </Sider>
-    //     <Layout>
-    //       <Header style={{backgroundColor:"#BAA3A3" ,color:"#fff"}}>
-    //         <HeaderComponent/>
-    //       </Header>
-    //       <Content style={{padding:"26px"}}>
-    //         {props.children}
-    //         </Content>
-    //       <Footer>Footer</Footer>
-    //     </Layout>
-    //   </Layout>
-    // </Space>
+  

@@ -6,6 +6,7 @@ import {
   TeamOutlined,
   ReadOutlined,
   UserOutlined,
+  MessageOutlined
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { Menu, Space, Layout, ConfigProvider, theme, Button } from "antd";
@@ -65,10 +66,11 @@ function SideMenu() {
                   icon: <UserOutlined style={{ fontSize: 20 }} />,
                   key: "/admin/DSGV",
                 },
+                
                 {
-                  label: "Đăng Ký Lớp Học ",
-                  icon: <ReadOutlined style={{ fontSize: 20 }} />,
-                  key: "/admin/DSDK",
+                  label: "Phản hồi học viên ",
+                  icon: <MessageOutlined style={{ fontSize: 20 }} />,
+                  key: "/admin/feedbackmng",
                 },
               ]}
             ></Menu>
