@@ -77,7 +77,7 @@ const FeedbackForm = () => {
     }
     try {
       await axios
-        .post('http://localhost:5000/api/feedback/recive', dataSend)
+        .post('https://x09-be.onrender.com/api/feedback/recive', dataSend)
         .then((result) => {
           console.log(result.data)
           toast.success('Cảm ơn những đóng góp quý báu của bạn')
