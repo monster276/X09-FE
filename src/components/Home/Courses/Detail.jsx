@@ -101,7 +101,7 @@ const Detail = () => {
             <Card className="detail-card1" bordered={false}>
               <img
                 alt="sthing"
-                src="https://resources.mindx.edu.vn/uploads/images/IMG_0047NVL.jpg"
+                src="https://wwd.com/wp-content/uploads/2016/12/yoox-net-a-porter-coding-scoop-120516.jpg"
               />
               <h4 id="card-heading">Học thật làm thật</h4>
               <p>
@@ -114,7 +114,7 @@ const Detail = () => {
             <Card className="detail-card1" bordered={false}>
               <img
                 alt="sthing"
-                src="https://resources.mindx.edu.vn/uploads/images/img_0695_optimized.jpg"
+                src="https://the-cs.org/static/media/red_blue_hoodie.08faf7eba4c8faf6f193.jpg"
               />
               <h4 id="card-heading">Học bài bản</h4>
               <p>
@@ -126,7 +126,7 @@ const Detail = () => {
             <Card className="detail-card1" bordered={false}>
               <img
                 alt="sthing"
-                src="https://resources.mindx.edu.vn/uploads/images/img_0601_optimized.jpg"
+                src="https://s2.research.com/wp-content/uploads/2020/12/24112820/coding-student-1-1200x600.jpg"
               />
               <h4 id="card-heading">Cam kết việc làm </h4>
               <p>
@@ -138,7 +138,7 @@ const Detail = () => {
             <Card className="detail-card1" bordered={false}>
               <img
                 alt="sthing"
-                src="https://resources.mindx.edu.vn/uploads/images/photo_2022-11-08%2015.14.46.jpeg"
+                src="https://www.eu-startups.com/wp-content/uploads/2019/07/Coding-Schools.png"
               />
               <h4 id="card-heading">Mở rộng networking </h4>
               <p>

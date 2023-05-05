@@ -27,7 +27,9 @@ function SideMenu() {
                 width: 120,
                 marginLeft: 31,
                 marginTop: 5,
+                borderRadius: "50%"
               }}
+              alt=""
             />
             {/* <Avatar size={45} icon={<UserOutlined />} className="Avatar" /> */}
 
