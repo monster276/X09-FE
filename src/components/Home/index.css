@@ -126,7 +126,8 @@ p {
   padding-right: 20px;
   font-weight: 50;
   color: white;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
   position: absolute;
 }
 .banner button {

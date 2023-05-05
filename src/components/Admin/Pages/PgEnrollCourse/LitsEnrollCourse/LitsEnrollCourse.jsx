@@ -29,7 +29,7 @@ const ListEnrollCourse = () => {
     setPage(value);
   };
   const getData = async () => {
-    const { data } = await Axios.get(`https://x09-be.onrender.com/api/enrollCourse`);
+    const { data } = await Axios.get(baseUrlenrollCourse+"?page=" + `${page}`);
     setloading(false);
     setData(
       data.enrollCourses.map((row) => ({
