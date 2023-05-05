@@ -304,7 +304,7 @@ const EditClass = ({ classId }) => {
               </Form.Item>
             </Col>
             <Col span={8}>
-              <Form.Item label="Số bài học" name="numberOfLessons">
+              <Form.Item label="Số buổi học" name="numberOfLessons">
                 <InputNumber
                   placeholder="Số buổi học"
                   style={{ width: "100%" }}
