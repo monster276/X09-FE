@@ -66,6 +66,11 @@ function SideMenu() {
                   icon: <UserOutlined style={{ fontSize: 20 }} />,
                   key: "/admin/DSGV",
                 },
+                {
+                  label: "Yêu cầu đăng kí",
+                  icon: <UserOutlined style={{ fontSize: 20 }} />,
+                  key: "/admin/DSDK",
+                },
                 
                 {
                   label: "Phản hồi học viên ",

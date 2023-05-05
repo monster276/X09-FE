@@ -153,14 +153,6 @@ const ListClass = () => {
             {" "}
             Chỉnh Sửa{" "}
           </Button>
-          {/* <Button style={{background: "red", color: "white"}} onClick={() => SeleArtista(fila, "Delete")}> xóa </Button> */}
-          {/* <Button
-            style={{ background: "green", color: "white" }}
-            onClick={() => SeleDetail(fila, "Detail")}
-          >
-            {" "}
-            Chi Tiết{" "}
-          </Button> */}
         </Space>
       ),
     },
