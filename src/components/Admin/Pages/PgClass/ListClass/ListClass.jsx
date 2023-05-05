@@ -28,6 +28,7 @@ const ListClass = () => {
   const [EditsModalOpen, setEditModalOpen] = useState(false);
   const [DetailsModalOpen, setDetailModalOpen] = useState(false);
   const [postData, setPostData] = useState({
+    _id: "",
     id: "",
     course: "",
     location: "",
@@ -37,7 +38,7 @@ const ListClass = () => {
     endTime: "",
     numberOfLessons: "",
     classTime: "",
-    schedule: ["2", "6"],
+    schedule: "",
   });
   useEffect(() => {
     getData();
@@ -153,13 +154,13 @@ const ListClass = () => {
             Chỉnh Sửa{" "}
           </Button>
           {/* <Button style={{background: "red", color: "white"}} onClick={() => SeleArtista(fila, "Delete")}> xóa </Button> */}
-          <Button
+          {/* <Button
             style={{ background: "green", color: "white" }}
             onClick={() => SeleDetail(fila, "Detail")}
           >
             {" "}
             Chi Tiết{" "}
-          </Button>
+          </Button> */}
         </Space>
       ),
     },
