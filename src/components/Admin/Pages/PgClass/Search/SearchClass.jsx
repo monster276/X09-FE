@@ -3,7 +3,7 @@ import Axios from "axios";
 import "./Search.css";
 import swal from "sweetalert";
 import { ListContext } from "../ListClass/ListClass";
-import { SreachDeBounce } from "../../hooks"
+import { SreachDeBounce } from "../../hooks";
 
 import {
   Space,
@@ -29,9 +29,7 @@ const SearchClass = () => {
   const [classCodeArr, setClassCodeArr] = useState(["", "", ""]);
   const [courses, setCourses] = useState([]);
   const [locations, setLocations] = useState([]);
-  const [teachers, setTeachers] = useState([
-    { _id: "64141ea1e59fd2544534942a", name: "64141ea1e59fd2544534942a" },
-  ]);
+  const [teachers, setTeachers] = useState([]);
   const [enrollCourses, setEnrollCourses] = useState([]);
 
   const [createModalOpen, setcreateModalOpen] = useState(false);
@@ -48,11 +46,13 @@ const SearchClass = () => {
     baseUrlClass,
     Layout,
   } = useContext(ListContext);
-  
-  const debounced = SreachDeBounce(searchValue , 700)
+
+  const debounced = SreachDeBounce(searchValue, 700);
   useEffect(() => {
     getCourse();
     getLocation();
+    getEnrollCourse();
+    getTeachers();
     // fetchTeacher();
   }, []);
   useEffect(() => {
@@ -87,7 +87,7 @@ const SearchClass = () => {
       }))
     );
   };
-  
+
   const handleCreateCancel = () => {
     setcreateModalOpen(!createModalOpen);
   };
@@ -131,6 +131,46 @@ const SearchClass = () => {
       }))
     );
   };
+
+  const getEnrollCourse = async () => {
+    const { data } = await Axios.get(
+      `https://x09-be.onrender.com/api/enrollCourse`
+    );
+
+    setloading(false);
+    setEnrollCourses(
+      data.enrollCourses.map((row) => ({
+        _id: row._id,
+        fullName: row.fullName,
+        email: row.email,
+        phoneNumber: row.phoneNumber,
+        location: row.location,
+        course: row.course,
+      }))
+    );
+  };
+
+  const getTeachers = async () => {
+    const config = {
+      headers: {
+        token: `Bearer ${JSON.parse(localStorage.getItem("accesstoken"))}`,
+      },
+    };
+
+    const { data } = await Axios.get(
+      `https://x09-be.onrender.com/api/user`,
+      config
+    );
+
+    setTeachers(
+      data.users.map((row) => ({
+        _id: row._id,
+        fullName: row.fullName,
+        username: row.username,
+      }))
+    );
+  };
+
   const onFinish = async (value) => {
     const config = {
       headers: {
@@ -234,7 +274,7 @@ const SearchClass = () => {
             style={{
               height: 10,
               width: 460,
-              background: "none"
+              background: "none",
             }}
             onSearch={(text) => setOptions(getPanelValue(text))}
             options={options}
@@ -338,13 +378,13 @@ const SearchClass = () => {
               <Col span={8}>
                 <Form.Item
                   label="Tên lớp học"
-                  name="nameclass"
+                  name="name"
                   rules={[
                     { required: true, message: "Vui lòng nhập tên lớp học" },
                   ]}
                 >
                   <Input
-                    name="nameclass"
+                    name="name"
                     placeholder="Tên lớp học"
                     onChange={handeChange}
                   />
@@ -408,10 +448,17 @@ const SearchClass = () => {
               </Col>
               <Col span={8}>
                 <Form.Item label="Giảng viên" name="user">
-                  <Select placeholder="Giảng viên">
+                  <Select
+                    placeholder="Giảng viên"
+                    onChange={(postData) =>
+                      handeChange({
+                        target: { value: postData, name: "user" },
+                      })
+                    }
+                  >
                     {teachers?.map((item, index) => (
                       <Option id={index} key={item._id}>
-                        {item.name}
+                        {item.fullName}
                       </Option>
                     ))}
                   </Select>
@@ -438,10 +485,31 @@ const SearchClass = () => {
                 </Form.Item>
               </Col>
 
-              <Col span={24}>
+              {/* <Col span={24}>
                 {enrollCourses.length > 0 && (
                   <Table columns={enrollColumns} dataSource={enrollCourses} />
                 )}
+              </Col> */}
+              <Col span={24}>
+                <Table
+                  rowSelection={{
+                    onChange: (selectedRowKeys, selectedRows) => {
+                      console.log(
+                        `selectedRowKeys: ${selectedRowKeys}`,
+                        "selectedRows: ",
+                        selectedRows
+                      );
+                      handeChange({
+                        target: {
+                          value: selectedRowKeys,
+                          name: "students",
+                        },
+                      });
+                    },
+                  }}
+                  columns={enrollColumns}
+                  dataSource={enrollCourses.map((e) => ({ ...e, key: e._id }))}
+                />
               </Col>
               <Col span={24} style={{ textAlign: "right" }}>
                 <Button
