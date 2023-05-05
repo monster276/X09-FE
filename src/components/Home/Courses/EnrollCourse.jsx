@@ -66,8 +66,12 @@ const EnrollCourse = (props) => {
       style={{ margintop: "2%" }}
     >
       <ToastContainer />
-      <form onSubmit={onSubmit}>
-        <CloseOutlined className="regis-btn" onClick={props.handleCloseModal} style={{ paddingTop:"2%"}} />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <CloseOutlined
+          className="regis-btn"
+          onClick={props.handleCloseModal}
+          style={{ paddingTop: "2%" }}
+        />
         <div className="regis-container">
           <div className="regis-pic">
             <img alt="idk" src="https://wondercopier.in/Images/signup.png" />
