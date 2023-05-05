@@ -102,7 +102,6 @@ const EditUsers = () => {
 
           <Item label="Email" key="email">
             <Input
-              disabled
               name="email"
               onChange={handeChange}
               placeholder="nhập Email"

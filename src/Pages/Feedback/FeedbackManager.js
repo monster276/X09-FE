@@ -19,8 +19,8 @@ const FeedbackManager = () => {
     getData()
   }, [page])
   const getData = async () => {
-    const { data } = await axios.get('http://localhost:5000/api/feedback/')
-
+    const { data } = await axios.get('https://x09-be.onrender.com/api/feedback/')
+    
     setFeedback(
       data.data.map((row) => ({
         _id: row._id,

@@ -12,7 +12,6 @@ import CourseState from './components/Home/Context/course/CourseState'
 import EnrollState from './components/Home/Context/enrollCourse/EnrollState'
 import LocationState from './components/Home/Context/location/LocationState'
 import FeedbackForm from './Pages/Feedback/FeedbackForm'
-import FeedbackManager from './Pages/Feedback/FeedbackManager'
 const App = () => {
   return (
     <LocationState>
@@ -25,6 +24,7 @@ const App = () => {
             <Route path="admin/*" element={<Admin />} />
             <Route path="teacher/*" element={<Teacher />} />
             <Route path="/detail/:id" element={<Detail />} />
+            <Route path="/feedback" element={<FeedbackForm />} />
           </Routes>
         </CourseState>
       </EnrollState>

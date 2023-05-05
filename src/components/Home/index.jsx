@@ -135,8 +135,13 @@ export default function Index(props) {
           {!loading && (
             <Button className="landing-btn" style={{ fontSize: "22px", background: "#1781c7", width: "400px", fontWeight: "600", color:"white" }}>
               <Link to="/course">Khám phá các khóa học ở đây</Link>
+              
             </Button>
+            
           )}
+          <Button className="landing-btn" style={{ fontSize: "22px", background: "#1781c7", width: "400px", fontWeight: "600", color:"white" }}>
+              <Link to="/feedback">Ý kiến phản hồi</Link>     
+            </Button>
         </div>
       </Content>
       <Footer className="footer1">
